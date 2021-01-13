@@ -134,7 +134,9 @@ var a = parseInt("11", 2);
 //The radix variable says that "11" is in the binary system, or base 2. Converts the string "11" to an integer 3.
 ```
 
-  If the first character in the string can't be converted into a number, then it returns NaN.
+If the first character in the string can't be converted into a number, then it returns NaN.
+
+ NaN es lo único en Javascript que no es igual a sí mismo. Podría ser cualquier cosa pero lo unico que se sabe es que no es un número.
 
 **NaN is toxic:** If you provide it as an operand to any mathematical operation, the result will also be NaN:
 ```js

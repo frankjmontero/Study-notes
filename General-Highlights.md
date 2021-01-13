@@ -1,4 +1,4 @@
-## **General**
+# **General**
 
 - **Internet**. Internet is a global network of computers connected to each other which communicate through a standardized set of protocols. The internet is a design philosophy and an architecture expressed in a set of protocols.
 - **Chrome tabs resource usage.** Cada tab en Chrome tiene su proprio mundo. Event loop, stack, etc. Hence the amount of resourced it uses.
@@ -22,19 +22,37 @@ There are two instances the browser-generated DOM will be different than HTML so
 - The browser automatically fixes errors in the source code.
 
 
-## **API**
+_____
+# **OOP**
+
+**Abstraction**. Take out the individual characteristics and leave the common ones. Separate the unique traits and use only the shared ones.
+
+**Encapsulation**. Forming an object that is independent in its functionality and features, packing within itself what it needs to interact with others.
+
+**Inheritance**. Taking the characteristics and behaviors of an element and assign to another one.
+
+**Polymorphism**. The ability an object has to transform in different things. Also to be able to do something in different ways.
+
+
+
+____
+# **API**
 Interface y API no es lo mismo. Pero sí, el DOM tiene cara de API y expone esa interface. JDBC expone la interface Connection, pero no tiene nada de funcionalidad. No es una API. Una API uno la llama para utilizarla en la creación de una app. O sea, ya tiene toda su funcionalidad. Y uno usualmente se comunica con esa API a través de alguna interface que ella expone. En este casi, interface no se refiere a la que no está implementada, simplemente a la cara del API, los métodos que expone, etc. La I de API, o sea Interface en este caso, no se refiere a una interface de un lenguaje que hay que implementar, simplemente se refiere a las formas o métodos que expone para comunicarte con ella.
 
-## **Database**
+____
+# **Database**
 - **Partionning**:
     - *Horizontal*. Has separado en una base de datos una tabla con 100 columnas en varias de menos columnas para normalizar?
     - *Vertical*. Has separado en una base de datos una tabla con millones de records, en varias tablas con menos records, conde puedes elegir separarlas por categoría o lo que quieras. Si quieres separarlas por categoría, de una tabla products puedes hacer 10 tablas electronic_products, etc., y listo. Para que pesen menos.
 
-## **Web Assembly (WASM)**
+
+____
+# **Web Assembly (WASM)**
 High-level single-threaded garbage-collected interpreted or just-in-time compiled prototype-based multi pradigm dinamic langugae with a non blocking event loop concurrency model
 
 
-## **Data Structures**
+_____
+# **Data Structures**
 
 A way to organize data para facilitar su manipulacion mas adelante. 
 
@@ -132,3 +150,199 @@ Step 2: END
 2 - Si es un nodo con un solo hijo se intercambian los valores y ahora que el nodo pasa a ser un leaf
 
 HashMap, HashSet, Balanced Tress, Grafos, al bruja, la recursión. Con un par de ejemplos, fibonacci, caching, time y space complexity, etc.
+
+<br>
+
+______
+# **Browser Console**
+
+Open: `Ctrl` + `Shift` + `I` || F12 || Right-click > Inspect Element.
+
+If you list multiple objects they will be concatenated into a single, space-delimited string, which is then output to the console.
+```js
+console.log('This is a string', { foo: 'bar' }, { bar: 'foo' });
+// OUTPUT: This is a string {foo: "bar"} {bar: "foo"}
+```
+
+The first parameter can contain format specifiers that allow you to define the format and positioning, of the subsequent objects.
+```js
+var number = 11 * 9;
+var color = 'red';
+
+console.log('%d %s balloons', number, color);
+//OUTPUT: 99 red balloons
+```
+
+|FORMAT SPECIFIER |	DESCRIPTION |
+|-----|---|
+| %s	| String |
+|%d or %i |	Integer |
+|%f	| Floating point value |
+|%o	| Expandable DOM element (as displayed in the ‘Elements’ tab of the dev tools) |
+|%O	| Expandable JavaScript object|
+|%c	| Formats the output using the CSS style you provide |
+
+Using the %c format specifier allows you to style the console output.
+```JS
+console.log('%cThis text is styled!', 'color: #86CC00; background-color: blue; font-size: 20px; padding: 3px;')
+```
+**`alert()`**. Another way of creating output that you can see. But `console.log` is the preferred one.
+
+## **Input**
+Use the function prompt(..)
+```js
+age = prompt( "Please tell me your age:" );
+console.log( age );
+```
+
+## **`console.assert(expression, object)`**. 
+If the result of the expression is false the object will be printed in the console.
+```js
+var count = 5;
+console.assert(count > 10, 'count is not larger than 10');
+//OUTPUT: Assertion failed: count is not larger than 10
+```
+## **`console.clear()`**. 
+Clears any output in the console window.
+
+## **`console.count(label)`**. 
+Method will output the number of times that the `count()` method has been called. You will only get an accurate count if this method is called at the same line, with the same label each time. This method can be useful for finding out how many times a function is being called in your code.
+```js
+function clickHandler() {
+    console.count('Click handler called');
+    ...
+}
+
+for (var i = 0; i < 3; i++) {
+    clickHandler();
+}
+/* OUTPUT:
+Click handler called: 1
+Click handler called: 2
+Click handler called: 3
+*/
+```
+
+## **`console.dir(object)`**. 
+Prints a JavaScript representation of the supplied object to the console. This method is especially useful for examining HTML elements, as it will display the DOM representation of the element rather than the XML representation displayed when using `console.log()`.
+```js
+console.dir(document.body);
+```
+
+## **`console.dirxml(object)`**
+Prints the XML representation of on a object.
+```js
+console.dirxml(document.body);
+```
+
+## **`console.error(object [, object, …])`**
+Takes one or more objects and prints them to the console. Will also print a stack trace from where the method was called. The output will also be flagged as an error in the console.
+```js
+console.error('Page not found (404)');
+/*OUTPUT
+Page not found (404)
+(anonymous) @ VM717:1
+*/
+```
+
+## **`console.group(object[, object, …])` & `console.groupEnd()`**
+Groups together log messages.
+```js
+console.log("This is the outer level");
+console.group("First group");
+console.log("In the first group");
+console.group("Second group");
+console.log("In the second group");
+console.warn("Still in the second group");
+console.groupEnd();
+console.log("Back to the first group");
+console.groupEnd();
+console.debug("Back to the outer level");
+```
+
+## **`console.groupCollapse()`**
+Equal to the prev but groups are displayed collapse.
+```js
+console.groupCollapsed('Fetching Data');
+console.log('Request Sent');
+console.error('Error: Server not responding (500)');
+console.groupEnd();
+console.log('Continuing...');
+```
+
+## **`console.info(object [, object, …])`**
+Equal to `console.log() except that log messages are  given the info flag.
+```js
+consol.info('Hello Treehouse');
+```
+
+## **`console.warn(object [, object, …])`**
+Logs a message to the console with a warning flag.
+```js
+console.warn(‘This is a warning.’);
+```
+
+## **`console.profile([profile]) & console.profileEnd()`**
+Starts a new JavaScript CPU performance profile if the developer tools are open.
+```js
+function animationUI() {
+    console.profile('Animating');
+    // Animate something...
+    console.profileEnd();
+}
+``` 
+
+## **`console.table(data)`**
+Allows you to output structured data as an interactive table in the console.
+```js
+var data = [
+    {first_name: 'Matt', last_name: 'West', occupation: 'Programmer'},
+    {first_name: 'Vince', last_name: 'Vaughn', occupation: 'Actor'},
+    {first_name: 'Larry', last_name: 'Page', occupation: 'CEO'}  
+];
+
+console.table(data);
+```
+This method can be really handy for examining data returned by an AJAX call.
+
+## **`console.time(label) & console.timeEnd(label)`**
+These methods give you a way of timing how long it takes for a piece of code to execute. Both the `time()` and `timeEnd()` methods should be passed the same label parameter.
+```js
+console.time('Draw frame');
+// Execute some code...
+console.timeEnd('Draw frame');
+//POSSIBLE OUTPUT
+// Draw frame: 0.28125 ms
+```
+
+## **`console.timeline(label)` & `console.timelineEnd(label)`**
+Allows you to make a new timeline recording in the Chrome developer tools.
+```js
+console.timeline('Google Search');
+
+// Do some work.
+
+console.timelineEnd('Google Search');
+```
+## **`console.timeStamp(label)`**
+Manually add events to the timeline. Adds a single marker to the browser's Performance or Waterfall tool. This lets you correlate a point in your code with the other events recorded in the timeline, such as layout and paint events.
+
+## **`console.trace()`**
+Prints a stack trace for the point at which the method was called.
+```js
+function foo() {
+  function bar() {
+    console.trace();
+  }
+  bar();
+}
+
+foo();
+/*
+console.trace
+bar @ VM498:3
+foo @ VM498:5
+(anonymous) @ VM498:8
+*/
+```
+
