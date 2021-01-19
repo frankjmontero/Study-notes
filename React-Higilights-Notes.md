@@ -20,13 +20,13 @@ React elements are immutable. Once you create an element, you can’t change its
 Conceptually, components are like JavaScript functions. They accept arbitrary inputs (called “props”) and return React elements describing what should appear on the screen.
 
 - *Function components*. Literally JavaScript function that accept “props” (which stands for properties) object argument with data and returns a React element.
-```js
+```jsx
 function Welcome(props) {
   return <h1>Hello, {props.name}</h1>;
 }
 ```
 - *Class components*. A component defined using ES6 classes sintaxis. 
-```js
+```jsx
 class Welcome extends React.Component {
   render() {
     return <h1>Hello, {this.props.name}</h1>;
@@ -42,13 +42,13 @@ When React sees an element representing a user-defined component, it passes JSX 
 We recommend naming props from the component’s own point of view rather than the context in which it is being used.
 
 A component must never modify its own props.
-```js
+```jsx
 function sum(a, b) {
     return a + b;
 }
 // “pure” function because they do not attempt to change their inputs, and always return the same result for the same inputs.
 ```
-```js
+```jsx
 function withdraw(account, amount) {
     account.total -= amount;
 }
@@ -57,8 +57,17 @@ function withdraw(account, amount) {
 
 React is pretty flexible but it has a single strict rule: ***All React components must act like pure functions with respect to their props.***
 
+## **State and Props**
+
+`State` are properties intrinsic to the component. It will cause the component to re-render. `Props` are properties that are passed down to the component from the parent.
+
 ___
 ### **Videos**
 
 - How to add components to the ProofConcenpt. 
     - Meet - uoe-dufj-fqm - Google Chrome 2020-10-27 21-42-50_Bootstrap-109. 1:20
+
+___
+# MISC
+
+- `import React from 'react';` used to be mandatory import line on React because even though you were not going to use react on that particular file, it was needed for the JSX portion of the file.

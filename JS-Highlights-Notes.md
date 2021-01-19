@@ -987,3 +987,6 @@ let bar = "bar2"; // SyntaxError: Identifier 'bar' has already been declared
 Executes a provided function for each value of the array (from left-to-right).
 *Syntax:*
 `array.reduce(function(total, currentValue, currentIndex, arr), initialValue)`
+
+#### **Number Placeholder**
+Be careful using 0 to initialize variables with meant to store numbers. JS evaluates ceros to falsy, rather use `null` to indicate absence of values.

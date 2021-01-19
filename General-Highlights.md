@@ -12,6 +12,9 @@ Hay otros detalles que se consideran secundarios pero son importantes:
     - mentor técnico de los developers en caso de ser necesario (seniors incluidos)
     - lead en caso de ser necesario.
 
+### **Diff between framework and platform**
+There are a few important distinctions between a framework and a platform. A frame-work is usually just the code library used to build an application, whereas a platform is more holistic and  includes  tooling  and  support  beyond  a  framework.
+
 ## **DOM**
 
 O sea, el DOM exposes una interface, para que cualquier lenguaje pueda manipularlo. No solo JavaScript.
@@ -25,14 +28,35 @@ There are two instances the browser-generated DOM will be different than HTML so
 _____
 # **OOP**
 
-**Abstraction**. Take out the individual characteristics and leave the common ones. Separate the unique traits and use only the shared ones.
+### **Abstraction** 
 
-**Encapsulation**. Forming an object that is independent in its functionality and features, packing within itself what it needs to interact with others.
+Knowing what something does without knowing how it does it. Hide what you want to hide and show what you want to show. Take out the individual characteristics and leave the common ones. Separate the unique traits and use only the shared ones.
 
-**Inheritance**. Taking the characteristics and behaviors of an element and assign to another one.
+### **Encapsulation** 
 
-**Polymorphism**. The ability an object has to transform in different things. Also to be able to do something in different ways.
+The actual action of hiding what it does. Forming an object that is independent in its functionality and features, packing within itself what it needs to interact with others.
 
+### **Inheritance**
+
+Taking the characteristics and behaviors of an element and assign to another one.
+
+### **Polymorphism**. 
+
+The ability an object has to transform in different things. Also to be able to do something in different ways. There are 2 types of polymorphism:
+
+- ***Dynamic polymorphism*** (al que nos referimos por defecto como polimorfismo). Also known as runtime polymorphism. This is when a overridden method is resolved at runtime.
+- ***Static polymorphism*** (más raro y discutible si es real polimorfismo). It is also called compile time polymorphism. An example of it are methods overloading.
+
+El primero se logra con method `override` y el segundo se logra con method `overloading`
+
+### **Access Levels and Access Modifiers**
+
+El nivel de acceso es una característica que controla que o traves de que se puede acceder al codigo que un elemento contiene. Los modificadores de acceso es lo que utilizamos para indicar el mencionado nivel, o sea,  especifican su accesibilidad y alcance (scope) en otras palabras su visibilidad.
+
+La razón por la que a veces mencionan a la abstracción y encapsulación, es porque una envuelve a la otra.
+La abstracción es más general, y la encapsulación es un mecanismo también para lograr un poco de abstracción, pero a diferente nivel.
+
+Por ejemplo, cuando tienes todas las propiedades privadas en la clase String, cuando uso un objeto de tipo String y no puedo ver sus detalles al usar el punto, como s.arrayOfChars, entonces en cierto sentido sus detalles están abstraídos para mí, no puedo ver cómo está construido el objeto, esos detalles me están oculto, y por eso, están abstraídos, pero en este caso el mecanismo que logró esa abstracción fue la encapsulación. Pero como la abstracción es más amplia, hay más formas de abstraer, cómo meter la lógica en un método, etc.
 
 
 ____

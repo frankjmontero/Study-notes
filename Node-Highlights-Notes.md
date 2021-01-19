@@ -87,4 +87,25 @@ const notMatter = () => {
     Promise 
     Greet
 */
-``` El promise se resuelve y se ejecuta después. El time out también. Entonces la funciones que no necesitan ser resueltas se imprimen primero.
+``` 
+El promise se resuelve y se ejecuta después. El time out también. Entonces la funciones que no necesitan ser resueltas se imprimen primero.
+
+## Event Loop
+
+Node.js applications then enter the Event Loop, responding to incoming client requests by executing the appropriate callback. This callback executes synchronously, and may register asynchronous requests to continue processing after it completes.
+
+## ¿Quién me dice qué significa esto?
+
+![](.\Resources\bcrypt-bcryptjs-Diff.png)
+
+Significa que aunque las librerias fueron escritas en dos lenguajes diferentes (c++ vs js), comparten la misma interface, entonces ambas siguen usando los mismos metodos
+
+## Other
+
+child_process es un module el que permite crear procesos en el sistema operativo que cuentan con sus propios recursos(memoria, threads and CPU) independientes de la aplicación las cual los esta llamando.
+
+child_process.exec() Engendra (o crea) un proceso en sistema operativo, pero el resultado (output) lo carga completo en memoria antes de retornar, cabe mencionar que este comando acepta shell scripting por defecto.
+
+child_process.spawn Engendra (o crea) un nuevo proceso, pero este puede interactuar con el mismo a través de su stdio's streams, también los parámetros para ejecutar el proceso utilizando este metodo deben de ser pasados en un array como segundo argumento.
+
+child_process.fork Engendra (o crea) un nuevo proceso pero esta es una aplicación node, esta aplicación tendrá sus propios recursos (heap, event loop y thread pool) y se va a comunicar con la aplicación padre mediante IPC
