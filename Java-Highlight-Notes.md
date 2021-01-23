@@ -681,370 +681,526 @@ verifyData(this);
 
 You can override an inherited method by writing a method with the same name and signature as the inherited method in the subclass. This enables a subclass to change, replace, or completely wipe out some of the behavior or attributes of its superclasses. You need to override a method any time the inherited behavior produces an undesired result or you want to do something different. When a method is defined in a subclass and its superclass, the subclass method is used.
 To override a method, you must declare the method in the same way it was declared in the superclass from which it was inherited. A public method must remain public, the value sent back by the method must be the same, and the number and type of arguments to the method must not change. The name of the arguments are of no importance.
-When you override a method in a subclass, you should preface the method declaration with @ Override, as in this example:
+When you override a method in a subclass, you should preface the method declaration with `@Override`, as in this example:
 Ex.:
+```java
 @Override
 public void setPosition(int x, int y) {
-if ( (x > 0) & (y > 0) ) {
-	super.setPosition(x, y);
+	if ( (x > 0) & (y > 0) ) {
+		super.setPosition(x, y);
+	}
 }
-}
+```
+The `@Override` text is a special comment called an annotation that tells the Java compiler more than it could figure out on its own. By preceding a method with the `@Override` annotation, you give the compiler an opportunity to check whether the method really overrides a superclass method. If it doesn’t—for example, you might have left off the second integer argument—the program won’t compile.
 
-The @Override text is a special comment called an annotation that tells the Java compiler more than it could figure out on its own. By preceding a method with the @Override annotation, you give the compiler an opportunity to check whether the method really overrides a superclass method. If it doesn’t—for example, you might have left off the second integer argument—the program won’t compile.
 Without the annotation, the compiler can’t look for this potential problem. The method without the second integer would just appear like any other method.
-Using this and super in a Subclass: As "this" is used to refer the current object of a class "this" is being used in, "super" is used to refer to the immediate superclass (parent/base class) of the object.
-Ex.:
-super("Adam", 12);   //To refer to a constructor of the superclass.
-super.hawaii = 50   //To refer to a variable of the superclass.
-super.dragnet();   //To refer to a method of the superclass.
 
-A variable accessed through "super" can’t be private because those are not available in a subclass. The first statement of a subclass constructor must be a call to a constructor of the superclass. This requires the super keyword, as in the following statements:
+<br>
+
+### **Using this and super in a Subclass**
+
+As "this" is used to refer the current object of a class "this" is being used in, "super" is used to refer to the immediate superclass (parent/base class) of the object.
 Ex.:
+```java
+super("Adam", 12);   //To refer to a constructor of the superclass.
+super.hawaii = 50;   //To refer to a variable of the superclass.
+super.dragnet();   //To refer to a method of the superclass.
+```
+A variable accessed through `super` can’t be private because those are not available in a subclass. The first statement of a subclass constructor must be a call to a constructor of the superclass. This requires the super keyword, as in the following statements:
+Ex.:
+```java
 public DataReader(String name, int length) {
 super(name, length);
 }
+```
 
 If a constructor does not explicitly invoke a superclass constructor, the Java compiler automatically inserts a call to the no-argument constructor (super()) of the superclass. If the superclass does not have a no-argument constructor, you will get a compile-time error. Object does have such a constructor, so if Object is the only superclass, there is no problem.
+
 If a subclass constructor invokes a constructor of its superclass, either explicitly or implicitly, you might think that a whole chain of constructors called, all the way back to the constructor of Object. This, in fact, is the case. It is called constructor chaining.
 
--STORING OBJECTS OF THE SAME CLASS IN AN ARRAY LIST.-
+<br>
+
+## **-STORING OBJECTS OF THE SAME CLASS IN AN ARRAYLIST.-**
 
 As the class name suggests, array lists are like arrays, which also hold elements of related data, but they can grow or shrink in size at any time.
-They are created by referencing two classes: the ArrayList class and the class the list holds. The name of the class held by the list is placed within < and > characters, as in this statement.
+They are created by referencing two classes: the ArrayList class and the class the list holds. The name of the class held by the list is placed within `<` and `>` characters, as in this statement.
 Ex.:
+```java
 ArrayList<String> structure = new ArrayList<String>();
+```
 
-You can also declare it as: ArrayList structure = new ArrayList();
-But indicating the type of class the list would hold as the latter example will give the compiler a better way to prevent error and will keep you from misusing the array list by putting wrong objects in it.
-An array list holds objects that either belong to the same class or share the same superclass. Unlike arrays, array lists aren’t created with a fixed number of elements they hold. The list is created with 10 elements. You can specify a size as an argument to the constructor.
+You can also declare it as: `ArrayList structure = new ArrayList();`
+But indicating the type of class the list would hold as the latter example will give the compiler a better way to prevent error and will keep you from misusing the ArrayList by putting wrong objects in it.
+An ArrayList holds objects that either belong to the same class or share the same superclass. Unlike arrays, ArrayLists aren’t created with a fixed number of elements they hold. The list is created with 10 elements. You can specify a size as an argument to the constructor.
 Ex.:
+```java
 ArrayList<String> structure = new ArrayList<String>(300);
+```
 
-To add elements use the add() method with the object as the only argument.
+To add elements use the `add()` method with the object as the only argument.
 Ex.:
+```java
 structure.add("Vance"); //Becomes element 0
 structure.add("Vernon"); //Becomes element 1 and so on as you add elements.
+```
 
-Use the get() method along with the index number to retrieve the element
+Use the `get()` method along with the index number to retrieve the element
 Ex.:
+```java
 String name = structure.get(1);
+```
 
-To see if a list contains an object in one of its elements, call its contains() method with that object as an argument:
+To see if a list contains an object in one of its elements, call its `contains()` method with that object as an argument:
 Ex.:
+```java
 if (structure.contains("Velma")) {
 System.out.println("Velma found");
 }
+```
 
 Remove an object from a list using itself or its index number:
 Ex.:
+```java
 structure.remove(0);
 structure.remove("Vernon");
+```
 
-Looping through an ArrayList: We use a special type of for loop that uses only two parts. The first has the calss and nama of the variable that would hold each object of the list. The second the name of the list.
+### **Looping through an ArrayList**
+
+We use a special type of `for` loop that uses only two parts. The first has the class and name of the variable that would hold each object of the list. The second the name of the list.
 Ex.:
+```java
 for (String name : structure) {
 System.out.println(name);
 }
+```
+<br>
 
+# **HOUR 13 STORING OBJECTS IN DATA STRUCTURES **
 
-HOUR 13 STORING OBJECTS IN DATA STRUCTURES 
+## **-ARRAYLISTS.-**
 
--ARRAY LISTS.-
-
-The good thing about array lists is that they can change in size somthing arrays do not do. An array list is a data structure that holds objects of the same class or a common superclass.
+The good thing about ArrayList is that they can change in size; something arrays do not do. An ArrayList is a data structure that holds objects of the same class or a common superclass.
 Ex.:
+```java
 ArrayList servants = new ArrayList(); // simple declaration.
 ArrayList servants = new ArrayList(30); //declaration with estimated capacity. The default capacity is 10.
+```
+ArrayLists can be created by specifying an initial capacity, which provides some guidance on how many elements the list might hold. The capacity is just a hint. If the capacity is exceeded, the ArrayList will be adjusted accordingly and continue to function properly. The better you estimate the capacity, the more efficient the list will be as the program runs.
 
-Array lists can be created by specifying an initial capacity, which provides some guidanceon how many elements the list might hold. The capacity is just a hint. If the capacity is exceeded, the array list will be adjusted accordingly and continue to function properly. The better you estimate the capacity, the more efficient the list will be as the program runs.
+You can specify the type of class the ArrayList is going to hold.
+```java
+ArrayList<String> servants = new ArrayList<String>(); //This statement creates an ArrayList of String objects.
+```
 
-You can specify the type of class the arrray list is going to hold.
-ArrayList<String> servants = new ArrayList<String>(); //This statement creates an array list of String objects.
+These are common arrayList methods:
 
-These are common arraylist methods:
--add(Object): adds an object to the list
-ex.: servants.add("Bates");   servants.add("Anna"); //All you add goes to the end of the list, so Bates is first and Anna is last.
--add(int, Object): Adds object at the specified -int- position.
-ex.: servants.add(0, "Robert"); //this adds Robert on top of Bates instead of the bottom. The position specified as the first argument must be no greater than the size() of the list. If robert would have been added to 4 error IndexOutOfBoundsException would have been thrown.
--remove(Object): takes an object out of the list.
-ex.: servants.remove("Mrs. O'Brien");
--remove(int): remove and object specifying a number in the list.
--size(): Gets the number of elements currently holds.
-ex.: int servantCount = servants.size();
--get(int): Calls an element specified by -int.
-ex.: String aristocrat = aristocrats.get(i);
--indexOf(Ojbect): find out whether an array list contains a specific object with that object as the argument. The method returns the position of the object, or -1 if it cannot be found in the list:
-ex.: int hasCarson = servants.indexOf("Carson");
--contains(): returns true or false based on whether the specified
+- **`add(Object)`**: adds an object to the list
+	ex.: 
+	```java
+	servants.add("Bates");   servants.add("Anna"); //All you add goes to the end of the list, so Bates is first and Anna is last.
+	```
+- **`add(int, Object)`**: Adds object at the specified `int` position.
+	ex.: 
+	```java
+	servants.add(0, "Robert"); //this adds Robert on top of Bates instead of the bottom. The position specified as the first argument must be no greater than the size() of the list. If robert would have been added to 4 error IndexOutOfBoundsException would have been thrown.
+	```
+- **`remove(Object)`**: takes an object out of the list.
+	ex.: 
+	```java
+	servants.remove("Mrs. O'Brien");
+	```
+- **`remove(int)`**: removes an object specifying a number in the list.
+- **`size()`**: Gets the number of elements currently holds.
+	ex.: 
+	```java
+	int servantCount = servants.size();
+	```
+- **`get(int)`**: Calls an element specified by `int`.
+	ex.: 
+	```java
+	String aristocrat = aristocrats.get(i);
+	```
+- **`indexOf(Object)`**: find out whether an array list contains a specific object with that object as the argument. The method returns the position of the object, or `1` if it cannot be found in the list:
+	ex.: 
+	```java
+	int hasCarson = servants.indexOf("Carson");
+	```
+- **`contains()`**: returns true or false based on whether the specified
 object can be found.
-ex.: boolean hasCarson = servants.contains("Carson");
-
--Going through elements.
+	ex.:
+	```java
+	boolean hasCarson = servants.contains("Carson");
+	```
+- **`Going through elements`**.
 ex.:
+```java
 for (String servant : servants) {
 System.out.println(servant);
 }
+```
 The first argument to for is a variable where an element should be stored. The second is the array list.
 
--HASH MAPS.-
+<br>
 
-Hash maps are data structure in Java that use an object to retrieve another object. The first object is the -key- and the second is the -value-. Is implemented by the HashMap class of the java.util package.
+## **-HASHMAPS.-**
+
+*HashMaps* are data structure in Java that use an object to retrieve another object. The first object is the *key* and the second is the *value*. It's implemented by the `HashMap` class of the `java.util` package.
 Ex.:
-HashMap phonebook = new HashMap(); // can be created by calling the constructor with no arguments.
+```java
+HashMap phoneBook = new HashMap(); // can be created by calling the constructor with no arguments.
 
-HashMap phonebook = new HashMap(30, 0.7F);
+HashMap phoneBook = new HashMap(30, 0.7F);
+```
 
-In the latter the first number -30- is the capacity. It represents the number of elements the hash map can store. The second argument represents the percetange of elements that can be stored before the capacity is automatically increased. The value is floating-point number ranging from 0 (empty) to 1.0 (full). The defaults are a capacity of 16 and load factor of .75, which often are sufficient.
+In the latter the first number `30` is the capacity. It represents the number of elements the hash map can store. The second argument represents the percentage of elements that can be stored before the capacity is automatically increased. The value is floating-point number ranging from 0 (empty) to 1.0 (full). The *defaults* are a capacity of `16` and load factor of `.75`, which often are sufficient.
+```java
+HashMap<String, Long> phoneBook = new HashMap<>();
+```
 
-HashMap<String, Long> phonebook = new HashMap<>();
+This creates a `HashMap` called phoneBook with keys that are *strings* and *values* that are `Long` objects. The second set of `< >` characters are empty, which assumes the same classes as those in the previous `< >` in the statement.
 
-This creates a hash map called phonebook with keys that are strings and values that are Long objects. The second set of < and > characters is empty, which assumes the same classes as those in the previous < and > in the statement.
+**Note**: if you were to use a primitive type between `< >`, such as `<int, Long>` will cause his class equivalent to be used: `<Integer, Long>` in this example.
 
-Note: if you were to use a primitive type between <>, such as <int, Long> will cause his class equivalent to be used: <Integer, Long> in this example.
+- **`put(Object, Object)`**: Use to stored objects in the hash map.
+	ex.: 
+	```java
+	phoneBook.put("Butterball Turkey Line", 8002888372L); 
+	```
+	**Note**: These statements are putting `Long` objects in the `HashMap` using `long` values. This would have been an error in early versions of Java, because a primitive data type such as `long` couldn't be used where an object was required.But it's no longer an error because of autoboxing and unboxing, a feature of Java that automatically converts between primitive types and their equivalent object classes. When the Java compiler sees a `long` like 8002888372, it converts it to a `Long` object.
 
--put(Object, Object): Use to stored objects in the hash map.
-ex.: phonebook.put("Butterball Turkey Line", 8002888372L); 
-Note: These statements are putting -Long- objects in the hash map using -long- values. This would have been an error in early versions of Java, because a primitive data type such as long couldn't be used where an object was required.
-But it's no longer an error because of autoboxing and unboxing, a feature of Java that automatically converts between primitive types and their equivalent object classes. When the Java compiler sees a -long- like 8002888372, it converts it to a -Long- object.
+- **`get(Object)`**: retrieves an object using its key as the only argument.
+	ex.: 
+	```java
+	long number = phoneBook.get("Butterball Turkey Line"); // returns -null- if not matching key is found. This could cause a problem because -long- types do not accept null values. this could be fixed by declaring number a -Long- object.
+	```
 
--get(Object): retrieves an object using its key as the only argument.
-ex.: long number = phonebook.get("Butterball Turkey Line"); // returns -null- if not matching key is found. This could casue a problem because -long- types do not accept null values. this could be fixed by declaring number a -Long- object.
+- **`getOrDefault(Object, Object)`**: If the key specified as the first argument is not found, the second argument is returned by default.
+	ex.: 
+	```java
+	long number = phoneBook.getOrDefault("Betty Crocker", -1L); //If a number matching the key "Betty Crocker" is found in the map, that number is returned. Otherwise, −1 is returned.	
+	```
 
--getOrDefault(Object, Object): If the key specified as the first argument is not found, the second argument is returned by default.
-ex.: long number = phonebook.getOrDefault("Betty Crocker", -1L); //If a number matching the key "Betty Crocker" is found in the map, that number is returned. Otherwise, −1 is returned.	
+- **`containsKey(Object)` / `containsValue(Object)`**: Indicate whether a key / value is present in the map. Returns a `Boolean`.
 
-containsKey(Object) / containsValue(Object): Indicate whether a key / value is present in the map. Returns a Boolean.
+- **`size()`**: reveals the number of items in the data structure.
 
--size(): reveals the number of items in the data structure.
-
--Loop though the Hash map.-
-
-for (Map.Entry<String, Long> entry : phonebook.entrySet()) {
-String key = entry.getKey();
-Long value = entry.getValue();
-// ...
+### -Loop though the Hash map.-
+```java
+for (Map.Entry<String, Long> entry : phoneBook.entrySet()) {
+	String key = entry.getKey();
+	Long value = entry.getValue();
+	// ...
 }
+```
+The method `entrySet()` returns these entries in the map as a `Set` of object (using the Set interface in `java.util`). Each item is them represented by `Map.Entry`, a class of `Java.util`. The entry object can call `getKey()` and `getValue()` to get the key and value.
 
-The method entrySet() returns these entries in the map as a -Set- of object (using the Set interface in java.util). Each item is them represented by Map.Entry, a class of Java.util. The entry object can call getKey() and getValue() to get the key and value.
+<br>
 
-
-HOUR 14 HANDLING ERRORS IN A PROGRAM
+# **HOUR 14 HANDLING ERRORS IN A PROGRAM**
 
 Java divides errors into two categories:
-→Exceptions—Events that signal an unusual circumstance has taken place as a program runs
-→Errors—Events that signal the interpreter is having problems that might be unrelated to your program
 
-Errors normally aren’t something a Java program can recover from. You might have encountered an OutOfMemoryError as you worked on Java programs, which means the program got so big it ran out of memory on the computer. There’s nothing that can be done in a Java program to handle that kind of error after it occurs. The program exits with the error.
+- **Exceptions—Events** that signal an unusual circumstance has taken place as a program runs
+- **Errors—Events** that signal the interpreter is having problems that might be unrelated to your program
+
+Errors normally aren’t something a Java program can recover from. You might have encountered an *OutOfMemoryError* as you worked on Java programs, which means the program got so big it ran out of memory on the computer. There’s nothing that can be done in a Java program to handle that kind of error after it occurs. The program exits with the error.
 Exceptions often can be dealt with in a way that keeps a program running properly.
 
--NOTE: Two terms are used to describe this process: throw and catch. Objects throw exceptions to alert other objects that they have occurred. These exceptions are caught by other objects or the Java Virtual Machine.
+**NOTE:** Two terms are used to describe this process: `throw` and `catch`. Objects throw exceptions to alert other objects that they have occurred. These exceptions are caught by other objects or the Java Virtual Machine.
 
-All exceptions are subclasses of Exception in the java.lang package.
-There are exceptions that can be dealt with by simple changing the code similar to compiler errors. Other exceptions must be dealt with every time a program runs by using five new keywords: -try-, -catch-, -finally-, -throw-, and -throws-.
+All exceptions are subclasses of Exception in the `java.lang` package.
+There are exceptions that can be dealt with by simple changing the code, similar to compiler errors. Other exceptions must be dealt with every time a program runs by using five new keywords: `try`, `catch`, `finally`, `throw`, and `throws`.
 
-Java programs can take care of their own exceptions by using a try-catch block statement, which takes the following form:
+Java programs can take care of their own exceptions by using a `try-catch` block statement, which takes the following form:
 Ex.:
+```java
 try {
 // statements that might cause the exception
 } catch (Exception e) {
 // what to do when the exception occurs
 }
+```
 
-The -Exception- object that appears in the -catch- statement should be one of three things:
-→The class of the exception that might occur
-→More than one class of exception, separated by pipe "|" characters
-→A superclass of several different exceptions that might occur
+The `Exception` object that appears in the `catch` statement should be one of three things:
+1. The class of the exception that might occur
+2. More than one class of exception, separated by pipe "|" characters
+3. A superclass of several different exceptions that might occur
 
-Try...Catch in action:
+*`Try...Catch` in action*
+```java
 package com.java24hours;
 
 public class NewCalculator {
-public static void main(String[] arguments) {
-	float sum = 0;
-	
-	for (String argument : arguments) {
-		try {
-			sum = sum + Float.parseFloat(argument);
-		} catch (NumberFormatException e) {
-			System.out.println(argument 
-				+ " is not a number.");
+	public static void main(String[] arguments) {
+		float sum = 0;
+		
+		for (String argument : arguments) {
+			try {
+				sum = sum + Float.parseFloat(argument);
+			} catch (NumberFormatException e) {
+				System.out.println(argument 
+					+ " is not a number.");
+			}
 		}
+		System.out.println("Those numbers add up to " + sum);
 	}
-	System.out.println("Those nubmers add up to " + sum);
 }
-}
+```
+<br>
 
--Catching Several Different Exceptions.-
+## **-Catching Several Different Exceptions.-**
 
 One way to handle multiple classes of exceptions is to devote a catch block to each one.
 Ex.:
+```java
 String textValue = "35";
 int value;
 try {
-value = Integer.parseInt(textValue);
+	value = Integer.parseInt(textValue);
 } catch (NumberFormatException exc) {
-// code to handle exception
+	// code to handle exception
 } catch (ArithmeticException exc) {
-// code to handle exception
+	// code to handle exception
 }
+```
 
-You also can handle multiple exceptions in the same catch block by separating them with pipe "|" characters and ending the list with a name for the exception variable.
+You also can handle multiple exceptions in the same catch block by separating them with pipe `|` characters and ending the list with a name for the exception variable.
 Ex.:
+```java
 try {
-value = Integer.parseInt(textValue);
+	value = Integer.parseInt(textValue);
 } catch (NumberFormatException | ArithmeticException exc) {
-// code to handle exceptions
+	// code to handle exceptions
 }  //If a NumberFormatException or ArithmeticException is caught, it will be assigned to the -exc- variable.
+```
+<br>
 
--Handling Something After an Exception.-
+## **-Handling Something After an Exception.-**
 
 There are times when you want the program to do something at the end of the block whether an exception occurred or not. Do this with:
 Ex.:
+```java
 try {
-// statements that might cause the exception
+	// statements that might cause the exception
 } catch (Exception e) {
-// what to do when the exception occurs
+	// what to do when the exception occurs
 } finally {
-// statements to execute no matter what
+	// statements to execute no matter what
 }
+```
 
-The statement or statements within the finally section of the block are executed after everything else in the block, even if an exception occurs. One place this is useful is in a program that reads data from a file on disk. There are several ways an exception can occur when you are accessing data: the file might not exist, a disk error could occur, and so on. If the statements to read the disk are in a try section and errors are handled in a catch section, you can close the file in the finally section. This makes sure that the file is closed whether or not an exception is thrown as it is read.
+The statement/s within the `finally` section of the block are executed after everything else in the block, even if an exception occurs. One place this is useful is in a program that reads data from a file on disk. There are several ways an exception can occur when you are accessing data: the file might not exist, a disk error could occur, and so on. If the statements to read the disk are in a try section and errors are handled in a catch section, you can close the file in the finally section. This makes sure that the file is closed whether or not an exception is thrown as it is read.
 
--Throwing Exceptions.-
+## **-Throwing Exceptions.-**
 
 When the compiler displays a message about an exception being handled incorrectly while using classes in the Java class library such as:
+```java
 Output ▼
 NetReader.java:14: unreported exception java.net.MalformedURLException; must be
 caught or declared to be thrown.
+```
 
-The “must be caught or declared to be thrown,” part indicates the method you are trying to use throws that exception. You and your application must do one of the following:
-→Handle the exception with a try-catch block
-→Throw the exception
-→Handle the exception with a try-catch block and then throw it
+The *must be caught or declared to be thrown* part indicates the method you are trying to use throws that exception. You and your application must do one of the following:
+1. Handle the exception with a `try-catch` block
+2. Throw the exception
+3. Handle the exception with a `try-catch` block and then throw it
 
-If you would like to throw an exception after handling it (catch it), you can use a throw statement followed by the exception object to throw.
+If you would like to throw an `exception` after handling it (catch it), you can use a `throw` statement followed by the exception object to throw.
 Ex.:
+```java
 float principal;
 try {
-principal = Float.parseFloat(loanText) * 1.1F;
+	principal = Float.parseFloat(loanText) * 1.1F;
 } catch (NumberFormatException e) {
-System.out.println(arguments[0] + " is not a number.");
-throw e;
+	System.out.println(arguments[0] + " is not a number.");
+	throw e;
 } //This handles NumberFormatException errors only
 
 float principal;
 try {
-principal = Float.parseFloat(loanText) * 1.1F;
+	principal = Float.parseFloat(loanText) * 1.1F;
 } catch (Exception e) {
-System.out.println("Error " + e.getMessage());
-throw e;
+	System.out.println("Error " + e.getMessage());
+	throw e;
 } // Handles all exceptions that could occur.
+```
 
--Exception- is the parent of all exception subclasses. When you use throw in a catch block that catches a parent class, such as Exception, throwing the exception throws that class. This loses some detail of what kind of error occurred, because a subclass such as NumberFormatException tells you a lot more about the problem than simply the Exception class.
-Java offers a way to keep this detail: the final keyword in a catch statement.
+`Exception` is the parent of all exception subclasses. When you use throw in a catch block that catches a parent class, such as Exception, throwing the exception throws that class. This loses some detail of what kind of error occurred, because a subclass such as `NumberFormatException` tells you a lot more about the problem than simply the Exception class.
+Java offers a way to keep this detail: the `final` keyword in a catch statement.
 Ex.:
+```java
 try {
-principal = Float.parseFloat(loanText) * 1.1F;
+	principal = Float.parseFloat(loanText) * 1.1F;
 } catch (final Exception e) {
-System.out.println("Error " + e.getMessage());
-throw e;
+	System.out.println("Error " + e.getMessage());
+	throw e;
 }
+```
+That `final` keyword in catch causes throw to behave differently. The specific class that was caught is thrown.
 
-That final keyword in catch causes throw to behave differently. The specific class that was caught is thrown.
+## -Ignoring Exceptions.-
 
--Ignoring Exceptions.-
-
-When you want to create a method not to deal with a certain exception you can use -throws-.
+When you want to create a method not to deal with a certain exception you can use `throws`.
 Ex.:
+```java
 public void loadURL(String address) throws MalformedURLException {
-URL page = new URL(address);
-// code to load web page
+	URL page = new URL(address);
+	// code to load web page
 }
+```
+If a wrong URL is passed to *address* (for instance *http:www.java24hours.com* missing the two slash //) then the constructor of the URL class throws a *MalformedURLException*. However, because the loadURL method declare with `throws MalformedURLException` the responsibility for catching this exception falls to any method that calls the `loadURL()` method.
 
-If a wrong URL is passed to -address- (for instance "http:www.java24hours.com" missing the two slash //) then the constructor of the URL class throws a MalformedURLException. However, because the loadURL method declare with -throws MalformedURLException- the responsibility for catching this exception falls to any method that calls the loadURL() method.
+## **-Exceptions That Don’t Need `catch`.-**
 
--Exceptions That Don’t Need catch.-
-
-These exceptions are called Unchecked exceptions. They are all subclasses of the "RuntimeException" in the java.lang package. -IndexOutOfBoundsException- and -NullPointerException- (If a statement incorrectly assumes an object has a value or when an object that has no value is used) are common unchecked exceptions.
+These exceptions are called *Unchecked exceptions*. They are all subclasses of the *RuntimeException* in the `java.lang` package. *IndexOutOfBoundsException* and *NullPointerException* (if a statement incorrectly assumes an object has a value or when an object that has no value is used) are common unchecked exceptions. <br>
 The rationale for unchecked exceptions in Java is that they either can be prevented by wellwritten code, or they could occur so often that catching them all the time would make programs unnecessarily complex. A NullPointerException could occur in every statement in a program where an object’s methods are called.
 Of course, just because an exception can be ignored doesn’t mean it should be. You still have the option of using try, catch, and throws with unchecked exceptions.
 
-Is it possible to create your own exceptions?
-It’s not just possible, it’s a really good idea. Making your own exceptions for problems that may arise makes your classes more robust. You can create your own exceptions easily by making them a subclass of an existing exception, such as Exception, the superclass of all exceptions. In a subclass of Exception, there are only two constructors you might want to override: Exception() with no arguments and Exception() with a String as an argument. In the latter, the string should be a message describing the error that has occurred.
+### **Is it possible to create your own exceptions?**
+It’s not just possible, it’s a really good idea. Making your own exceptions for problems that may arise makes your classes more robust. You can create your own exceptions easily by making them a subclass of an existing exception, such as Exception, the superclass of all exceptions. In a subclass of Exception, there are only two constructors you might want to override: `Exception()` with no arguments and `Exception(String )` with a `String` as an argument. In the latter, the string should be a message describing the error that has occurred.
 
+<br>
 
-	-HOUR 15. CREATING A THREADED PROGRAM.-
+# **-HOUR 15. CREATING A THREADED PROGRAM.-**
 
-In a Java program, each of the simultaneous tasks the computer handles is called a thread, and the overall process is called multithreading. Multitasking is made possible through a class of objects called -threads-.
+In a Java program, each of the simultaneous tasks the computer handles is called a thread, and the overall process is called multithreading. Multitasking is made possible through a class of objects called *threads*.
 
-Tip: All classes that belong to the -java.lang- package do not need to be imported to be used. Both, the class -Thread- and the interface -Runnable-, that represent Threads are part of this package.
+**Tip**: All classes that belong to the `java.lang` package do not need to be imported to be used. Both, the class `Thread` and the interface `Runnable`, that represent Threads are part of this package.
 
--Slowing Down a Program.-
+## **-Slowing Down a Program.-**
 
-The Thread class has a -sleep()- method that you can call in any program that should stop running for a short period of time.
+The `Thread` class has a `sleep()` method that you can call in any program that should stop running for a short period of time.
 Ex.:
+```java
 Thread.sleep(5000); 
-
-Causes the JVM to pause for five seconds (5,000 milliseconds) before doing anything else.If for some reason the JVM can’t pause that long, an InterruptedException is thrown by the sleep() method. Therefore, you should deal with some manner, like inside a try-catch statement block.
+```
+Causes the JVM to pause for five seconds (5,000 milliseconds) before doing anything else. If for some reason the JVM can’t pause that long, an *InterruptedException* is thrown by the `sleep()` method. Therefore, you should deal with some manner, like inside a `try-catch` statement block.
 Ex.:
+```java
 try {
 Thread.sleep(5000);
 } catch (InterruptedException e) {
 // wake up early
 }
-
+```
 Your program can have as many threads as needed, and they all can run simultaneously without affecting each other.
 
--Creating a Thread.-
+## **-Creating a `Thread`.-**
 
-A Java class that can be run as a thread is referred to as a runnable (or threaded) class.
+A Java class that can be run as a thread is referred to as a *runnable (or threaded) class*. <br>
 Two ways to place a task in its own thread include:
-→Putting the task in a class that implements the Runnable interface
-→Putting the task in a class that is a subclass of Thread
+1. Putting the task in a class that implements the Runnable interface
+2. Putting the task in a class that is a subclass of Thread
 
-To support the Runnable interface, the implements keyword is used when the class is created.
+To support the `Runnable` interface, the implements keyword is used when the class is created.
 Ex.:
+```java
 public class LoadStocks implements Runnable {
 // body of the class
 }
+```
 
 When a class implements an interface, it indicates that the class contains some extra behavior in addition to its own methods.
-Classes that implement the Runnable interface must include the run() method, which has the following structure:
+Classes that implement the `Runnable` interface must include the `run()` method, which has the following structure:
 Ex.:
+```java
 public void run() {
 // body of the method
 }
+```
+The `run()` method should take care of the task that the thread was created to accomplish.
 
-The run() method should take care of the task that the thread was created to accomplish.
+When a threaded application is run, the statements in its `run()` method are not executed automatically. Threads can be started and stopped in Java, and a thread doesn’t begin running until you do two things:
 
-When a threaded application is run, the statements in its run() method are not executed automatically. Threads can be started and stopped in Java, and a thread doesn’t begin running until you do two things:
-→Create an object of the threaded class by calling the Thread constructor
-→Start the thread by calling its start() method
-The Thread constructor takes a single argument: the object that contains the thread’s run() method. Often, you use the "this" keyword as the argument, which indicates the current class includes the run() method.
+1. Create an object of the threaded class by calling the Thread constructor
+2. Start the thread by calling its `start()` method <br>
+The Thread constructor takes a single argument: the object that contains the thread’s `run()` method. Often, you use the `this` keyword as the argument, which indicates the current class includes the `run()` method.
 
 Normally you’d expect to see that object assigned to a variable, like so:
 Ex.: 
+```java
 PrimeFinder frame = new PrimeFinder();
-However, if there is no need to refer to the object later on in the code, you can simply call "new" to cause the program to run
-Ex.: 
+/*However, if there is no need to refer to the object later on in the code, you can simply call "new" to cause the program to run*/ 
 new PrimeFinder();
-
+```
 It’s a good programming practice in Java to store objects in variables only when those objects are needed after their creation.
 
-NOTE
-The PrimeFinder application does something unusual with the StringBuffer object's append() method. A call to append() is followed by a period (.) character and another call to append(). This causes text to be appended in sequence. It's possible because a call to append() returns that buffer, which then can be called again.
+```java
+public class PrimeFinder implements Runnable {
+	Thread go;
+	StringBuffer primes = new StringBuffer();
+	int time = 0;
+
+	public PrimeFinder() {
+		start();
+		while (primes != null) {
+			System.out.println(time);
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException exc) {
+				// do nothing
+			}
+			time++;
+		}
+	}
+
+	public void start() {
+		if (go == null) {
+			go = new Thread(this);
+			go.start();
+		}
+	}
+
+	public void run() {
+		int quantity = 1_000_000;
+		int numPrimes = 0;
+		// candidate: the number that might be prime
+		int candidate = 2;
+
+		primes.append("\nFirst ").append(quantity).append(" primes:\n\n");
+		while (numPrimes < quantity) {
+			if (isPrime(candidate)) {
+				primes.append(candidate).append(" ");
+				numPrimes++;
+			}
+			candidate++;
+		}
+		System.out.println(primes);
+		primes = null;
+		System.out.println("\nTime elapsed: " + time + " seconds");
+	}
+
+	public static boolean isPrime(int checkNumber) {
+		double root = Math.sqrt(checkNumber);
+		
+		for (int i = 2; i <= root; i++) {
+			if (checkNumber % i == 0) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public static void main(String[] arguments) {
+		new PrimeFinder();
+	}
+}
+```
+
+**NOTE**: The PrimeFinder application does something unusual with the StringBuffer object's `append()` method. A call to `append() `is followed by a period `.` character and another call to `append()`. This causes text to be appended in sequence. It's possible because a call to `append()` returns that buffer, which then can be called again.
 
 The following subjects will be covered by following code:
--The Constructor
--Catching Errors as You Set Up URLs
--Starting the Thread
--Handling Mouse Clicks
--Displaying Revolving Links
+- The Constructor
+- Catching Errors as You Set Up URLs
+- Starting the Thread
+- Handling Mouse Clicks
+- Displaying Revolving Links
 
 The program you are undertaking rotates through a list of website titles and the addresses used to visit them. The title of each page and the web address are displayed in a continuous cycle. Users can visit the currently displayed site by clicking a button on the application’s graphical user interface. This program operates over a period of time, displaying information about each website in sequence. Because of this time element, threads are the best way to control the program.
 package com.java24hours;
-_______________________________________________
 
+```java
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
@@ -1055,147 +1211,149 @@ import java.net.*;
 
 public class LinkRotator extends JFrame implements Runnable, ActionListener {
 
-/*With this LinkRotator is a subclass of JFrame and support the Runnable and ActionListener interfaces. With Runnable you can make the thread start running (Run()) and with ActionListener the program to respond to mouse clicks*/
+	/*With this LinkRotator is a subclass of JFrame and support the Runnable and ActionListener interfaces. With Runnable you can make the thread start running (Run()) and with ActionListener the program to respond to mouse clicks*/
 
-String[] pageTitle = new String[6];
-	//holds the titles of the six websites that are displayed.
+	String[] pageTitle = new String[6];
+		//holds the titles of the six websites that are displayed.
 
-URI[] pageLink = new URI[6];
-	/*The URI class of objects stores the value of a website address. 
-	URI has all the behavior and attributes needed to keep track 
-	of a web address.*/
+	URI[] pageLink = new URI[6];
+		/*The URI class of objects stores the value of a website address. 
+		URI has all the behavior and attributes needed to keep track 
+		of a web address.*/
 
-int current = 0;
-	//keeps track of which site is being displayed so you can cycle 
-	through the sites.
+	int current = 0;
+		//keeps track of which site is being displayed so you can cycle through the sites.
 
-Thread runner;
-JLabel siteLabel = new JLabel();
+	Thread runner;
+	JLabel siteLabel = new JLabel();
 
-public LinkRotator() {
-	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	setSize(300, 100);
-	FlowLayout flo = new FlowLayout();
-	setLayout(flo);
-	add(siteLabel);
-	
-	pageTitle = new String[] {
-		"Oracle's Java Site",
-		"Server Side",
-		"JavaWorld",
-		"Java in 24 Hours",
-		"Sams Publishing",
-		"Workbench"
-	};
-	pageLink[0] = getURI("http://www.oracle.com/technetwork/java");
-	pageLink[1] = getURI("http://www.theserverside.com");
-	pageLink[2] = getURI("http://www.javaworld.com");
-	pageLink[3] = getURI("http://www.java24hours.com");
-	pageLink[4] = getURI("http://www.samspublishing.com");
-	pageLink[5] = getURI("http://workbench.cadenhead.org");
-	Button visitButton = new Button("Visit Site");
-	visitButton.addActionListener(this);
-	add(visitButton);
-/*Assigns values to the array pageTitle. The elements of the pageLink array are assigned a value returned by the getURI() method, created below. The last three statements create a clickable button labeled “Visit Site” and add it to the application’s frame.*/
+	public LinkRotator() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(300, 100);
+		FlowLayout flo = new FlowLayout();
+		setLayout(flo);
+		add(siteLabel);
+		
+		pageTitle = new String[] {
+			"Oracle's Java Site",
+			"Server Side",
+			"JavaWorld",
+			"Java in 24 Hours",
+			"Sams Publishing",
+			"Workbench"
+		};
+		pageLink[0] = getURI("http://www.oracle.com/technetwork/java");
+		pageLink[1] = getURI("http://www.theserverside.com");
+		pageLink[2] = getURI("http://www.javaworld.com");
+		pageLink[3] = getURI("http://www.java24hours.com");
+		pageLink[4] = getURI("http://www.samspublishing.com");
+		pageLink[5] = getURI("http://workbench.cadenhead.org");
+		Button visitButton = new Button("Visit Site");
+		visitButton.addActionListener(this);
+		add(visitButton);
+	/*Assigns values to the array pageTitle. The elements of the pageLink array are assigned a value returned by the getURI() method, created below. The last three statements create a clickable button labeled “Visit Site” and add it to the application’s frame.*/
 
-	setVisible(true);
-	start();
-}
-
-/*Takes a web address as an argument, returning a URI object representing that address. If the string is not a valid address, the method returns null instead*/	
-private URI getURI(String urlText) {
-	URI pageURI = null;
-	try {
-		pageURI = new URI(urlText);
-	} catch (URISyntaxException ex) {
-		// do nothing
+		setVisible(true);
+		start();
 	}
-	return pageURI;
-}
 
-/*Starts the runner thread if it is not already started. The start() method is called as the last statement of the constructor above.*/
-public void start() {
-	if (runner == null) {
-		runner = new Thread(this); 
-		/*Creates a new Thread object. The this keyword refers to the
-			program itself, designating it as the class that runs within 
-			the thread*/
-		runner.start();
-		/*Causes the thread to begin running. When a thread begins,
-			the run() method of that thread is called. Because the 
-			runner thread is the LinkRotator application itself, 
-			the run() method of the application is called.*/
-	}
-}
-
-//Here the main work of a thread takes place.
-public void run() {
-	Thread thisThread = Thread.currentThread();
-	/*The currentThread() keeps track of the thread that’s currently 
-		running.*/
-
-	/*Both runner and thisThread are threads, and as long as they 
-		refer to the same object, the while loop continues looping.*/
-	while (runner == thisThread) {
-		current++;
-
-		/*The current variable is used as index to the pageTitle
-			array to determine which website’s information to display. 
-			The title is set as the text of the siteLabel user interface 			   component.*/
-		if (current > 5) {
-			current = 0;
-		}
-		siteLabel.setText(pageTitle[current]);
-		repaint();
-
-		/*Pauses the thread for 2 seconds and handles any
-			InterruptedException error. This error would occur if 
-			something interrupted the thread as it slept.*/
+	/*Takes a web address as an argument, returning a URI object representing that address. If the string is not a valid address, the method returns null instead*/	
+	private URI getURI(String urlText) {
+		URI pageURI = null;
 		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException exc) {
-			//do nothing
+			pageURI = new URI(urlText);
+		} catch (URISyntaxException ex) {
+			// do nothing
+		}
+		return pageURI;
+	}
+
+	/*Starts the runner thread if it is not already started. The start() method is called as the last statement of the constructor above.*/
+	public void start() {
+		if (runner == null) {
+			runner = new Thread(this); 
+			/*Creates a new Thread object. The this keyword refers to the
+				program itself, designating it as the class that runs within 
+				the thread*/
+			runner.start();
+			/*Causes the thread to begin running. When a thread begins,
+				the run() method of that thread is called. Because the 
+				runner thread is the LinkRotator application itself, 
+				the run() method of the application is called.*/
 		}
 	}
-}
 
-/*This method is required by the ActionListener interface. Its code makes the application open the displayed website with a web browser.*/	
-public void actionPerformed(ActionEvent event) {
-	Desktop desktop = Desktop.getDesktop();
-	/*The Desktop class in the java.awt package represents the desktop
-		environment of the computer running the application. After 
-		you have this object, you can use it to launch an email client 
-		using a “mailto:” link, open a file for editing with another 
-		program, print a file, and make other programs outside of 
-		Java perform tasks. Here, the Desktop object is used to open 
-		a web page with the computer’s default web browser.*/
+	//Here the main work of a thread takes place.
+	public void run() {
+		Thread thisThread = Thread.currentThread();
+		/*The currentThread() keeps track of the thread that’s currently 
+			running.*/
 
-	if (pageLink[current] != null) {
-		try {
-			desktop.browse(pageLink[current]);
-			runner = null;
-			System.exit(0);
-		} catch (IOException exc) {
-			//do nothing
+		/*Both runner and thisThread are threads, and as long as they 
+			refer to the same object, the while loop continues looping.*/
+		while (runner == thisThread) {
+			current++;
+
+			/*The current variable is used as index to the pageTitle
+				array to determine which website’s information to display. 
+				The title is set as the text of the siteLabel user interface component.*/
+			if (current > 5) {
+				current = 0;
+			}
+			siteLabel.setText(pageTitle[current]);
+			repaint();
+
+			/*Pauses the thread for 2 seconds and handles any
+				InterruptedException error. This error would occur if 
+				something interrupted the thread as it slept.*/
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException exc) {
+				//do nothing
+			}
 		}
-	/*The browse(URI) method loads the specified web address in a 
-		browser. If pageLink[current] is a valid address, browse() 
-		requests that the browser load the page.*/
 	}
-}	
 
-public static void main(String[] arguments) {
-	new LinkRotator();
+	/*This method is required by the ActionListener interface. Its code makes the application open the displayed website with a web browser.*/	
+	public void actionPerformed(ActionEvent event) {
+		Desktop desktop = Desktop.getDesktop();
+		/*The Desktop class in the java.awt package represents the desktop
+			environment of the computer running the application. After 
+			you have this object, you can use it to launch an email client 
+			using a “mailto:” link, open a file for editing with another 
+			program, print a file, and make other programs outside of 
+			Java perform tasks. Here, the Desktop object is used to open 
+			a web page with the computer’s default web browser.*/
+
+		if (pageLink[current] != null) {
+			try {
+				desktop.browse(pageLink[current]);
+				runner = null;
+				System.exit(0);
+			} catch (IOException exc) {
+				//do nothing
+			}
+		/*The browse(URI) method loads the specified web address in a 
+			browser. If pageLink[current] is a valid address, browse() 
+			requests that the browser load the page.*/
+		}
+	}	
+
+	public static void main(String[] arguments) {
+		new LinkRotator();
+	}
 }
-}
+```
 
 The LinkRotator application doesn't have a way to stop the thread. However, the way it is structured it can be easily created.
 Ex.:
+```java
 public void stop() {
-if (runner != null) {
-	runner = null;
+	if (runner != null) {
+		runner = null;
+	}
 }
-}
+```
 Setting the runner object to a null value causes it to have a different value than the thisThread object. When this happens, the while loop inside the run() method stops running.
 
 NOTE:
