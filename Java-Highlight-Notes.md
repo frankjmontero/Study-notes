@@ -1211,7 +1211,9 @@ import java.net.*;
 
 public class LinkRotator extends JFrame implements Runnable, ActionListener {
 
-	/*With this LinkRotator is a subclass of JFrame and support the Runnable and ActionListener interfaces. With Runnable you can make the thread start running (Run()) and with ActionListener the program to respond to mouse clicks*/
+	/*With this LinkRotator is a subclass of JFrame and support the Runnable and 
+	ActionListener interfaces. With Runnable you can make the thread start running 
+	`Run()` and with ActionListener the program to respond to mouse clicks*/
 
 	String[] pageTitle = new String[6];
 		//holds the titles of the six websites that are displayed.
@@ -1251,13 +1253,17 @@ public class LinkRotator extends JFrame implements Runnable, ActionListener {
 		Button visitButton = new Button("Visit Site");
 		visitButton.addActionListener(this);
 		add(visitButton);
-	/*Assigns values to the array pageTitle. The elements of the pageLink array are assigned a value returned by the getURI() method, created below. The last three statements create a clickable button labeled “Visit Site” and add it to the application’s frame.*/
+	/*Assigns values to the array pageTitle. The elements of the pageLink array 
+	are assigned a value returned by the getURI() method, created below. The
+	last three statements create a clickable button labeled “Visit Site” and add 
+	it to the application’s frame.*/
 
 		setVisible(true);
 		start();
 	}
 
-	/*Takes a web address as an argument, returning a URI object representing that address. If the string is not a valid address, the method returns null instead*/	
+	/*Takes a web address as an argument, returning a URI object representing that 
+	address. If the string is not a valid address, the method returns null instead*/	
 	private URI getURI(String urlText) {
 		URI pageURI = null;
 		try {
@@ -1268,7 +1274,8 @@ public class LinkRotator extends JFrame implements Runnable, ActionListener {
 		return pageURI;
 	}
 
-	/*Starts the runner thread if it is not already started. The start() method is called as the last statement of the constructor above.*/
+	/*Starts the runner thread if it is not already started. The start() method is 
+	called as the last statement of the constructor above.*/
 	public void start() {
 		if (runner == null) {
 			runner = new Thread(this); 
@@ -1305,7 +1312,7 @@ public class LinkRotator extends JFrame implements Runnable, ActionListener {
 
 			/*Pauses the thread for 2 seconds and handles any
 				InterruptedException error. This error would occur if 
-				something interrupted the thread as it slept.*/
+				something interrupts the thread as it slept.*/
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException exc) {
@@ -1314,7 +1321,8 @@ public class LinkRotator extends JFrame implements Runnable, ActionListener {
 		}
 	}
 
-	/*This method is required by the ActionListener interface. Its code makes the application open the displayed website with a web browser.*/	
+	/*This method is required by the ActionListener interface. Its code makes 
+	the application open the displayed website with a web browser.*/	
 	public void actionPerformed(ActionEvent event) {
 		Desktop desktop = Desktop.getDesktop();
 		/*The Desktop class in the java.awt package represents the desktop
@@ -1354,131 +1362,147 @@ public void stop() {
 	}
 }
 ```
-Setting the runner object to a null value causes it to have a different value than the thisThread object. When this happens, the while loop inside the run() method stops running.
+Setting the runner object to a null value causes it to have a different value than the thisThread object. When this happens, the while loop inside the `run()` method stops running.
 
-NOTE:
+**NOTE:**
 Something important to remember about interfaces. An interface is a guarantee that the class includes all the interface's methods. If an interface contains three different methods all of them must be included in a class that implements the interface.
 
 
-	-HOUR 16 USING INNER CLASSES AND CLOSURES.-
+# **-HOUR 16 USING INNER CLASSES AND CLOSURES.-**
 
 Inner classes are helper classes that are contained within an enclosing class. There are three reasons that Java includes inner classes:
+
 1. When a helper class is only used by one other class, it makes sense to define it within that class.
 2. They enable a helper class to access private methods and variables it could not access as a separate class.
 3. They put a helper class as close as possible to where it is being used in another class.
 
-An inner class is created with the class keyword, like any other class, but it is declared inside
-the containing class. Typically, this is placed with class and instance variables.
+An inner class is created with the class keyword, like any other class, but it is declared inside the containing class. Typically, this is placed with class and instance variables.
 Ex.:
+```JAVA
 public class Simple {
-class InnerSimple {
-	InnerSimple() {
-		System.out.println("I am an inner class!");
+	class InnerSimple {
+		InnerSimple() {
+			System.out.println("I am an inner class!");
+		}
+	}
+	public Simple() {
+		// empty constructor
+	}
+	public static void main(String[] arguments) {
+		Simple program = new Simple();
+		Simple.InnerSimple inner = program.new InnerSimple();   /*Creating an inner class requires an object of the outer class. The new operator is called on the object. The name of the class includes the name of the outer class, a period (.) character, and the inner class name.*/
 	}
 }
-public Simple() {
-	// empty constructor
-}
-public static void main(String[] arguments) {
-	Simple program = new Simple();
-	Simple.InnerSimple inner = program.new InnerSimple();   /*Creating an inner class requires an object of the outer class. The new operator is called on the object. The name of the class includes the name of the outer class, a period (.) character, and the inner class name.*/
-}
-}
+```
 
--Anonymous Inner Classes.-
+## **-Anonymous Inner Classes.-**
 
-An anonymous inner class is one that has no name and is declared and created at the same time. To use one, you replace a reference to an object with the new keyword, a call to a constructor, and the class definition inside { and } characters.
+An anonymous inner class is one that has no name and is declared and created at the same time. To use one, you replace a reference to an object with the new keyword, a call to a constructor, and the class definition inside `{ }` characters.
 Ex.: The following doesn't use one
+```java
 WorkerClass worker = new WorkerClass();
 Thread main = new Thread(worker);
 main.start();
 /*If the code in WorkerClass is short and simple, and the class only needs to be used once, it could be worthwhile to put it in an anonymous inner class.*/
+```
 
+```java
 Thread main = new Thread(new Runnable() {
 public void run() {
 	// thread's work to perform goes here
 }
 }); /*The anonymous inner class has replaced the reference to worker with the code that ends here and starts with -new-*/
 main.start();
-
-This creates an anonymous class that implements the Runnable interface and overrides the run() method. The statements inside the method would perform whatever work the class requires.
+```
+This creates an anonymous class that implements the Runnable interface and overrides the `run()` method. The statements inside the method would perform whatever work the class requires.
 
 Let's elaborate with an example:
-
+```java
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 
 public class KeyViewer extends JFrame {
-JTextField keyText = new JTextField(80);
-JLabel keyLabel = new JLabel("Press any key in the text field.");
+	JTextField keyText = new JTextField(80);
+	JLabel keyLabel = new JLabel("Press any key in the text field.");
 
-public KeyViewer() {
-	super("KeyViewer");
-	setSize(350, 100);
-	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	keyText.addKeyListener(new KeyAdapter() {
-		public void keyTyped(KeyEvent input) {
-			char key = input.getKeyChar();
-			keyLabel.setText("You pressed " + key);
-		}
-	});
-	BorderLayout bord = new BorderLayout();
-	setLayout(bord);
-	add(keyLabel, BorderLayout.NORTH);
-	add(keyText, BorderLayout.CENTER);
-	setVisible(true);
-}
+	public KeyViewer() {
+		super("KeyViewer");
+		setSize(350, 100);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		keyText.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent input) {
+				char key = input.getKeyChar();
+				keyLabel.setText("You pressed " + key);
+			}
+		});
+		BorderLayout bord = new BorderLayout();
+		setLayout(bord);
+		add(keyLabel, BorderLayout.NORTH);
+		add(keyText, BorderLayout.CENTER);
+		setVisible(true);
+	}
 
-public static void main(String[] arguments) {
-	new KeyViewer();
+	public static void main(String[] arguments) {
+		new KeyViewer();
+	}
 }
-}
+```
 
-A Java application can receive keyboard input with the Swing graphical user interface packages. The application monitors the keyboard with an object that implements the KeyListener interface. For this interface 3 methods must be implemented: keyTyped(), keyPressed(), and keyReleased().
+A Java application can receive keyboard input with the `Swing` graphical user interface packages. The application monitors the keyboard with an object that implements the `KeyListener` interface. For this interface 3 methods must be implemented: `keyTyped()`, `keyPressed()`, and `keyReleased()`.
 Ex.:
+```java
 public void keyTyped(KeyEvent input) {
-char key = input.getKeyChar();
-keyLabel.setText("You pressed " + key);
+	char key = input.getKeyChar();
+	keyLabel.setText("You pressed " + key);
 }
 public void keyPressed(KeyEvent txt) {
-// do nothing
+	// do nothing
 }
 public void keyReleased(KeyEvent txt) {
-// do nothing
+	// do nothing
 }
+```
 
-In the same class as these statements, the key listener is set to use the class to monitor keyboard events:    keyText.addKeyListener(this);
+In the same class as these statements, the key listener is set to use the class to monitor keyboard events: `keyText.addKeyListener(this);`
 
-With an anonymous inner class and the KeyAdapter class in the java.awt.event package, there’s a better way to create the listener and add it to the graphical user interface. The KeyAdapter class implements the KeyListener interface with do-nothing implementations of all three methods. It makes it easy to create a listener for keyboard events, because you can create a subclass that only overrides the method that actually does anything.
+With an anonymous inner class and the KeyAdapter class in the java.awt.event package, there’s a better way to create the listener and add it to the graphical user interface. The *KeyAdapter* class implements the KeyListener interface with do-nothing implementations of all three methods. It makes it easy to create a listener for keyboard events, because you can create a subclass that only overrides the method that actually does anything.
 
-In the example above we created a KeyViewer class that implements the KeyAdapter interface in a anonimous inner class by calling the KeyAdapter constructor from the KeyAdapter interface. We could create an object of a KeyViewerListener helper class and set it as a listener: KeyViewerListener kvl = new KeyViewerListener();  keyText.addKeyListener(kvl);
+In the example above we created a *KeyViewer* class that implements the *KeyAdapter* interface in a anonymous inner class by calling the *KeyAdapter* constructor from the *KeyAdapter* interface. We could create an object of a *KeyViewerListener* helper class and set it as a listener: 
+```java
+KeyViewerListener kvl = new KeyViewerListener();  
+keyText.addKeyListener(kvl);
+```
 However, this approach would require a whole separate helper class.
 
-Instead, we created a breafer version by creating a listener class anonymously by calling the new KeyAdapter() followed by the definition of the class. The class overrides the keyTyped() method so that when a key is pressed, it is retrieved with a call to getKeyChar() and displayed by setting the value of keyLabel, which is a JLabel component.
+Instead, we created a briefer version by creating a listener class anonymously by calling the `new KeyAdapter()` followed by the definition of the class. The class overrides the `keyTyped()` method so that when a key is pressed, it is retrieved with a call to `getKeyChar()` and displayed by setting the value of *keyLabel*, which is a JLabel component.
 
-Plus, the anonymous inner class does something that a normal helper class could not do: access the keyLabel instance variable. That variable belongs to the KeyViewer class. Inner classes can access the methods and variables of their enclosing class.
+Plus, the anonymous inner class does something that a normal helper class could not do: access the keyLabel instance variable. That variable belongs to the *KeyViewer* class. Inner classes can access the methods and variables of their enclosing class.
 
 At the end, the application monitors keyboard input using the only method in the KeyListener interface the application requires and displays that input by updating the keyLabel instance variable.
 
-Anonymous inner classes cannot define constructors, so they are more limited than a nonanonymous inner class.
+Anonymous inner classes cannot define constructors, so they are more limited than a non-anonymous inner class.
 
--Closures / Lambda Expressions.-
+<br>
+
+## **-Closures / Lambda Expressions.-**
 
 Closures allow an object with a single method to be created with only an -> operator.
 Ex.: 
+```java
 Runnable runner = () -> { System.out.println("Run!"); };
-
-This single line creates an object that implements the Runnable interface and makes its run() method equivalent to the following code:
-
+```
+This single line creates an object that implements the Runnable interface and makes its *run()* method equivalent to the following code:
+```java
 void run() {
 System.out.println("Run!");
 }
-
+```
 In a lambda expression, the statement to the right of the arrow operator -> becomes the method that implements the interface. This can be done only when the interface has a single method to implement, like Runnable. An interface in Java that has one method is now called a FUNCTIONAL INTERFACE.
 
 The set of parentheses refers to the arguments sent to the method of the functional interface. Here is another one that needs an argument:
 Ex.: 
+```java
 //Regular expression
 public void actionPerformed(ActionEvent act) {
 System.out.println(act.getSource());
@@ -1488,172 +1512,203 @@ System.out.println(act.getSource());
 ActionListener al = (ActionEvent act) -> {
 System.out.println(act.getSource());
 }
-
-The ActionListener interface receives action events, such as when a user clicks a button. The only method in the functional interface is actionPerformed(ActionEvent). The argument is an ActionEvent object that describes the user action that triggered the event.
+```
+The `ActionListener` interface receives action events, such as when a user clicks a button. The only method in the functional interface is actionPerformed(ActionEvent). The argument is an ActionEvent object that describes the user action that triggered the event.
 
 The object, act, is used inside the body of the method. The left-half reference to act appears to be outside the scope of the right-half implementation of the method. This is because closures allow code to refer to the variables of another method outside the scope of those variables.
 
 In a lambda expression, it’s possible to infer the class of the argument or arguments sent to the method.
 Ex.:
+```java
 ActionListener al = (act) -> {
 System.out.println(act.getSource());
 }  /*Because the ActionListener functional interface has a method that takes an ActionEvent object as its only argument, the name of that class can be omitted.*/
-
+```
 Anonymous inner classes have access to the methods and instance variables of their enclosing class. A separate helper class would not.
 
-PROGRAMS: ColorFrame.class / NewColorFrame.class
+> PROGRAMS: ColorFrame.class / NewColorFrame.class
 
 
 
-	-HOUR 17 BUILDING A SIMPLE USER INTERFACE.-
+# **-HOUR 17 BUILDING A SIMPLE USER INTERFACE.-**
 
 With Java, the development of a program’s user interface is based on Swing and an earlier set of classes called the Abstract Windowing Toolkit. These classes enable you to create a GUI and receive input from the user. With Java’s user interface classes, you can create a GUI that includes all the following and more:
 
--Buttons, check boxes, labels, and other simple components
--Text fields, sliders, and other more complex components
--Pull-down menus and pop-up menus
--Windows, frames, dialog boxes, panels, and applet windows
+- Buttons, check boxes, labels, and other simple components
+- Text fields, sliders, and other more complex components
+- Pull-down menus and pop-up menus
+- Windows, frames, dialog boxes, panels, and applet windows
 
-NOTE: To know more about Swing components refer to the web at http://download.java.net/jdk9/docs/api.
+**NOTE:** To know more about Swing components refer to the web at *http://download.java.net/jdk9/docs/api*
 
--USING COMPONENTS.-
+## **-USING COMPONENTS.-**
 
 When you are putting a GUI together, you work with two kinds of objects: components and containers. A component is an individual element in a user interface, such as a button or slider. A container is a component that you can use to hold other components.
 In an application, the container is often a window or a frame.
 
->Windows and Frames<
+### **Windows and Frames**
 
 Windows are simple containers that do not have a title bar or any of the other buttons normally along the top edge of a GUI. Frames are windows that include all the common windowing features users expect to find when they run software—such as buttons to close, expand, and shrink the window.
-You create these containers using Swing’s JWindow and JFrame classes.
+You create these containers using *Swing’s `JWindow` and `JFrame`* classes.
 Ex.:
+```java
 import javax.swing.*; 
 //To refer to Swing classes without using the full package and class name
+```
 
-One way to make use of a frame in a Java application is to make the application a subclass of JFrame.
+One way to make use of a frame in a Java application is to make the application a subclass of `JFrame`.
 Ex.:
+```java
 import javax.swing.*;
 public class MainFrame extends JFrame {
-public MainFrame() {
-	// set up the frame
+	public MainFrame() {
+		// set up the frame
+	}
 }
-}
+```
+This class creates a frame but doesn’t set it up completely. In the frame’s constructor, you must do several things when creating a frame:
+- Call a constructor of the superclass, `JFrame`.
+- Set up the title of the frame.
+- Set up the size of the frame.
+- Set the frame’s look and feel.
+- Define what happens when the frame is closed by a user.
 
-This class creates a frame but doesn’t set it up completely. In the frame’s constructor, you must
-do several things when creating a frame:
--Call a constructor of the superclass, JFrame.
--Set up the title of the frame.
--Set up the size of the frame.
--Set the frame’s look and feel.
--Define what happens when the frame is closed by a user.
-
-You also must make the frame visible, unless for some reason it should not be displayed when
-the application begins running.
-Most of these things can be handled in the frame’s constructor. The first thing the method must
-contain is a call to one of the constructors of JFrame, using the super statement.
+You also must make the frame visible, unless for some reason it should not be displayed when the application begins running.
+Most of these things can be handled in the frame’s constructor. The first thing the method must contain is a call to one of the constructors of `JFrame`, using the super statement.
 Ex.:
+```java
 super("Main Frame");
 //Calling with a String argument sets that String as the frame's tittle.
 //Another way.
 super();
 setTitle("Main Frame");
+```
 
-The size of the frame can be established by calling its setSize(int, int) method with two arguments: the width and height.
+The size of the frame can be established by calling its setSize(int, int) method with two arguments: the *width* and *height*.
 Ex.:
+```java
 setSize(350, 125);
 //Sets a frame 350 pixels wide and 125 pixels tall.
+```
 
-Another way to set the size of a frame is to fill it with components and then call the frame’s pack() method.
+Another way to set the size of a frame is to fill it with components and then call the frame’s `pack()` method.
 Ex.:
+```java
 pack();
+```
+The `pack()` method sets the frame big enough to hold the preferred size of each component inside the frame (but no bigger). Every interface component has a preferred size, though this is sometimes disregarded, depending on how components have been arranged within an interface. You don’t need to explicitly set the size of a frame before calling pack()—the method sets it to an adequate size before the frame is displayed.
 
-The pack() method sets the frame big enough to hold the preferred size of each component inside the frame (but no bigger). Every interface component has a preferred size, though this is sometimes disregarded, depending on how components have been arranged within an interface. You don’t need to explicitly set the size of a frame before calling pack()—the method sets it to an adequate size before the frame is displayed.
-Every frame is displayed with a button along the title bar that can be used to close the frame. To define
-what happens when this button is clicked, call the frame’s setDefaultCloseOperation(int) method with one of four JFrame class variables as the argument:
-•EXIT_ON_CLOSE: Exit the program when the button is clicked.
-•DISPOSE_ON_CLOSE: Close the frame and keep running the application.
-•DO_NOTHING_ON_CLOSE: Keep the frame open and continue running.
-•HIDE_ON_CLOSE—Close: the frame and continue running.
+Every frame is displayed with a button along the title bar that can be used to close the frame. To define what happens when this button is clicked, call the frame’s `setDefaultCloseOperation(int)` method with one of four `JFrame` class variables as the argument:
+- `EXIT_ON_CLOSE`: Exit the program when the button is clicked.
+- `DISPOSE_ON_CLOSE`: Close the frame and keep running the application.
+- `DO_NOTHING_ON_CLOSE`: Keep the frame open and continue running.
+- `HIDE_ON_CLOSE—Close`: the frame and continue running.
 
-A graphical user interface created with Swing can customize its appearance with a look and feel, a visual theme that controls how buttons and other components appear and how they behave. Java includes an enhanced look and feel called Nimbus, but it must be turned on to be used in a class. Setting a look and feel is done by calling the setLookAndFeel() method of the UIManager class in the main Swing package.
+A graphical user interface created with Swing can customize its appearance with a look and feel, a visual theme that controls how buttons and other components appear and how they behave. Java includes an enhanced look and feel called Nimbus, but it must be turned on to be used in a class. Setting a look and feel is done by calling the `setLookAndFeel()` method of the *UIManager* class in the main Swing package.
 The method takes one argument: the full name of the look and feel’s class.
 Ex.:
+```java
 The following statement sets Nimbus as the look and feel:
 UIManager.setLookAndFeel(
 "javax.swing.plaf.nimbus.NimbusLookAndFeel"
 );
 //Sets Nimbus as the look and feel
+```
 
-One last thing is required is to make the frame visible. Call its setVisible() method with true as an argument:
+One last thing is required is to make the frame visible. Call its `setVisible()` method with true as an argument:
 Ex: 
+```java
 setVisible(true);
-
+```
 This opens the frame at the defined width and height. You also can call it with false to stop displaying a frame.
 
-To add components to a frame, you must create the component and add it to the container. Each container has an add() method that takes one argument: the component to display.
+To add components to a frame, you must create the component and add it to the container. Each container has an `add()` method that takes one argument: the component to display.
 
->Buttons<
+### `Buttons`
 
 A JButton object is a clickable button with a label that describes what clicking the button does. This label can be text, graphics, or both.
 Ex.: 
+```java
 JButton okButton = new JButton("OK");
 //creates a JButtoncalled okButton and labels it OK.
+```
 
 Next add the component to a container by calling its add() method
 Ex.:
+```java
 add(okButton);
-
+```
 When you add components to a container, you do not specify the place in the container where the component should be displayed. The arrangement of components is decided by an object called a layout manager. The simplest of these managers is the FlowLayout class, which is part of the java.awt package.
+
 To make a container use a specific layout manager, you must first create an object of that layout manager’s class. You can create a FlowLayout object by calling its constructor with no arguments.
 Ex.:
+```java
 FlowLayout flo = new FlowLayout();
-
+```
 Then call the container's setLayout method to associate the specified manager with that container
 Ex.:
+```java
 setLayout(flo);
+```
+<br>
 
->Labels and Text Fields<
+### **Labels and Text Fields**
 
 A JLabel component displays information that the user cannot modify. This information can be text, a graphic, or both. A JTextField component is an area where a user can enter a single line of text. You can set up the width of the box when you create the text field.
 Ex.:
+```java
 JLabel pageLabel = new JLabel("Web page address: ", JLabel.RIGHT);
 /*Creates a label with the text "Web page address: ". The second
-* argument indicates the label should appear flush (alligned) right.*/ 
+* argument indicates the label should appear flush (assigned) right.*/ 
 JTextField pageAddress = new JTextField(20);
 /*Indicates the text field should be approximately 20 characters wide*/
 FlowLayout flo = new FlowLayout();
 setLayout(flo);
 add(pageLabel);
 add(pageAddress);
+```
 
 You also can specify default text that appears in the text field with a statement.
 Ex.:
+```java
 JTextField country = new JTextField("Togolese Republic", 29);
+```
 
-You can retrieve the text contained within the object with the getText() method, which returns a string.
+You can retrieve the text contained within the object with the `getText()` method, which returns a string.
 Ex.:
+```java
 String countryChoice = country.getText();
+```
 
 You also can set the text with a corresponding method:
 Ex.:
+```java
 country.setText("Separate Customs Territory of Taiwan, Penghu, Kinmen, and Matsu");
+```
+<br>
 
->Check Boxes<
+### **Check Boxes**
 
-A JCheckBox component is a box next to a line of text that can be checked or unchecked by the user.
+A *JCheckBox* component is a box next to a line of text that can be checked or unchecked by the user.
 Ex.:
+```java
 JCheckBox jumboSize = new JCheckBox("Jumbo Size");
 /*The String passed to the constructor the text to be displayed
 * alongside the box*/
 FlowLayout flo = new FlowLayout();
 setLayout(flo);
 add(jumboSize);
+```
 
 If you want the box to be checked.
 Ex.:
+```java
 JCheckBox jumboSize = new JCheckBox("Jumbo Size", true);
+```
 
 You can present a JCheckBox as part of a group. In a group of check boxes, only one can be checked at a time. To make a JCheckBox object part of a group, you have to create a ButtonGroup object.
 Ex.:
+```java
 JCheckBox frogLegs = new JCheckBox("Frog Leg Grande", true);
 JCheckBox fishTacos = new JCheckBox("Fish Taco Platter", false);
 JCheckBox emuNuggets = new JCheckBox("Emu Nuggets", false);
@@ -1667,13 +1722,14 @@ add(jumboSize);
 add(frogLegs);
 add(fishTacos);
 add(emuNuggets);
-
+```
 This creates three check boxes that are all grouped under the ButtonGroup object called meals. The Frog Leg Grande box is checked initially, but if the user checked one of the other meal boxes, the check next to Frog Leg Grande would disappear automatically.
 
->Combo Boxes<
+### **Combo Boxes**
 
 A JComboBox component is a pop-up list of choices that also can be set up to receive text input. To create a JComboBox object, you have to add each of the choices after creating the object
 Ex.:
+```java
 JComboBox profession = new JComboBox();
 FlowLayout flo = new FlowLayout();
 profession.addItem("Butcher");
@@ -1684,44 +1740,55 @@ profession.addItem("Fighter");
 profession.addItem("Technical writer");
 setLayout(flo);
 add(profession);
+```
 
-This example creates a single JComboBox component that provides six choices from which the user can make a selection. When one is selected, it appears in the display of the component.
+This example creates a single JComboBox component that provides six choices from which the user can make a selection. When one is selected, it appears in the display of the component. <br>
 To enable a JComboBox component to receive text input
 Ex.:
+```java
 profession.setEditable(true);
 //This method must be called before the component is added to a container.
+```
+<br>
 
->Text Area<
+### **Text Area**
 
 A JTextArea component is a text field that enables the user to enter more than one line of text. You can specify the width and height of the component.
 E.:
+```java
 JTextArea comments = new JTextArea(8, 40);
 FlowLayout flo = new FlowLayout();
 setLayout(flo);
 add(comments);
+```
 
-You can specify a string in the JTextArea() constructor to be displayed in the text area
+You can specify a string in the `JTextArea()` constructor to be displayed in the text area
 Ex.:
+```java
 JTextArea comments = new JTextArea("I should have been a pair\n"
 + "of ragged claws.", 10, 25);
+```
 
-Call the setLineWrap(boolean) method with an argument of true to cause text to wrap to the next line when the user enters text passed the right boundary of the component.
+Call the `setLineWrap(boolean)` method with an argument of true to cause text to wrap to the next line when the user enters text passed the right boundary of the component.
 Ex.:
+```java
 comments.setLineWrap(true);
 comments.setWrapStyleWord(true); //True wraps base on where the word ends, false based on character.
+```
 
 In Swing, you support scrolling by adding a component to a scroll pane, a container that is represented by the JScrollPane class. You can create a scroll pane with the following constructors:
-►JScrollPane()—Create a scroll pane with horizontal and vertical scrollbars that appear as needed.
-►JScrollPane(int, int)—Create a scroll pane with the specified vertical scrollbar and horizontal scrollbars.
-►JScrollPane(Component)—Create a scroll pane that contains the specified user interface component.
-►JScrollPane(Component, int, int)—Create a scroll pane with the specified component, vertical scrollbar, and horizontal scrollbar.
+- `JScrollPane()` — Create a scroll pane with horizontal and vertical scrollbars that appear as needed.
+- `JScrollPane(int, int)` — Create a scroll pane with the specified vertical scrollbar and horizontal scrollbars.
+- `JScrollPane(Component)` — Create a scroll pane that contains the specified user interface component.
+- `JScrollPane(Component, int, int)` — Create a scroll pane with the specified component, vertical scrollbar, and horizontal scrollbar.
 
 The integer arguments to these constructors determine how scrollbars are used in the pane. Use the following class variables as these arguments:
-►JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED or JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED
-►JScrollPane.VERTICAL_SCROLLBAR_NEVER or JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
-►JScrollPane.VERTICAL_SCROLLBAR_ALWAYS or JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS>
+- `JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED` or `JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED`
+- `JScrollPane.VERTICAL_SCROLLBAR_NEVER` or `JScrollPane.HORIZONTAL_SCROLLBAR_NEVER`
+- `JScrollPane.VERTICAL_SCROLLBAR_ALWAYS` or `JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS`
 
 Example:
+```java
 FlowLayout flo = new FlowLayout();
 setLayout(flo);
 JTextArea comments = new JTextArea(8, 40);
@@ -1731,55 +1798,62 @@ JScrollPane scroll = new JScrollPane(comments,
 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 add(scroll);
+```
+<br>
 
->Panels<
+### **Panels**
 
-The purpose of JPanel objects is to subdivide a display area into different groups of components. When the display is divided into sections, you can use different layout managers in each section.
+The purpose of `JPanel` objects is to subdivide a display area into different groups of components. When the display is divided into sections, you can use different layout managers in each section.
 Ex.:
+```java
 JPanel topRow = new JPanel();
 FlowLayout flo = new FlowLayout();
 topRow.setLayout(flo);
 add(topRow);
+```
+You add components to a panel by calling its `add()` method. You can assign a layout manager directly to the panel by calling its `setLayout()` method. You also can use panels when you need an area in an interface to draw something, such as an image from a graphics file. Another convenient use of JPanel is to create your own components that can be added to other classes.
 
-You add components to a panel by calling its add() method. You can assign a layout manager directly to the panel by calling its setLayout() method. You also can use panels when you need an area in an interface to draw something, such as an image from a graphics file. Another convenient use of JPanel is to create your own components that can be added to other
-classes.
+Including the final keyword in a method declaration prevents the method from being overridden in a subclass. This is required for *FreeSpacePanel* to be a GUI component.
 
-Including the final keyword in a method declaration prevents the method from being overridden in a subclass. This is required for FreeSpacePanel to be a GUI component.
+> **SEE** FreeSpacePanel.java and FreeSpaceFrame.java FILES
 
-SEE FreeSpacePanel.java and FreeSpaceFrame.java FILES
+In a simple container such as a panel, components are arranged using `FlowLayout` by default. Each component is added in the same manner that words are displayed on a page in English, from left to right, then down to the next line when there’s no more room. Frames, windows, and applets use the BorderLayout default layout style.
 
-In a simple container such as a panel, components are arranged using FlowLayout by default. Each component is added in the same manner that words are displayed on a page in English, from left to right, then down to the next line when there’s no more room. Frames, windows, and applets use the BorderLayout default layout style.
+> **PROGRAMS:** SalutonFrame.java / Playback.java / Components.java
 
-PROGRAMS: SalutonFrame.java / Playback.java / Components.java
+<br>
 
+# **-HOUR 18 LAYING OUT A USER INTERFACE.-**
 
--HOUR 18 LAYING OUT A USER INTERFACE.-
-
--Using Layout Managers.-
+## **-Using Layout Managers.-**
 
 In Java, the layout of buttons, text fields, and other components can be affected by the following things:
-►The size of the container
-►The size of other components and containers
-►The layout manager
+- The size of the container
+- The size of other components and containers
+- The layout manager
 
-SEE Crisis.java
+> **SEE** Crisis.java
 
 The FlowLayout class uses the dimensions of its container as the only guide for how to lay out components. Resize the window of the application to see how components are instantly rearranged in response.
 
->The GridLayout Manager<
+### **The GridLayout Manager**
 
-The GridLayout class in the java.awt package organizes all components in a container into a specific number of rows and columns. All components are allocated the same-sized space in the display area, so if you specify a grid that is three columns wide and three rows tall, the container is divided into nine areas of equal size.
-GridLayout places all components as they are added into a place on a grid. Components are added from left to right until a row is full, and then the leftmost column of the next grid is filled.
+The GridLayout class in the java.awt package organizes all components in a container into a specific number of rows and columns. All components are allocated the same-sized space in the display area, so if you specify a grid that is three columns wide and three rows tall, the container is divided into nine areas of equal size. <br>
+GridLayout places all components as they are added into a place on a grid. Components are added from left to right until a row is full, and then the leftmost column of the next grid is filled. <br>
 The following statements create a container and set it to use a grid layout that is two rows wide and three columns tall:
 Ex.:
+```java
 GridLayout grid = new GridLayout(2, 3);
 setLayout(grid);
+```
+<br>
 
->The BorderLayout Manager<
+### **The BorderLayout Manager**
 
-In java.awt, the BorderLayout manager arranges components into five areas: four denoted by compass irections and one for the center area. It's add() method includes a second argument to specify where the component should be placed. This argument should be one of five class variables of the BorderLayout class: NORTH, SOUTH, EAST, WEST, and CENTER.
-Like the GridLayout class, BorderLayout devotes all available space to the components. The component placed in the center is given all the space that isn’t needed for the four border components.
+In `java.awt`, the BorderLayout manager arranges components into five areas: four denoted by compass directions and one for the center area. It's `add()` method includes a second argument to specify where the component should be placed. This argument should be one of five class variables of the BorderLayout class: `NORTH`, `SOUTH`, `EAST`, `WEST`, and `CENTER`. <br>
+Like the `GridLayout` class, BorderLayout devotes all available space to the components. The component placed in the center is given all the space that isn’t needed for the four border components.
 Ex.:
+```java
 BorderLayout crisisLayout = new BorderLayout();
 setLayout(crisisLayout);
 add(panicButton, BorderLayout.NORTH);
@@ -1787,13 +1861,16 @@ add(dontPanicButton, BorderLayout.SOUTH);
 add(blameButton, BorderLayout.EAST);
 add(mediaButton, BorderLayout.WEST);
 add(saveButton, BorderLayout.CENTER);
+```
+<br>
 
->The BoxLayout Manager<
+### **The BoxLayout Manager**
 
-BoxLayout in the javax.swing package, makes it possible to stack components in a single row horizontally or vertically. For that you  create a panel to hold components, and then create a layout manager with two arguments:
--The component to organize in box layout
--The value BoxLayout.Y_AXIS for vertical alignment and BoxLayout.X_AXIS for horizontal alignment
+*BoxLayout* in the `javax.swing` package, makes it possible to stack components in a single row horizontally or vertically. For that you  create a panel to hold components, and then create a layout manager with two arguments:
+- The component to organize in box layout
+- The value `BoxLayout.Y_AXIS` for vertical alignment and `BoxLayout.X_AXIS` for horizontal alignment
 Ex.:
+```java
 JPanel pane = new JPanel();
 BoxLayout box = new BoxLayout(pane, BoxLayout.Y_AXIS);
 pane.setLayout(box);
@@ -1803,8 +1880,10 @@ pane.add(blameButton);
 pane.add(mediaButton);
 pane.add(saveButton);
 add(pane);
+```
+<br>
 
->Separating Components with Insets<
+### **Separating Components with Insets**
 
 Insets are objects that represent the border area of a container and you can use to move components away from the edges of the container.
 The Insets class, which is part of the java.awt package, has a constructor that takes fou arguments: the space to leave at the top, left, bottom, and right of the container. Each argument is specified using pixels.

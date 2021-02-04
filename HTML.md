@@ -1,5 +1,12 @@
 ## **Elements**
 
+### **`<html>`**
+```html
+<html lang="en">
+</html>
+```
+You should always include the `lang` attribute to declare the language of the Web page. This is meant to assist search engines and browsers.
+
 As a convention, all HTML tags are written in lowercase.
 
 ### **`p`**
@@ -20,6 +27,7 @@ Used to add images to your website. Points to a specific image's URL using the `
 ```html 
 <img src="https://www.your-image-source.com/your-image.jpg" alt="Author standing on a beach with two thumbs up.">
 ```
+**Note**: Always specify the width and height of an image. If width and height are not specified, the web page might flicker while the image loads.
 
 ## **`a(anchor)`**
 Links content outside of your web page. Needs a destination web address called an href attribute. They also need anchor text. Ex.:
@@ -175,7 +183,9 @@ Check Radio Buttons and Checkboxes by Default. Ex.:
 Its general purpose is a container of other elements. It can be styled with CSS or manipulated with JavaScript.
 
 ## **Default structure**
-At the top of your document, you need to tell the browser which version of HTML your page is using. You tell the browser this information by adding the `<!DOCTYPE ...>` tag on the first line, where the ... part is the version of HTML. For HTML5, you use `<!DOCTYPE html>`. The `!` and uppercase DOCTYPE is important, especially for older browsers. The html is not case sensitive.
+At the top of your document, you need to tell the browser which version of HTML your page is using. You tell the browser this information by adding the `<!DOCTYPE ...>` tag on the first line, where the ... part is the version of HTML. For HTML5, you use `<!DOCTYPE html>`. The `!` and uppercase DOCTYPE is important, especially for older browsers. The declaration is not an HTML tag. It is an "information" to the browser about what document type to expect.
+
+The html is not case sensitive. The HTML standard does not require lowercase tags, but W3C recommends lowercase in HTML, and demands lowercase for stricter document types like *XHTML*.
 
 ## **`head` and `body`**
 Any markup with information about your page would go into the `head` tag. Then any markup with the content of the page would go into the `body` tag. Metadata elements, such as link, meta, title, style, script, and  base typically go inside the head element. Ex.:
@@ -190,3 +200,101 @@ Any markup with information about your page would go into the `head` tag. Then a
   </body>
 </html>
 ```
+
+## HTML is Not Case Sensitive
+HTML tags are not case sensitive.
+
+## `title` Attribute
+The title attribute defines some extra information about an element. The value of the title attribute will be displayed as a tooltip when you mouse over the element.
+
+## `iFrame`
+
+Used to display a web page within a web page. <br>
+Syntax:
+```html
+<iframe src="url" title="description">
+
+```
+An iframe can be used as the target frame for a link
+```html
+<iframe src="demo_iframe.htm" name="iframe_a" title="Iframe Example"></iframe>
+
+<p><a href="https://www.w3schools.com" target="iframe_a">W3Schools.com</a></p>
+```
+<br>
+
+## `noscript`
+Users that have disabled scripts in their browser and browser without support for JavaScript will show the text written inside the *noscript* element.
+```html
+<script>
+document.getElementById("demo").innerHTML = "Hello JavaScript!";
+</script>
+<noscript>Sorry, your browser does not support JavaScript!</noscript>
+```
+
+<br>
+
+## Web Worker
+When executing scripts in an HTML page, the page becomes unresponsive until the script is finished. A web worker is a JavaScript that runs in the background, independently of other scripts, without affecting the performance of the page. <br>
+**Note**: Normally web workers are not used for simple scripts, but for more CPU intensive tasks.
+
+<br>
+
+---
+# **MISC**
+
+## Restrictions on spaces and lines
+
+With HTML, you cannot change the display by adding extra spaces or extra lines in your HTML code. The browser will automatically remove any extra spaces and lines when the page is displayed:
+```html
+<p>
+This paragraph
+contains a lot of lines
+in the source code,
+but the browser
+ignores it.
+</p>
+
+<p>
+This paragraph
+contains         a lot of spaces
+in the source         code,
+but the        browser
+ignores it.
+</p>
+```
+
+## `<em>` (Screen readers). 
+A screen reader will pronounce the words in `<em>` with an emphasis, using verbal stress.
+
+## `<b>` Last resort
+For bold text according to the HTML5 specification, the `<b>` tag should be used as a **LAST** resort when no other tag is more appropriate. 
+
+## `<title>`, Importance in SEOs
+The contents of a page title is very important for search engine optimization (SEO)! The page title is used by search engine algorithms to decide the order when listing pages in search results.
+
+## **Meta, refresh page**
+```html
+<meta http-equiv="refresh" content="30">
+```
+<br>
+
+## `URL` breakdown
+Uniform Resource Locator. <br>
+- `scheme://prefix.domain:port/path/filename`
+  - *scheme* - defines the type of Internet service (most common is http or https)
+  - *prefix* - defines a domain prefix (default for http is www)
+  - *domain* - defines the Internet domain name (like w3schools.com)
+  - *port* - defines the port number at the host (default for http is 80)
+  - *path* - defines a path at the server (If omitted: the root directory of the site)
+  - *filename* - defines the name of a document or resource
+- *URL Encoding*. URLs can only be sent over the Internet using the ASCII character-set. URL encoding converts non-ASCII characters with a "%" followed by hexadecimal digits. URLs cannot contain spaces. URL encoding normally replaces a space with a plus (+) sign, or %20.
+
+## `Input` restrictions
+Are not foolproof, and JavaScript provides many ways to add illegal input. To safely restrict input, it must also be checked by the receiver (the server)!
+
+## Height and width of images 
+**Tip**: Always specify both the height and width attributes for images. If height and width are set, the space required for the image is reserved when the page is loaded. Without these attributes, the browser does not know the size of the image, and cannot reserve the appropriate space to it. The effect will be that the page layout will change during loading (while the images load).
+
+## Media support
+Only *MP4*, *WebM*, and *Ogg* video are supported by the HTML standard.

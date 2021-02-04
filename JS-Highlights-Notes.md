@@ -2,20 +2,12 @@
 
 Unlike most programming languages, the JavaScript language has no concept of input or output. It is designed to run as a scripting language in a host environment, and it is up to the host environment to provide mechanisms for communicating with the outside world. The most common host environment is the browser, but JavaScript interpreters can also be found in a huge list of other places,
 
-## **<u>Basic</u>**
 
-
-### **Comments**
-```js
-// This is an in-line comment. 
-/* This is a 
-multi-line comment */
-``` 
-<br>
+# **Basics**
 
 ## **Variables**
 
- has 8 different data types:  `undefined, null, boolean, string, symbol, bigint, number,` and `object.`
+JS has 8 different data types:  `undefined, null, boolean, string, symbol, bigint, number,` and `object.`
 
 ```js
 let ourName;
@@ -26,8 +18,13 @@ a number.*/
 ```
 
 When JavaScript variables are declared, they have an initial value of `undefined`. If you do a mathematical operation on an `undefined` variable your result will be `NaN` which means *"Not a Number"*. If you concatenate a string with an `undefined` variable, you will get a literal string of "undefined".
-<br><br>
 
+You can declare several variables on one single statement separating them with coma:
+```js
+var person = "John Doe", carName = "Volvo", price = 200;
+```
+
+<br>
 
 ### **String**
 Strings in JavaScript are sequences of Unicode characters. More accurately, they are sequences of UTF-16 code units; each code unit is represented by a 16-bit number. Each Unicode character is represented by either 1 or 2 code units.
@@ -45,7 +42,7 @@ When you are defining a string you must start and end with a single or double qu
 ```js
 let sampleStr = "Alan said, \"Peter is learning JavaScript\".";
 ```
-**Escape Sequences**. <br> 
+**Escape Sequences** <br> 
 | **Code** | **Output** |
 | -------- | ---------- |
 | \\' | single quote |
@@ -56,6 +53,7 @@ let sampleStr = "Alan said, \"Peter is learning JavaScript\".";
 | \\t | tab |
 | \\b | word boundary |
 | \\f | form feed |
+<br>
 
 Ex.:
 ```js
@@ -68,23 +66,30 @@ The string looks like:
 ThirdLine"
 */
 ```
-**Concatenation**. We use the `+` sign to concatenate in 
+<br>
+
+#### **Concatenation**. 
+We use the `+` sign to concatenate in 
 :
 ```js
 let myStr; // Change this line
 myStr = "This is the start. " + "This is the end."
 // = This is the start. This is the end.
 ```
+<br>
 
-**`.length`** Se puede usar:
+#### **`.length`** 
+Se puede usar:
 ```js
 let firstName = "Frank";
 let firstNameLength1 = firstName.length;
 let firstNameLength2 = "Frank".length;
 // firstNameLength1 =  firstNameLength2 > 5 = 5 
 ```
+<br>
 
-**Bracket Notation**. Gets a character at a specific index within a string.
+#### **Bracket Notation**. 
+Gets a character at a specific index within a string.
 ```js
 var firstName = "Charles";
 var firstLetter = firstName[0]; // 'f'
@@ -110,8 +115,9 @@ So an apparent integer is in fact implicitly a float.
 Math.sin(3.5);
 var circumference = 2 * Math.PI * r;
 ```
+<br>
 
-**`parseInt()`**
+#### **`parseInt()`**
 ```js
 parseInt('123', 10); // 123
 parseInt('010', 10); // 10
@@ -155,7 +161,7 @@ var myArray2 = [["Bulls", 23], ["White Sox", 45]];
 
 Unlike strings, the entries of arrays are mutable and can be changed freely.
 
-*Multidimensional Array*.
+#### *Multidimensional Array*.
 ```js
 var arr = [
   [1,2,3],
@@ -167,8 +173,10 @@ arr[3]; // equals [[10,11,12], 13, 14]
 arr[3][0]; // equals [10,11,12]
 arr[3][0][1]; // equals 11
 ```
+<br>
 
-**`.push()`**, takes one or more parameters and "pushes" them onto the end of the array.
+#### **`.push()`**, 
+Takes one or more parameters and "pushes" them onto the end of the array.
 ```js
 var arr1 = [1,2,3];
 arr1.push(4);
@@ -178,16 +186,20 @@ var arr2 = ["Stimpson", "J", "cat"];
 arr2.push(["happy", "joy"]);
 // arr2 now equals ["Stimpson", "J", "cat", ["happy", "joy"]]
 ```
+<br>
 
-**`.unshift()`** works exactly like .push(), but instead of adding the element at the end of the array, unshift() adds the element at the beginning of the array.
+#### **`.unshift()`** 
+Works exactly like .push(), but instead of adding the element at the end of the array, unshift() adds the element at the beginning of the array.
 ```js
 var ourArray = ["Stimpson", "J", "cat"];
 ourArray.shift(); // ourArray now equals ["J", "cat"]
 ourArray.unshift("Happy");
 // ourArray now equals ["Happy", "J", "cat"]
 ```
+<br>
 
-**`.pop()`** is used to "pop" a value off of the end of an array. We can store this "popped off" value by assigning it to a variable. In other words, .pop() removes the last element from an array and returns that element.
+#### **`.pop()`** 
+Is used to "pop" a value off of the end of an array. We can store this "popped off" value by assigning it to a variable. In other words, .pop() removes the last element from an array and returns that element.
 Any type of entry can be "popped" off of an array - numbers, strings, even nested arrays.
 
 ```js
@@ -196,19 +208,19 @@ var oneDown = threeArr.pop();
 console.log(oneDown); // Returns 6
 console.log(threeArr); // Returns [1, 4]
 ```
+<br>
 
-**`.shift()`** just like `.pop()` but it removes the first element instead of the last
+#### **`.shift()`** 
+Just like `.pop()` but it removes the first element instead of the last
 ```js
 var ourArray = ["Stimpson", "J", ["cat"]];
 var removedFromOurArray = ourArray.shift();
 // removedFromOurArray now equals "Stimpson" and ourArray now equals ["J", ["cat"]].
 ```
 <br>
-## **Functions**
 
-`Parameters` are variables that act as placeholders for the values that are to be input to a function when it is called. The actual values that are input (or "passed") into a function when it is called are known as `arguments`.
-
-**Global vs local variables.** It is possible to have both local and global variables with the same name. When you do this, the local variable takes precedence over the global variable.
+### **Global vs local variables.** 
+It is possible to have both local and global variables with the same name. When you do this, the local variable takes precedence over the global variable.
 ```js
 var someVar = "Hat";
 function myFun() {
@@ -224,9 +236,14 @@ function isEqual(a,b) {
   return a === b;
 }
 ```
+<br>
 
+## **Functions**
+
+`Parameters` are variables that act as placeholders for the values that are to be input to a function when it is called. The actual values that are input (or "passed") into a function when it is called are known as `arguments`.
 
 <br>
+
 ## **Objects**
 
 Objects are similar to `arrays`, except that instead of using indexes to access and modify their data, you access the data in objects through what are called `properties`.
@@ -249,7 +266,8 @@ var anotherObject = {
 ```
 However, if your object has any non-string properties, JavaScript will automatically typecast them as strings.
 
-**Dot notation**. 
+### **Dot notation**
+
 ```js
 var myObj = {
   prop1: "val1",
@@ -258,8 +276,11 @@ var myObj = {
 var prop1val = myObj.prop1; // val1
 var prop2val = myObj.prop2; // val2
 ```
+<br>
 
-**Bracket Notation**. If the property of the object you are trying to access has a space in its name, you will need to use bracket notation.
+### **Bracket Notation**
+
+If the property of the object you are trying to access has a space in its name, you will need to use bracket notation.
 ```js
 var myObj = {
   "Space Name": "Kirk",
@@ -279,11 +300,15 @@ var myDog = "Hunter";
 var myBreed = dogs[myDog];
 console.log(myBreed); // "Doberman"
 ```
-**Update**, you can update its properties at any time just like you would update any other variable. You can use either dot or bracket notation to update.
+<br>
 
-**Add**. You can add new properties to existing JavaScript objects the same way you would modify them.
+### **Update**
+You can update its properties at any time just like you would update any other variable. You can use either dot or bracket notation to update.
 
-**Delete**. 
+### **Add**
+You can add new properties to existing JavaScript objects the same way you would modify them.
+
+### **Delete**
 ```js
 ar ourDog = {
   "name": "Camper",
@@ -324,8 +349,9 @@ alpha[24]; // "C"
 var value = 2;
 alpha[value]; // "Y"
 ```
+<br>
 
-**`.hasOwnProperty()`**. 
+### **`.hasOwnProperty()`** 
 ```js
 var myObj = {
   top: "hat",
@@ -334,8 +360,10 @@ var myObj = {
 myObj.hasOwnProperty("top");    // true
 myObj.hasOwnProperty("middle"); // false
 ```
+<br>
 
-**Accessing Nested Objects**. The sub-properties of objects can be accessed by chaining together the dot or bracket notation.
+### **Accessing Nested Objects**
+The sub-properties of objects can be accessed by chaining together the dot or bracket notation.
 ```js
 var ourStorage = {
   "desk": {
@@ -352,8 +380,9 @@ var ourStorage = {
 ourStorage.cabinet["top drawer"].folder2;  // "secrets"
 ourStorage.desk.drawer; // "stapler"
 ```
+<br>
 
-**Accessing Nested Arrays**
+### **Accessing Nested Arrays**
 ```js
 var ourPets = [
   {
@@ -376,12 +405,11 @@ var ourPets = [
 ourPets[0].names[1]; // "Fluffy"
 ourPets[1].names[0]; // "Spot"
 ```
-
-
 <br>
+
 ## **Loops**
 
-**While**
+### **While**
 ```js
 var ourArray = [];
 var i = 0;
@@ -390,15 +418,17 @@ while(i < 5) {
   i++;
 }
 ```
+<br>
 
-**For**
+### **For**
 ```js
 for (var i = 0; i < 5; i++) {
   ourArray.push(i);
 }
 ```
+<br>
 
-**Do...While**. Code will execute at least once.
+### **Do...While**. Code will execute at least once.
 ```js
 var ourArray = [];
 var i = 0;
@@ -407,8 +437,10 @@ do {
   i++;
 } while (i < 5);
 ```
+<br>
 
-**Replace Loops using Recursion**. Recursion is the concept that a function can be expressed in terms of itself. 
+### **Replace Loops using Recursion**
+Recursion is the concept that a function can be expressed in terms of itself. 
 ```js
 function multiply(arr, n) {
     var product = 1;
@@ -432,15 +464,17 @@ The recursive version of multiply breaks down like this. In the base case, where
 
 *Note*: Recursive functions must have a *`base case`* when they return without calling the function again (in this example, when n <= 0), otherwise they can never finish executing.
 
-**Random number**. JavaScript has a Math.random() function that generates a random decimal number between 0 (inclusive) and not quite up to 1 (exclusive). Thus Math.random() can return a 0 but never quite return a 1.
+### **Random number**
+JavaScript has a Math.random() function that generates a random decimal number between 0 (inclusive) and not quite up to 1 (exclusive). Thus Math.random() can return a 0 but never quite return a 1.
   Generate Random Whole Numbers within a Range:
 ```js
 function randomRange(myMin, myMax) {
   return Math.floor(Math.random() * (myMax -myMin + 1)) + myMin;
 }
 ```
+<br>
 
-**Ternary Operator**
+### **Ternary Operator**
 Can be used as a one line if-else expression.
 ```js
 function findGreater(a, b) {
@@ -457,11 +491,11 @@ function checkSign(num) {
 
 checkSign(10);
 ```
+<br>
 
+## **ES6**
 
-## **<u>ES6</u>**
-
-**`Const`**
+### **`Const`**
 
 Objects (including arrays and functions) assigned to a variable using const are still mutable. Using the const declaration only prevents reassignment of the variable identifier.
 
@@ -471,8 +505,10 @@ s = [1, 2, 3]; // throws error, trying to assign a const
 s[2] = 45; // works just as it would with an array declared with var or let
 console.log(s); // returns [5, 6, 45]
 ```
+<br>
 
-**Object.freeze()**. Prevents object mutations. You can no longer add, update, or delete properties from it. Any attempt at changing the object will be rejected without an error.
+### **Object.freeze()**
+Prevents object mutations. You can no longer add, update, or delete properties from it. Any attempt at changing the object will be rejected without an error.
 ```js
 let obj = {
   name:"FreeCodeCamp",
@@ -484,8 +520,9 @@ obj.newProp = "Test"; // will be ignored. Mutation not allowed
 console.log(obj); 
 // { name: "FreeCodeCamp", review:"Awesome"}
 ```
+<br>
 
-**`Arrow Functions`**
+### **`Arrow Functions`**
 ```js
 const myFunc = function() {
   const myVar = "value";
@@ -507,8 +544,9 @@ if an arrow function has a single parameter, the parentheses enclosing the param
 ```js
 const doubler = item => item * 2;
 ```
+<br>
 
-**`Default Parameters`**
+### **`Default Parameters`**
 ```js
 const greeting = (name = "Anonymous") => "Hello " + name;
 
@@ -516,8 +554,9 @@ console.log(greeting("John")); // Hello John
 console.log(greeting()); // Hello Anonymous
 ```
 The default parameter kicks in when the argument is not specified (it is undefined)
+<br>
 
-**`Rest Parameter`**
+### **`Rest Parameter`**
 
 You can create functions that take a variable number of arguments. These arguments are stored in an array that can be accessed later from inside the function.
 ```js
@@ -527,8 +566,9 @@ const sum = (...args) => {
 
 console.log(sum(1,2,3,4));
 ```
+<br>
 
-**`Spread Operator`**
+### **`Spread Operator`**
 
 Allows us to expand arrays and other expressions in places where multiple parameters or elements are expected.
 ```js
@@ -541,7 +581,7 @@ var maximus = Math.max.apply(null, arr);*/
 `...arr` returns an unpacked array. In other words, it spreads the array. However, the spread operator only works in-place, like in an argument to a function or in an array literal. In other words, allows an iterable such as an array expression or string to be expanded in places where zero or more arguments (for function calls) or elements (for array literals) are expected, or an object expression to be expanded in places where zero or more key-value pairs (for object literals) are expected.
 
 
-**`Destructuring assignment`**
+### **`Destructuring assignment`**
 
 Assigns values taken directly from an object. 
 ```js
@@ -558,14 +598,15 @@ const { name: userName, age: userAge } = user;
 // userName = 'John Doe', userAge = 34
 ```
 
-*Destructuring nested objects:*
+#### *Destructuring nested objects:*
 ```js
 const { johnDoe: { age, email }} = user;
 //variables with different names:
 const { johnDoe: { age: userAge, email: userEmail }} = user;
 ```
+<br>
 
-*Destructuring an array:*
+#### *Destructuring an array:*
 ```js
 const [a, b] = [1, 2, 3, 4, 5, 6];
 console.log(a, b); // 1, 2
@@ -606,8 +647,9 @@ const profileUpdate = (profileData) => {
   // do something with these variables
 }
 ```
+<br>
 
-**`Template Literals`**
+### **`Template Literals`**
 Allow you to create multi-line strings and to use string interpolation features to create strings.
 ```js
 const person = {
@@ -628,7 +670,7 @@ Several things about the code above:
 - The string is multi-line, both in the code and the output. This saves inserting \n within strings. 
 - The ${variable} syntax is a placeholder. Basically, you won't have to use concatenation with the + operator. Similarly, you can include other expressions in your string literal, for example ${a + b}.
 
-**`Concise Object Literal Declarations Using Object Property Shorthand`**. 
+### **`Concise Object Literal Declarations Using Object Property Shorthand`**. 
 ```js
 const getMousePosition = (x, y) => ({
   x: x,
@@ -640,7 +682,7 @@ const getMousePosition = (x, y) => ({ x, y });
 ```
 Syntactic sugar to eliminate the redundancy of having to write `x: x`. You can simply write x once, and it will be converted tox: x (or something equivalent) under the hood. 
 
-**`Concise Declarative Functions`**
+#### **`Concise Declarative Functions`**
 
 You can remove the function keyword and colon altogether when defining functions in objects. Here's an example of this syntax:
 ```js
@@ -659,8 +701,9 @@ const person = {
   }
 };
 ```
+<br>
 
-**`Syntax to Define a Constructor Function`**
+### **`Syntax to Define a Constructor Function`**
 The class syntax:
 ```js
 class SpaceShuttle {
@@ -674,7 +717,7 @@ It should be noted that the class keyword declares a new function, to which a co
 - UpperCamelCase should be used by convention for ES6 class names, as in `SpaceShuttle` used above.
 - The constructor method is a special method for creating and initializing an object created with a class.
 
-**`Getters and Setters`**
+### **`Getters and Setters`**
 
 Getter functions are meant to simply return (get) the value of an object's private variable. Setter functions are meant to modify (set) the value of an object's private variable based on the value passed into the setter function. 
 ```js
@@ -697,8 +740,9 @@ console.log(novel.writer);  // anonymous
 novel.writer = 'newAuthor';
 console.log(novel.writer);  // newAuthor
 ```
+<br>
 
-**`Export to Share a Code Block`**
+### **`Export to Share a Code Block`**
 If you want to use this a function or variable in several different JavaScript files you first need to export it.
 ```js
 export const add = (x, y) => {
@@ -711,7 +755,10 @@ const add = (x, y) => {
 
 export { add };
 ```
-*`export default`*. Usually you will use this syntax if only one value is being exported from a file. It is also used to create a fallback value for a file or module.
+<br> 
+
+#### *`export default`*. 
+Usually you will use this syntax if only one value is being exported from a file. It is also used to create a fallback value for a file or module.
 ```js
 // named function
 export default function add(x, y) {
@@ -725,7 +772,7 @@ export default function(x, y) {
 ```
 Since `export default` is used to declare a fallback value for a module or file, you can only have one value be a default export in each module or file. Additionally, you cannot use `export default` with `var, let, or const`.
 
-**`Using import`**
+#### **`Using import`**
 `import` allows you to choose which parts of a file or module to load. 
 ```js
 import { add } from './math_functions.js';
@@ -747,14 +794,13 @@ myMathModule.subtract(5,3);
 ```
 The above import statement will create an object called myMathModule. This is just a variable name, you can name it anything. The object will contain all of the exports from math_functions.js in it, so you can access the functions like you would any other object property.
 
-*`Import a Default Export`*
+#### *`Import a Default Export`*
 ```js
 import add from "./math_functions.js";
 ```
 The syntax differs in one key place. The imported value, `add`, is not surrounded by curly braces `({})`. `add` here is simply a variable name for whatever the default export of the `math_functions.js` file is. You can use any name here when importing a default.
 
-
-**`Callback Functions`**
+### **`Callback Functions`**
 
 Callbacks make sure that a function is not going to run before a task is completed but will run right after the task has completed. It helps us develop asynchronous JavaScript code and keeps us safe from problems and errors. A callback function is to pass it as a parameter to another function, and then to call it back right after something has happened or some task is completed.
 ```js
@@ -769,9 +815,9 @@ function myCalculator(num1, num2, myCallback) {
 
 myCalculator(5, 5, myDisplayer);
 ```
+<br>
 
-
-**`Promises`**
+### **`Promises`**
 
 A promise in JavaScript is exactly what it sounds like - you use it to make a promise to do something, usually asynchronously. When the task completes, you either fulfill your promise or fail to do so. Promise is a constructor function, so you need to use the new keyword to create one. It takes a function, as its argument, with two parameters - resolve and reject. These are methods used to determine the outcome of the promise.
 ```js
@@ -809,9 +855,10 @@ myPromise.then(
   function(error) { /* code if some error */ }
 );
 ```
-  *SEE JS_Practice, Line 46*
+> *SEE JS_Practice, Line 46*
+<br>
 
-**`Rejected Promise with catch`**
+#### **`Rejected Promise with catch`**
 `catch` is the method used when your promise has been rejected. It is executed immediately after a promise's reject method is called. It is an alternative to the second parameter of `then`.
 ```js
 myPromise.catch(error => {
@@ -822,18 +869,20 @@ myPromise.catch(error => {
 
 
 
-
-
-
-
 ---
-## ***<u>Good To Know</u>***
+# **Good To Know**
 
-1. `localStorage`. Si yo estoy en Facebook y abro la consola y agrego algo así: `'localStorage.myValFromFB = 'From facebook' `, y luego en otra tab entro a Youtube, abro la consola y accedo a `localStorage.myValFromFB`, por seguridad no se puede. Las webs ponen información como login tokens, información del usuario, información del app, etc., en localStorage. Así que el navegador no puede permitir que otro dominio pueda ver lo que otro dominio guardó ahí. Así que el storage es por dominio. Cada quiente tiene su propio storage.
-2. **THIS AND ARROW FUNCTIONS.** Las arrow function no tienen un `this` propio como las demás funciones. El `this` es la de su contexto. Los arrows functions no tienen contexto. El engine tiene que salir a buscarlo más arriba.
-3. ***Functions*** 
-   1. **FIRST CLASS FUNCTIONS.** Para entender mejor las First Class Functions en JavaScript, uno puede decir que las funciones en JavaScript son objetos ejecutables/invocables.
-   2. **HIGH CLASS FUNCTIONS** Son funciones que aceptan como parametro otra funcion y/o pueden devolver una funcion como resultado. Ex.:
+## `localStorage`
+Si yo estoy en Facebook y abro la consola y agrego algo así: `'localStorage.myValFromFB = 'From facebook' `, y luego en otra tab entro a Youtube, abro la consola y accedo a `localStorage.myValFromFB`, por seguridad no se puede. Las webs ponen información como login tokens, información del usuario, información del app, etc., en localStorage. Así que el navegador no puede permitir que otro dominio pueda ver lo que otro dominio guardó ahí. Así que el storage es por dominio. Cada quiente tiene su propio storage.
+
+## **THIS AND ARROW FUNCTIONS**
+Las arrow function no tienen un `this` propio como las demás funciones. El `this` es la de su contexto. Los arrows functions no tienen contexto. El engine tiene que salir a buscarlo más arriba.
+
+## **Functions**
+### **FIRST CLASS FUNCTIONS** 
+Para entender mejor las First Class Functions en JavaScript, uno puede decir que las funciones en JavaScript son objetos ejecutables/invocables.
+### **HIGH CLASS FUNCTIONS** 
+Son funciones que aceptan como parametro otra funcion y/o pueden devolver una funcion como resultado. Ex.:
 
 ```js
 function powerOfTwo(x){
@@ -847,39 +896,26 @@ console.log(powerThenDouble);
 //prints 18
 //double(y, func) es nuestra high class function
 ```
+<br>
 
-4. ***Binding***
-   1. **HARD BINDING**. Se hace con `bind()`. Se dice que es hard con el bind, porque la wrapped function que te devuelve bind, por más bind que le vuelvas a hacer y más jodiendas, ya no se volverá a referir a nadie más que el objeto original que le pasaste.
-   2. **SOFT BINDING**. Soft binding lo hace `call` y `apply` y llamando a la función desde el objeto también.
+## ***Binding***
+- **HARD BINDING**. Se hace con `bind()`. Se dice que es hard con el bind, porque la wrapped function que te devuelve bind, por más bind que le vuelvas a hacer y más jodiendas, ya no se volverá a referir a nadie más que el objeto original que le pasaste.
+- **SOFT BINDING**. Soft binding lo hace `call` y `apply` y llamando a la función desde el objeto también.
 
-5. ***Switch Case***
-   1. JavaScript's switch case uses the sctrict comparison (===), i didn't know that.
+## ***Switch Case***
+JavaScript's switch case uses the strict comparison (===), i didn't know that.
 
-6. Si la llave y el valor de una objeto en javascript es una misma variable, para usarlo puedes:
+## **Key = Value**
+Si la llave y el valor de una objeto en javascript es una misma variable, para usarlo puedes:
 ```js
 let x = obj1 (p1 : p1); //Utiliza el nombre de la variable como key y su valor como valor
 //Es igual que
 let x = obj1 (p1);
 ```
 
+## **Let vs Var**
 
-
----
-### **<u>MISC</u>**
-
-
-- **Comparable** son un tipo de objetos que entre ellos pueden ser comparables. **Comparator** es un objeto que se encarga de comparar a otros objetos entre ellos.
-- A way to sort numbers:
-```js
-const sortAscending = (x,y) => x-y;
-[0,11,100,2,4,500,33].sort(sortAscending);
-//
-const sortDescending = (x,y)=>y-x;
-```
-
-### **Let and Var**
-
-* #### **Scoping rules**
+### **Scoping rules**
 Main difference is scoping rules. Variables declared by `var` keyword are scoped to the immediate function body (hence the function scope) while let variables are scoped to the immediate enclosing block denoted by `{ }` (hence the block scope).
 
 ```js
@@ -929,7 +965,7 @@ console.log(camper);
 // logs 'David'
 ```
 
-#### **Hoisting**
+### **Hoisting**
 Hoisting is the process of setting up of memory space for our variables and functions. Before the code starts to execute, the JS engine goes thru the code and sets up blocks of memory for functions and variables. The values of variables are not stored but functions are stored entirely along with their definitions. However, for variables declared with `var` the engine assigns `undefined` as the default value.
 
 While variables declared with var keyword are hoisted (initialized with undefined before the code is run) which means they are accessible in their enclosing scope even before they are declared:
@@ -955,7 +991,7 @@ function checkHoisting() {
 checkHoisting();
 ```
 
-#### **Creating global object property**
+### **Creating global object property**
 At the top level, let, unlike var, does not create a property on the global object:
 
 ```js
@@ -966,7 +1002,27 @@ console.log(window.foo); // Foo
 console.log(window.bar); // undefined
 ```
 
-#### **Redeclaration**
+### **Number Placeholder**
+Be careful using 0 to initialize variables with meant to store numbers. JS evaluates ceros to falsy, rather use `null` to indicate absence of values.
+
+---
+# **MISC**
+
+
+## **Comparable** 
+Son un tipo de objetos que entre ellos pueden ser comparables. **Comparator** es un objeto que se encarga de comparar a otros objetos entre ellos.
+
+## **Sorting numbers**
+- A way to sort numbers:
+```js
+const sortAscending = (x,y) => x-y;
+[0,11,100,2,4,500,33].sort(sortAscending);
+//
+const sortDescending = (x,y)=>y-x;
+```
+<br>
+
+## **Redeclaration**
 
 In strict mode, var will let you re-declare the same variable in the same scope while let raises a SyntaxError.
 
@@ -979,14 +1035,19 @@ let bar = "bar1";
 let bar = "bar2"; // SyntaxError: Identifier 'bar' has already been declared
 ```
 
-#### **switch case ... Statements**
-- `case` values are tested with strict equality (===). 
-- The `break` tells JavaScript to stop executing statements. If the `break` is omitted, the next statement will be executed.
-
-#### **`.reduce()`**
+## **`.reduce()`**
 Executes a provided function for each value of the array (from left-to-right).
 *Syntax:*
 `array.reduce(function(total, currentValue, currentIndex, arr), initialValue)`
 
-#### **Number Placeholder**
-Be careful using 0 to initialize variables with meant to store numbers. JS evaluates ceros to falsy, rather use `null` to indicate absence of values.
+## **switch case ... Statements**
+- `case` values are tested with strict equality (===).
+
+##  **<Scripts>**
+Placing scripts at the bottom of the `<body>` element improves the display speed, because script interpretation slows down the display.
+
+## **Print**
+JavaScript does not have any print object or print methods. You cannot access output devices from JavaScript. The only exception is that you can call the window.print() method in the browser to print the content of the current window.
+```js
+<button onclick="window.print()">Print this page</button>
+```

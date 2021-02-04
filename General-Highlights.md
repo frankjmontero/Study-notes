@@ -12,7 +12,7 @@ Hay otros detalles que se consideran secundarios pero son importantes:
     - mentor técnico de los developers en caso de ser necesario (seniors incluidos)
     - lead en caso de ser necesario.
 
-### **Diff between framework and platform**
+## **Diff between framework and platform**
 There are a few important distinctions between a framework and a platform. A frame-work is usually just the code library used to build an application, whereas a platform is more holistic and  includes  tooling  and  support  beyond  a  framework.
 
 ## **DOM**
@@ -24,6 +24,13 @@ There are two instances the browser-generated DOM will be different than HTML so
 - The DOM is modified by client-side JavaScript
 - The browser automatically fixes errors in the source code.
 
+## **Arugments and Parameters**
+
+### Argument
+Los argumentos son los valores o expresiones (que resultarán en valor) que le pasas a una función.
+
+### Parameter
+Y parámetro es la variable declarada en la firma del método que sostiene esos argumentos
 
 _____
 # **OOP**
@@ -88,6 +95,13 @@ Entre otras
 
 Algo que he aprendido de los seniors aca es a ver las cosas mas preguntandome cuándo es mas util en vez de cuál es la mejor. Asi que, usamos Inheritance cuando entendemos que una nueva clase-hija es una version mas especifica y compleja que la clase-padre (hija `ES de` tipo padre). Y usamos composition cuando la clase guarda una relacion con otra y es parte de ella. Si bien es cierto que es posible lograr los mismos resultados con composition que podemos lograr con herencia y con el valor agregado de loose coupling,  cuando tenemos una estructura clara de nuestra solucion y entendemos que a nivel funcional y estructural una sub-clase ***es*** del tipo de una super-clase, siendo esa una relacion que nos sera de utilidad, entonces la herencia es el camino a tomar.
 
+
+
+___
+# **Functional Programming**
+
+## **Memoization**
+Es cuando una función es capaz de devolver el mismo resultado para inputs repetidos sin necesidad de ejecutarse de nuevo Como dijo @Carlos Gómez, la función maneja un caché de los inputs que ya ha trabajado y sus resultados. Cuando la llamas otra vez, revisa si ya había vistos esos inputs y si tiene el resultado guardado te lo devuelve desde el caché.
 
 
 ____
