@@ -24,7 +24,17 @@ You can declare several variables on one single statement separating them with c
 var person = "John Doe", carName = "Volvo", price = 200;
 ```
 
+### Re-Declaring JavaScript Variables
+If you re-declare a JavaScript variable, it will not lose its value.
+```js
+var carName = "Volvo";
+var carName;
+// Still Volvo
+```
 <br>
+
+### Const. Not Real Constants
+WHen we use to declare we are not defining a constant value but a constant reference to a value. This explains why we cannot change primitive values but we can change properties of const objects.
 
 ### **String**
 Strings in JavaScript are sequences of Unicode characters. More accurately, they are sequences of UTF-16 code units; each code unit is represented by a 16-bit number. Each Unicode character is represented by either 1 or 2 code units.
@@ -100,6 +110,47 @@ String values are immutable, which means that they cannot be altered once create
 var myStr = "Bob";
 myStr = "Job";
 ```
+<br>
+
+#### **String Methods**
+All string methods return a new string and don't modify the original.
+
+##### **`indexOf()` vs `search()`**
+They both search for an specified value inside a string and return its position. Their differences:
+- The search() method cannot take a second start position argument.
+- The indexOf() method cannot take regular expressions.
+<br>
+
+##### **`slice()`, `substring()` and `substr()`**
+They all extract part of a string returning a new string.
+- `slice()`. 
+  - Two parameters: start and end positions (end not included).
+  - Negative parameters to start from the end of the string.
+  - If the second parameters is omitted it takes the rest of the string. 
+- `substring()`. Similar to slice() but it does not accept negative values.
+- `substr()`. Differs from slice() because the second parameter is the length of the extracted part.
+```js
+// slice
+var str = "Apple, Banana, Kiwi";
+var res = str.slice(7, 13); //Banana
+var res = str.slice(-12, -6); // Banana
+i can eat banana
+//substring
+var res = str.substring(7, 13); //Banana
+
+//substr
+var res = str.substr(7, 6); //Banana
+```
+
+##### **`split()`**
+Converts a string in an array.
+```js
+let txt = "a,b,c,d";
+let arr = txt.split(',');
+```
+-If the separator is omitted the whole string in stored in index 0.
+-If separator is `""` then each character is stored in a separate index.
+
 <br>
 
 ### **Numbers**
@@ -238,9 +289,48 @@ function isEqual(a,b) {
 ```
 <br>
 
+### Undefined and Null
+
+A variable without a value is undefined. The type is also undefined. `null` is "nothing". But, due to what can be considered a bug, in JS null is an object.
+
+#### Considerations
+- Emptying. `undefined` can be used to empty variables and objects in both cases value and type will be undefined. `null` can empty objects and the types continues to be object.
+- Difference. `undefined` and `null` are similar in value but different in type:
+```js
+typeof undefined           // undefined
+typeof null                // object
+
+null === undefined         // false
+null == undefined          // true
+
+```
+
+## **Operations**
+
+### Exponentiation
+```js
+let x = 5;
+let z = x ** 2;  // 25
+
+//Similar to
+let y = Math.pow(x,2);
+```
+
 ## **Functions**
 
 `Parameters` are variables that act as placeholders for the values that are to be input to a function when it is called. The actual values that are input (or "passed") into a function when it is called are known as `arguments`.
+
+### Invoking a Function
+```js
+function toCelsius(fahrenheit) {
+  return (5/9) * (fahrenheit-32);
+}
+// This refers to the function result (return the result)
+document.getElementById("demo").innerHTML = toCelsius(77);
+
+// This returns the function object 
+document.getElementById("demo").innerHTML = toCelsius;
+```
 
 <br>
 
@@ -329,6 +419,7 @@ delete ourDog.bark;
 }
 */
 ```
+<br>
 
 Objects can be thought of as a key/value storage, like a dictionary. If you have tabular data, you can use an object to "lookup" values rather than a switch statement or an if/else chain. This is most useful when you know that your input data is limited to a certain range.
 
@@ -492,6 +583,7 @@ function checkSign(num) {
 checkSign(10);
 ```
 <br>
+
 
 ## **ES6**
 
@@ -872,6 +964,7 @@ myPromise.catch(error => {
 ---
 # **Good To Know**
 
+
 ## `localStorage`
 Si yo estoy en Facebook y abro la consola y agrego algo así: `'localStorage.myValFromFB = 'From facebook' `, y luego en otra tab entro a Youtube, abro la consola y accedo a `localStorage.myValFromFB`, por seguridad no se puede. Las webs ponen información como login tokens, información del usuario, información del app, etc., en localStorage. Así que el navegador no puede permitir que otro dominio pueda ver lo que otro dominio guardó ahí. Así que el storage es por dominio. Cada quiente tiene su propio storage.
 
@@ -959,16 +1052,14 @@ People had to create immediately invoked functions to capture correct value from
 
 You can overwrite variable declarations without an error.
 ```js
-var camper = 'James';
+`var camper = 'James';
 var camper = 'David';
 console.log(camper);
 // logs 'David'
 ```
 
 ### **Hoisting**
-Hoisting is the process of setting up of memory space for our variables and functions. Before the code starts to execute, the JS engine goes thru the code and sets up blocks of memory for functions and variables. The values of variables are not stored but functions are stored entirely along with their definitions. However, for variables declared with `var` the engine assigns `undefined` as the default value.
-
-While variables declared with var keyword are hoisted (initialized with undefined before the code is run) which means they are accessible in their enclosing scope even before they are declared:
+Hoisting is the process of setting up of memory space for our variables and functions. Before the code starts to execute, the JS engine goes thru the code and sets up blocks of memory for functions and variables. The values of variables are not stored but functions are stored entirely along with their definitions. However, for variables declared with `var` the engine assigns `undefined` as the default value; they are hoisted. Which means they are accessible in their enclosing scope even before they are declared:
 
 ```js
 function run() {
@@ -992,7 +1083,7 @@ checkHoisting();
 ```
 
 ### **Creating global object property**
-At the top level, let, unlike var, does not create a property on the global object:
+At the top level, let, unlike var, does not create a property on the global object(window object of HTML):
 
 ```js
 var foo = "Foo";  // globally scoped
@@ -1004,6 +1095,33 @@ console.log(window.bar); // undefined
 
 ### **Number Placeholder**
 Be careful using 0 to initialize variables with meant to store numbers. JS evaluates ceros to falsy, rather use `null` to indicate absence of values.
+
+## Configuration and Modification of Objects' Properties
+
+- Objeto inmutable = Object.freeze()
+- No más propiedades = Object.seal()
+- Bloquear propiedad = Object.defineProperty y writable: false
+- Esconder propiedad = Object.defineProperty y enumerable: false
+
+## Comparing Objects
+Comparing two JavaScript objects will always return false
+
+## Strings. Break up code
+You can break up a code line within a text string with a single backslash:
+```js
+document.getElementById("demo").innerHTML = "Hello \
+Dolly";
+```
+
+A safer to do it is to use string addition:
+```js
+document.getElementById("demo").innerHTML = "Hello " +
+"Dolly!";
+```
+
+
+<br>
+
 
 ---
 # **MISC**

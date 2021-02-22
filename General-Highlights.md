@@ -1,16 +1,23 @@
 # **General**
 
-- **Internet**. Internet is a global network of computers connected to each other which communicate through a standardized set of protocols. The internet is a design philosophy and an architecture expressed in a set of protocols.
-- **Chrome tabs resource usage.** Cada tab en Chrome tiene su proprio mundo. Event loop, stack, etc. Hence the amount of resourced it uses.
-- **Tuple**. Las tuples son inmutables. Luego de que se dimensionan y se les asigna un valor, estos no pueden ser modificados.
-- *Roles de un arquitecto de software*. El arquitecto es el encargado de hacer que el producto (Software) sea creado con la calidad suficiente, y que cree valor al negocio. Pero para poder crear valor el producto debe ser mantenible, oportuno, suficiente y escalable. Hay es donde muchos conceptos incluyendo Design Patterns y Design Principles viene al la palestra. Tu producto o solución no crea valor si es un dragón de recursos, y eso no solo se limita al hardware sino a tiempo, dinero, calidad, y algunos puntos importantes. El Arquitecto es el encargado de velar por el balance de cada una de esas cosas:
-    - punto intermedio de comunicación entre los dueños o gerencia de la empresa, los clientes finales y los developers.
-    - Diseñar los sistemas que luego los Developers estarán haciendo.
-    - Estructurar (unir) todos esos sistemas para que funcionen como un uno solo.
-    - garante de algo llamado 'consistencia conceptual' del sistema como un todo.
+## **Internet**
+Internet is a global network of computers connected to each other which communicate through a standardized set of protocols. The internet is a design philosophy and an architecture expressed in a set of protocols.
+
+
+## **Tuple**
+Las tuples son inmutables. Luego de que se dimensionan y se les asigna un valor, estos no pueden ser modificados.
+
+## *Roles de un arquitecto de software*. 
+El arquitecto es el encargado de hacer que el producto (Software) sea creado con la calidad suficiente, y que cree valor al negocio. Pero para poder crear valor el producto debe ser mantenible, oportuno, suficiente y escalable. Hay es donde muchos conceptos incluyendo Design Patterns y Design Principles viene al la palestra. Tu producto o solución no crea valor si es un dragón de recursos, y eso no solo se limita al hardware sino a tiempo, dinero, calidad, y algunos puntos importantes. El Arquitecto es el encargado de velar por el balance de cada una de esas cosas:
+- punto intermedio de comunicación entre los dueños o gerencia de la empresa, los clientes finales y los developers.
+- Diseñar los sistemas que luego los Developers estarán haciendo.
+- Estructurar (unir) todos esos sistemas para que funcionen como un uno solo.
+- garante de algo llamado 'consistencia conceptual' del sistema como un todo.
 Hay otros detalles que se consideran secundarios pero son importantes:
-    - mentor técnico de los developers en caso de ser necesario (seniors incluidos)
-    - lead en caso de ser necesario.
+- mentor técnico de los developers en caso de ser necesario (seniors incluidos)
+- lead en caso de ser necesario.
+
+
 
 ## **Diff between framework and platform**
 There are a few important distinctions between a framework and a platform. A frame-work is usually just the code library used to build an application, whereas a platform is more holistic and  includes  tooling  and  support  beyond  a  framework.
@@ -24,13 +31,22 @@ There are two instances the browser-generated DOM will be different than HTML so
 - The DOM is modified by client-side JavaScript
 - The browser automatically fixes errors in the source code.
 
-## **Arugments and Parameters**
+## **Arguments and Parameters**
 
 ### Argument
 Los argumentos son los valores o expresiones (que resultarán en valor) que le pasas a una función.
 
 ### Parameter
 Y parámetro es la variable declarada en la firma del método que sostiene esos argumentos
+
+## Expression, Computation and Evaluation
+An expression is a combination of values, variables, and operators, which computes to a value.
+
+The computation is called an evaluation.
+
+For example, `5 * 10` evaluates to `50`:
+
+<br>
 
 _____
 # **OOP**
@@ -414,4 +430,10 @@ foo @ VM498:5
 (anonymous) @ VM498:8
 */
 ```
+<br>
 
+____
+# **Good To Know**
+
+## **Chrome tabs resource usage.** 
+Cada tab en Chrome tiene su proprio mundo. Event loop, stack, etc. Hence the amount of resourced it uses.
