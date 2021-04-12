@@ -46,6 +46,18 @@ Did we mention that you can use strings like objects too? They have methods as w
 'hello, world'.replace('world', 'mars'); // "hello, mars"
 'hello'.toUpperCase(); // "HELLO"
 ```
+<br>
+
+But then if in JS strings are primitive why they have access to methods like objects.
+```js
+var str = 'hello';
+console.log(str.toUpperCase()); // --> HELLO
+```
+
+It appears that str clearly has a toUpperCase property. Was our inference incorrect? Specifically, if strings are not objects, why do they have properties like toUpperCase, toLowerCase, etc…? <br>
+**Short answer**: JavaScript promptly coerces between primitives and objects. <br>
+**Long answer**: whenever you try to access a property of a string str, JavaScript coerces the string value to an object, by new String(str). This object is called a wrapper object. It inherits all string methods, and is used to resolve the property reference. Once the property has been resolved, the wrapper object is discarded.
+> Note: the same concept applies to numbers and booleans.
 
 When you are defining a string you must start and end with a single or double quote. You can escape a quote from considering it as an end of string quote by placing a backslash (\) in front of the quote.
 
@@ -59,7 +71,7 @@ let sampleStr = "Alan said, \"Peter is learning JavaScript\".";
 | \\" | double quote |
 | \\\ | backslash |
 | \\n | newline |
-| \\r | carrige return |
+| \\r | carriage return |
 | \\t | tab |
 | \\b | word boundary |
 | \\f | form feed |
@@ -155,6 +167,11 @@ let arr = txt.split(',');
 
 ### **Numbers**
 Numbers in JavaScript are "double-precision 64-bit format IEEE 754 values", according to the spec —  There's no such thing as an integer in JavaScript
+
+| Value | (aka Fraction/Mantissa) | Exponent	Sign |
+| ------ | ------ | ----- |
+| 52 bits (0 - 51) | 11 bits (52 - 62) | 1 bit (63) |
+
 ```js
 console.log(3 / 2);             // 1.5, not 1
 console.log(Math.floor(3 / 2)); // 1
@@ -165,6 +182,28 @@ So an apparent integer is in fact implicitly a float.
 ```js
 Math.sin(3.5);
 var circumference = 2 * Math.PI * r;
+```
+<br>
+
+#### **Precision**
+Integers (numbers without a period or exponent notation) are accurate up to 15 digits. The maximum number of decimals is 17.
+```js
+var x = 999999999999999;   // x will be 999999999999999
+var y = 9999999999999999;  // y will be 10000000000000000
+//
+var x = 0.2 + 0.1;         // x will be 0.30000000000000004
+```
+<br>
+
+#### Methods
+
+All number methods can be used on any type of numbers (literals, variables, or expressions):
+```js
+Example
+var x = 123;
+x.toString();            // returns 123 from variable x
+(123).toString();        // returns 123 from literal 123
+(100 + 23).toString();   // returns 123 from expression 100 + 23
 ```
 <br>
 
@@ -200,6 +239,19 @@ If the first character in the string can't be converted into a number, then it r
 NaN + 5; // NaN
 ```
 <br>
+
+#### **`Infinity`**
+A value outside the largest possible number.
+```js
+//txt == Infinite after 1.3407807929942597e+154
+var myNumber = 2; 
+var txt = "";
+while (myNumber != Infinity) {
+   myNumber = myNumber * myNumber;
+   txt = txt + myNumber + "<br>";
+}
+```
+And when divided by `0`.
 
 ### **Arrays**
 - Nested:
@@ -270,6 +322,241 @@ var removedFromOurArray = ourArray.shift();
 ```
 <br>
 
+#### **`concat()`**
+
+Creates a new array merging the indicated ones.
+```js
+let myGirls = ["Cecilie", "Lone"];
+let myBoys = ["Emil", "Tobias", "Linus"];
+let myChildren = myGirls.concat(myBoys);   // Concatenates (joins) myGirls and myBoys
+```
+<br>
+
+#### **`slice()`**
+
+Slices a piece of an array into a new array
+```js
+var fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+var citrus = fruits.slice(1);
+//This snippet starts on Orange
+```
+
+With two arguments slice selects elements from the start argument and up to the end argument exclusive.
+```js
+var fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+var citrus = fruits.slice(1, 3);
+// Returns [Orange,Lemon]
+```
+<br>
+
+#### **Sorting**
+
+Alphabetical sorting is accomplished by simply using `sort()`:
+```js
+var fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.sort();
+```
+<br>
+
+##### **Sorting numbers**
+
+To numbers you supply a function as argument that sort uses to compare (*compare function*) the elements of the array :
+```js
+const sortAscending = (x,y) => x-y;
+let numSort = [0,11,100,2,4,500,33].sort(sortAscending);
+//
+const sortDescending = (x,y)=>y-x;
+```
+<br>
+
+###### **Compare Function**
+When the `sort()` function compares two values, it sends the values to the compare function, and sorts the values according to the returned (negative, zero, positive) value. For ascending order:
+
+- If the result is negative a is sorted before b.
+- If the result is positive b is sorted before a.
+- If the result is 0 no changes are done with the sort order of the two values.
+
+##### **Ramdom Sorting. Fisher Yates Method**
+
+```js
+var points = [40, 100, 1, 5, 25, 10];
+
+for (i = points.length -1; i > 0; i--) {
+  j = Math.floor(Math.random() * i)
+  k = points[i]
+  points[i] = points[j]
+  points[j] = k
+}
+```
+<br>
+
+##### **Sorting Arrays of Objects**
+
+Write a function that compares the property values:
+```js
+var cars = [
+  {type:"Volvo", year:2016},
+  {type:"Saab", year:2001},
+  {type:"BMW", year:2010}
+];
+
+cars.sort(function(a, b){return a.year - b.year});
+// This works even with properties of different data types
+```
+For string properties:
+```js
+cars.sort(function(a, b){
+  var x = a.type.toLowerCase();
+  var y = b.type.toLowerCase();
+  if (x < y) {return -1;}
+  if (x > y) {return 1;}
+  return 0;
+});
+```
+<br>
+
+##### **Find Highest/Lowest**
+
+1. You can sort the array in asc/desc order then get the corresponding first/last element for the array.
+2. Math.max/Math.min:
+```js
+function myArrayMax(arr) {
+  return Math.max(arr);
+}
+//
+function myArrayMin(arr) {
+  return Math.min(arr);
+}
+```
+3. The fastest is to make your own method. Example:
+```js
+function myArrayMax(arr) {
+  var len = arr.length;
+  var max = -Infinity;
+  while (len--) {
+    if (arr[len] > max) {
+      max = arr[len];
+    }
+  }
+  return max;
+}
+```
+<br>
+
+#### **Iteration()`**
+
+The callback functions used by these methods accept other parameters apart from value, but they can be omitted if only value will be used.
+
+```js
+function myFunction(value, index, array) {
+  //
+}
+//Could be
+function myFunction(value) {
+  //
+}
+``` 
+<br>
+
+##### **`forEach()`**
+
+Calls a function (a callback function) once for each array element.
+```js
+var arrMultiplied = "";
+var numbers = [45, 4, 9, 16, 25];
+numbers.forEach(myFunction);
+
+function myFunction(value) {
+  value *= 2;
+  arrMultiplied = arrMultiplied + value + '\n';
+}
+
+console.log(arrMultiplied);
+```
+<br>
+
+##### **`map()`**
+
+Creates a new array by performing a function on each array element. It does not execute the function for array elements without values.
+```js
+var numbers = [45, 4, 9, 16, 25];
+var numbersByTwo = numbers.map(myFunction)
+
+function myFunction(value) {
+  return value * 2;
+}
+
+console.log(numbersByTwo); // [90, 8, 18, 32, 50]
+```
+<br>
+
+##### **`reduce()`**
+
+Runs a function on each array element to produce (reduce it to) a single value. It runs left-to-right in the array. `reduceRight()` does it backwards.
+```js
+var numbers = [45, 4, 9, 16, 25];
+var numbersSum = numbers.reduce(myFunction)
+
+function myFunction(total, value) {
+  return total + value;
+}
+
+console.log(numbersByTwo);
+```
+It can accept 4 parameters:
+
+- The total (the initial value / previously returned value)
+- The item value
+- The item index
+- The array itself
+
+##### **`every()` vs `some()`**
+
+`every()` method check if all array values pass a test.
+
+`some()` checks if al least one value passes a test.
+
+```js
+var numbers = [45, 4, 9, 16, 25];
+var allOver18 = numbers.every(myFunction1); // false
+var someOver18 = numbers.some(myFunction2); // true
+
+function myFunction(value) {
+  return value > 18;
+}
+```
+<br>
+
+##### **`indexOf()`, `lastIndexOf()`**
+
+`indexOf()` method searches an array for an element value and returns the position of its first occurrence. Returns -1 if the item is not found.
+
+`lastIndexOf()` returns the position of the last occurrence.
+
+```js
+var fruits = ["Apple", "Orange", "Apple", "Mango"];
+var a = fruits.indexOf("Apple"); // 0
+var a = fruits.lastIndexOf("Apple"); /// 2
+```
+<br>
+
+##### **`find()`, `findIndex()`**
+`
+find()` method returns the value of the first array element that passes a test function.
+
+`findIndex()` returns the index.
+
+```js
+var numbers = [4, 9, 16, 25, 29];
+var firstValue = numbers.find(myFunction); // 25
+var firstIndex = numbers.findIndex(myFunction); // 3
+
+function myFunction(value, index, array) {
+  return value > 18;
+}
+```
+<br>
+
 ### **Global vs local variables.** 
 It is possible to have both local and global variables with the same name. When you do this, the local variable takes precedence over the global variable.
 ```js
@@ -304,6 +591,47 @@ null === undefined         // false
 null == undefined          // true
 
 ```
+<br>
+
+### **Dates**
+
+JavaScript stores dates as number of milliseconds since January 01, 1970, 00:00:00 UTC (Universal Time Coordinated).
+
+If only one argument is provided to its constructor, that argument is treated as milliseconds.
+```js
+var d = new Date(100000000000);
+// Sat Mar 03 1973 05:46:40 GMT-0400 from January 01, 1970, 00:00:00 
+```
+<br>
+
+**Days**. In JS, the first day of the week (0) means *Sunday*, even if some countries in the world consider the first day of the week to be *Monday*.
+
+#### **JS ISO Dates**
+
+The ISO 8601 syntax (`YYYY-MM-DD`) is also the preferred JavaScript date format.
+```js
+var d = new Date("2015-03-25");
+//
+// Date-Time
+  // 1- UTC == GMT (Greenwich Mean Time)
+var dT = new Date("2015-03-25T12:00:00Z");
+  //2- Relative to UTC
+var rDT = new Date("2015-03-25T12:00:00-06:30");
+```
+1. Date and time are separated by `T`. `Z` means UTC(Universal Time Coordinated) time.
+2. If you want to modify the time relative to UTC, remove the Z and add +HH:MM or -HH:MM instead
+
+**Note**: Omitting T or Z in a date-time string can give different results in different browsers.
+
+### **Booleans**
+
+Everything with a "value" is true. Without a "value" is false. Examples:
+- 0, -0
+- ""
+- undefined
+- null
+- NaN
+
 
 ## **Operations**
 
@@ -333,6 +661,22 @@ document.getElementById("demo").innerHTML = toCelsius;
 ```
 
 <br>
+
+### Math Class
+
+### Function for Random Integer Numbers
+
+To generate a random integer:
+```js
+function getRndInteger(min, max) {
+  return Math.floor(Math.random() * (max - min) ) + min;
+}
+
+// Including both parameters
+function getRndInteger(min, max) {
+  return Math.floor(Math.random() * (max - min) + 1 ) + min;
+}
+```
 
 ## **Objects**
 
@@ -515,6 +859,15 @@ while(i < 5) {
 ```js
 for (var i = 0; i < 5; i++) {
   ourArray.push(i);
+}
+```
+<br>
+
+The first statement of the for loop can be an statement or any group of statements separated by comma that are executed first and before anything else.
+
+```js
+for (i = 0, len = cars.length, text = ""; i < len; i++) {
+  text += cars[i] + "<br>";
 }
 ```
 <br>
@@ -998,6 +1351,25 @@ console.log(powerThenDouble);
 ## ***Switch Case***
 JavaScript's switch case uses the strict comparison (===), i didn't know that.
 
+### **Default**
+
+The default case does not have to be the last case in a switch block:
+```js
+switch (new Date().getDay()) {
+  default:
+    text = "Looking forward to the Weekend";
+    break;
+  case 6:
+    text = "Today is Saturday";
+    break;
+  case 0:
+    text = "Today is Sunday";
+}
+```
+<br>
+
+
+
 ## **Key = Value**
 Si la llave y el valor de una objeto en javascript es una misma variable, para usarlo puedes:
 ```js
@@ -1005,6 +1377,11 @@ let x = obj1 (p1 : p1); //Utiliza el nombre de la variable como key y su valor c
 //Es igual que
 let x = obj1 (p1);
 ```
+<br>
+
+## **Closure**
+
+Closure is when an inner function has access to its outer enclosing function’s variables and properties. 
 
 ## **Let vs Var**
 
@@ -1119,7 +1496,6 @@ document.getElementById("demo").innerHTML = "Hello " +
 "Dolly!";
 ```
 
-
 <br>
 
 
@@ -1129,16 +1505,6 @@ document.getElementById("demo").innerHTML = "Hello " +
 
 ## **Comparable** 
 Son un tipo de objetos que entre ellos pueden ser comparables. **Comparator** es un objeto que se encarga de comparar a otros objetos entre ellos.
-
-## **Sorting numbers**
-- A way to sort numbers:
-```js
-const sortAscending = (x,y) => x-y;
-[0,11,100,2,4,500,33].sort(sortAscending);
-//
-const sortDescending = (x,y)=>y-x;
-```
-<br>
 
 ## **Redeclaration**
 
@@ -1157,9 +1523,6 @@ let bar = "bar2"; // SyntaxError: Identifier 'bar' has already been declared
 Executes a provided function for each value of the array (from left-to-right).
 *Syntax:*
 `array.reduce(function(total, currentValue, currentIndex, arr), initialValue)`
-
-## **switch case ... Statements**
-- `case` values are tested with strict equality (===).
 
 ##  **<Scripts>**
 Placing scripts at the bottom of the `<body>` element improves the display speed, because script interpretation slows down the display.

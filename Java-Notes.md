@@ -1885,71 +1885,82 @@ add(pane);
 
 ### **Separating Components with Insets**
 
-Insets are objects that represent the border area of a container and you can use to move components away from the edges of the container.
-The Insets class, which is part of the java.awt package, has a constructor that takes fou arguments: the space to leave at the top, left, bottom, and right of the container. Each argument is specified using pixels.
+Insets are objects that represent the border area of a container and you can use to move components away from the edges of the container. The `Insets` class, which is part of the `java.awt` package, has a constructor that takes fou arguments: the space to leave at the top, left, bottom, and right of the container. Each argument is specified using pixels.
 To make use of an Insets object in a container, you must override the container’s getInsets() method.
-Ex.:
+```java
 public Insets getInsets() {
 Insets squeeze = new Insets(50, 15, 10, 15);
 return squeeze;
 }
+```
 
-NOTE
-A JFrame container has a built-in inset to make room for the frame’s title bar.
+> **NOTE**. A JFrame container has a built-in inset to make room for the frame’s title bar.
 
->Laying Out an Application<
+## **Laying Out an Application**
 
-When one single of the available layout managers is not suitable for the entire GUI you are building, one way around it is to use a group of JPanel objects as containers to hold different sections of a GUI. You can set up different layout rules for each of these sections by using the setLayout() methods of each JPanel. After these panels contain all the components they need to contain, you can add the panels directly to the frame.
+When one single of the available layout managers is not suitable for the entire GUI you are building, one way around it is to use a group of JPanel objects as containers to hold different sections of a GUI. You can set up different layout rules for each of these sections by using the `setLayout()` methods of each JPanel. After these panels contain all the components they need to contain, you can add the panels directly to the frame.
 
-SEE LottoMadness.java
+> **SEE** LottoMadness.java
 
-In the LottoMadness application the setLookAndFeel() method is created as a class method —note the static keyword— and called in the main() method.
-Previous applications made setLookAndFeel() an object method and called it within the object’s constructor. The reason this doesn’t happen in LottoMadness is because the look and feel must be selected before any instance variables have been created and given values.
+In the *LottoMadness* application the *setLookAndFeel()* method is created as a class method —note the static keyword— and called in the *main()* method.
+Previous applications made *setLookAndFeel()* an object method and called it within the object’s constructor. The reason this doesn’t happen in LottoMadness is because the look and feel must be selected before any instance variables have been created and given values.
 
-PROGRAMS: NewMadness.java / LottoMadness.java / Crisis.java / Crisis2.java
+**PROGRAMS:** NewMadness.java / LottoMadness.java / Crisis.java / Crisis2.java
 
 
-	-HOUR 19 RESPONDING TO USER INPUT.-
+# **-HOUR 19 RESPONDING TO USER INPUT.-**
 
--Getting Your Programs to Listen.-
+## **Getting Your Programs to Listen**
 
 A user event in Java is something that happens when a user performs an action with the mouse, keyboard, or another input device.
 Before receiving events you must make and objet listen. Responding to user events requires the use of one or more EventListener interfaces. Interfaces are a feature of object-oriented programming in Java that enable a class to inherit behavior it would not be able to employ otherwise. They’re like a contract agreement with other classes that guarantees the class will contain specific methods.
 An EventListener interface contains methods that receive user input of a specific type. You need two things to add one:
-►Add > java.awt.event.*;
-►Implement one or more listening interfaces.
-Ex.:
+- Add > java.awt.event.*;
+- Implement one or more listening interfaces.
+
+```java
 import java.awt.event.*;
 public class Graph implements ActionListener {
 }
 //ActionListener responds to button and menu clicks.
+```
+<br>
 
 EventListener interfaces enable a component of a GUI to generate user events. Without one of the listeners in place, a component cannot do anything that can be heard by other parts of a program. A program must include a listener interface for each type of component to which it listens: for a click or Enter key pressed ActionListener, for a choice list or check boxes ItemListener, etc.
 When you require more than one interface in the same class, separate their names with commas after the implements keyword.
-Ex.:
+
+```java
 public class Graph3D implements ActionListener, MouseListener {
 // ...
 }
+```
+<br>
 
--Setting Up Components to Be Heard.-
+## **Setting Up Components to Be Heard**
 
 Next make the needed components generate user events. To make a JButton object generate and event:
-Ex.:
+
+```java
 JButton fireTorpedos = new JButton("Fire torpedos");
 fireTorpedos.addActionListener(this);
 /*The button calls its addActionListener() method. The keyword 'this' passed to the method indicates the current object receives the user event and handles it as needed*/
+```
+<br>
 
--Handling User Events.-
+## **Handling User Events**
 
 Each listener has a method that is called automatically when a user generates an event through the component attached to the corresponding listener.
 For action listener:
-Ex.:
+
+```java
 public void actionPerformed(ActionEvent event) {
 // method goes here
 }
+```
+<br>
 
-If you have only one component performing the action just add statments to the method above to handle it. If there is more than component each class object that is passed to the event handler method (in the case of actionPerformed the class object is ActionEvent) has methods that can be use to determine which component the action comes from.
-Ex.:
+If you have only one component performing the action just add statements to the method above to handle it. If there is more than component each class object that is passed to the event handler method (in the case of actionPerformed the class object is ActionEvent) has methods that can be use to determine which component the action comes from.
+```java
 String cmd = event.getActionCommand();
 /*getActionCommand() returns a String: if the component is a button, its label; if it’s a text field the text entered in the field.*/
 //
@@ -1965,20 +1976,23 @@ if (source == speed) {
 }
 }
 /*This actionPerformed receives events from a JButton object called start, a JTextField called speed, and another JTextField called viscosity*/
+```
 
->Check Box and Combo Box Events<
+### **Check Box and Combo Box Events**
 
 These require the ItemListener interface. The method addItemListener() makes them generate events.
-Ex.:
+
+```java
 JCheckBox superSize = new JCheckBox("Super Size", true);
 superSize.addItemListener(this);
+```
+- *itemStateChanged()* method receives the event. With
+- *ItemEvent* object as argument
+- *getItem()* method sees what object caused the event.
 
-►itemStateChanged() method receives the event. With
-►ItemEvent object as argument
-►getItem() method sees what object caused the event.
+To determine whether a check box is selected or deselected, compare the value returned by the *getStateChange()* method to the constants *ItemEvent.SELECTED* and *ItemEvent.DESELECTED*. The following code is an example for an ItemEvent object called item:
 
-To determine whether a check box is selected or deselected, compare the value returned by the getStateChange() method to the constants ItemEvent.SELECTED and ItemEvent.DESELECTED. The following code is an example for an ItemEvent object called item:
-Ex.:
+```java
 public void itemStateChanged(ItemEvent item) {
 int status = item.getStateChange();
 if (status == ItemEvent.SELECTED) {
@@ -1989,52 +2003,57 @@ if (status == ItemEvent.SELECTED) {
 //To determine the value selected in a JComboBox object
 Object which = item.getItem();
 String answer = which.toString();
+```
+<br>
 
->Keyboard Events<
+### **Keyboard Events**
 
 When a program must react immediately once a key is pressed, it uses keyboard events and the KeyListener interface.
-First register the component that receives key presses by calling its addKeyListener() method. The argument of the method should be the object that implements the KeyListener interface. If it is the current class, use this as the argument.
+First register the component that receives key presses by calling its *addKeyListener()* method. The argument of the method should be the object that implements the KeyListener interface. If it is the current class, use this as the argument. 
+
 An object that handles keyboard events must implement three methods:
-►keyPressed(KeyEvent)—A method called the moment a key is pressed
-►keyReleased(KeyEvent)—A method called the moment a key is released
-►keyTyped(KeyEvent)—A method called after a key has been pressed and released
+
+- keyPressed(KeyEvent) — A method called the moment a key is pressed
+- keyReleased(KeyEvent) — A method called the moment a key is released
+- keyTyped(KeyEvent) — A method called after a key has been pressed and released
 
 These methods all return void instead of a value. Each of these has a KeyEvent object with the following methods:
-►getKeyChar() returns a char representing the key that was pressed (letters, numbers, puntuation)
-►getKeyCode() returns an integer value representing the key. Includes any key in the keyboard (enter, home, page up, etc).
-►getKeyText() accepts the prevous integer to return the name (String) of the key (Home, F1, etc.) 
+- *getKeyChar()* returns a char representing the key that was pressed (letters, numbers, punctuation)
+- *getKeyCode()* returns an integer value representing the key. Includes any key in the keyboard (enter, home, page up, etc).
+- *getKeyText()* accepts the previous integer to return the name (String) of the key (Home, F1, etc.) 
 
-SEE KeyViewer2.java
+> **SEE** KeyViewer2.java
 
->Enabling and Disabling Components<
+### **Enabling and Disabling Components**
 
 We use de setEnabled(boolean):
-Ex.:
+
+```java
 JButton previousButton = new JButton("Previous");
 JButton nextButton = new JButton("Next");
 JButton finishButton = new JButton("Finish");
 previousButton.setEnabled(false);
+```
+<br>
 
--Completing a Graphical Application.-
+## **Completing a Graphical Application**
 
-SEE LottoEvent.java / LottoMadness.java
+> **SEE** LottoEvent.java / LottoMadness.java
 
-It often is convenient to divide Swing projects with the GUI in one class and the event-handling methods in another.
-The LottoMadness project lacks variables used to keep track of things such as the number of drawings, winning counts, and lotto number text fields. Instead, the interface stores values and displays them automatically.
+It often is convenient to divide *Swing* projects with the GUI in one class and the event-handling methods in another.
+The *LottoMadness* project lacks variables used to keep track of things such as the number of drawings, winning counts, and lotto number text fields. Instead, the interface stores values and displays them automatically.
 
-After the setText() method of a text component is used to change its value, you don’t need to do anything else. Swing handles the updating necessary to show the new value. You dont need to use paint() or repaint().
+After the *setText()* method of a text component is used to change its value, you don’t need to do anything else. Swing handles the updating necessary to show the new value. You dont need to use paint() or repaint().
 
-WHY java.awt.* AND  java.awt.event.*? Shoudn't the former include the latter? 
-Though the names make them look like they are related, there’s no such thing as inheritance for packages in Java. One package cannot be a
-subpackage of another. When you use an asterisk in an import statement, you are making all the classes in a package available in a program. The asterisk works only on classes, not packages. The most a single import statement can load is the classes of a single package.
-
+WHY java.awt.* AND  java.awt.event.*? shouldn't the former include the latter? 
+Though the names make them look like they are related, there’s no such thing as inheritance for packages in Java. One package cannot be a sub-package of another. When you use an asterisk in an import statement, you are making all the classes in a package available in a program. The asterisk works only on classes, not packages. The most a single import statement can load is the classes of a single package.
 
 Add a text field to the LottoMadness application that works in conjunction with the Thread.sleep() statement in the LottoEvent class to slow down the rate that drawings are conducted.
 
-u Modify the LottoMadness project so it draws five numbers from 1 to 90.
+Modify the LottoMadness project so it draws five numbers from 1 to 90.
 
 
-	-HOUR 20. Reading and Writing Files.-
+# **-HOUR 20. Reading and Writing Files.-**
 
 -STEAMS.-
 A stream is an object that takes information from one source and sends it somewhere else. To save data permanently within a Java program, or to retrieve that data later, you must use at least one stream. After you learn how to work with one kind of data using streams, you can work with others in the same manner.
@@ -2742,9 +2761,9 @@ findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
 
 Save the file when you’re done. Choose the menu comment Build, Make Project to compile it. To run the app, choose Run, Run App, and SimpleAVD as the virtual device. The emulator loads (which takes time) and then automatically runs the app.
 
-NOTE: When excecuting the app you may get an error indicating that no default Activity has been indicated. You can fix this problem 2 ways:
+NOTE: When executing the app you may get an error indicating that no default Activity has been indicated. You can fix this problem 2 ways:
 
-1. Go to the Androigmanifest.xml file and add an intent-filter node to the activity confuguration section. It should look as follows:
+1. Go to the Androidmanifest.xml file and add an intent-filter node to the activity configuration section. It should look as follows:
 Ex.:
 <activity
 android:name=".LeaderActivity"

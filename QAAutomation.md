@@ -4,6 +4,28 @@ Selenium, Web Driver.
 
 # **Concepts**
 
+## **What is testing?**
+  
+Process that include many diff activities mainly execution of tests and results checking, also test planning, analysis, design test, bug reporting, test reporting.
+
+### **Testing and debugging**
+
+Testing is not debugging
+
+| Testing | Debugging |
+|---|---|
+| Fund bugs | Finds and fixes root cause of bugs |
+
+## **Testing Principles**
+
+1. Testing shows the presence of defects, not their absence
+2. Exhaustive testing is impossible.
+3. Early testing saves time and money.
+1. Defects cluster together.
+5. Beware of the pesticide paradox.
+6. Testing is context dependent
+7. Absence-of-errors is a fallacy.
+
 ## **QA automation**
 
 Using a separate software to automatically perform tests for you to a piece of software.

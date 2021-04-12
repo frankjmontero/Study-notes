@@ -3,6 +3,225 @@
 ## **Internet**
 Internet is a global network of computers connected to each other which communicate through a standardized set of protocols. The internet is a design philosophy and an architecture expressed in a set of protocols.
 
+### **Web Resources**
+
+The target of an HTTP request is called a *resource*; it can be a document, a photo, or anything else. Each resource is identified by a *URI*.
+
+#### **URIs, Uniform Resource Identifier**
+
+A URI is a string that refers to a resource. URLs and URNs are types or URIs.
+
+##### **URL, Uniform Resource Locator**
+
+Also known as *web address* or *link*. Can be used in HTTP, FTP and SMTP protocols. Ex.: `https://developer.mozilla.org`
+
+##### **URN, Uniform Resource Name**
+
+URNs are persistent identifiers (long-lasting references) that refer to a resources without indicating its location or wether it still exist or not. Ex.: `urn:oasis:names:specification:docbook:dtd:xml:4.1.2`
+
+##### **URI Syntax**
+
+> http://www.example.com:80/path/to/myfile.html?key1=value1&key2=value2#SomewhereInTheDocument
+
+
+| Section | Description |
+| --- | --- |
+| http:// | Protocol |
+| www.example.com | Authority, domain name <br> or server being requested |
+| :80 | Port |
+| path/to/myfile.html | Path to resource on wer server |
+| ?key1=value1&key2=value2# | Query: Extra parameters for web server |
+| #SomewhereInTheDocument | ** Fragment: Anchor to a part of the resource itself |
+<br>
+
+> ** Ex.: In HTML, jumps to where the anchor is located; video or audio, jumps to the time the anchor represents.
+
+**Important!**: What goes after `#` (fragment identifier) is not sent in the request to the server.
+
+##### **Data URL**
+
+URLs prefixed with the `data:` scheme, allow content creators to embed small files inline in documents.
+
+> Syntax: `data:[<mediatype>][;base64],<data>`
+```
+data:,Hello%2C%20World!
+//  Equals Hello, World! comma(%2C) and space(%20) are percent-encoded
+//
+data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==
+//  base64-encoded version of the above
+//
+data:text/html,%3Ch1%3EHello%2C%20World!%3C%2Fh1%3E
+//  An HTML document with <h1>Hello, World!</h1>
+//
+data:text/html,<script>alert('hi');</script>
+//  An HTML document that executes a JavaScript alert. Note that the closing script tag is required.
+```
+<br>
+
+##### **MIME** (Multipurpose Internet Mail Extensions) **Types**
+
+Is a standard that indicates the nature and format of a document, file, or assortment of bytes. Browsers use them instead of file extensions to know how to handle URL. They consist of a *type* and *subtype*. They could also contain optional *parameters*.
+```
+type/subtype
+type/subtype;parameter=value
+
+Ex.: 
+text/plain;charset=UTF-8
+```
+<br>
+
+###### **Other methods of conveying document type**
+MIME types are not the only way to convey document type information:
+
+- *Filename suffixes* are sometimes used, especially on Microsoft Windows. For Linux and MacOS they are not meaningful.
+- *Magic numbers*. The syntax of different formats allows file-type inference by looking at their byte structure. For example, GIF files start with the 47 49 46 38 39 hexadecimal value (GIF89), and PNG files with 89 50 4E 47 (.PNG). Not all file types have magic numbers, so this is not 100% reliable either.
+
+### **MISC**
+
+#### **User Agent**
+
+A computer program representing a person: browser, a bot, download manager. 
+
+Browsers include a self-identifying User-Agent HTTP header called a user agent (UA) string attached to requests to server. This string often identifies the browser, its version number, and its host operating system. Javascript can access that string with the `NavigatorID.userAgent` property.
+
+An user agent string:
+```
+"Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:35.0) Gecko/20100101 Firefox/35.0"
+```
+<br>
+
+### **HTTP**
+In a typical HTTP request/response cicle:
+- When data is requested the server sends it back in XML or JSON. 
+- A requested image like JPEG, the server returns an image file.
+- Something similar to the above happens with HTML pages, stylesheets and JavaScript code requested with responses of HTML file, CSS file and JS file accordingly.
+
+**Standard ports**
+- HTTP, port 80.
+- HTTPS, port 443.
+
+### **Responsive Web Design**
+Make our website resizable. We use HTML and CSS to accomplish it.
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- This makes it responsive-->
+```
+<br>
+
+### **AJAX** (Asynchronous JavaScript And XML)
+Not a programming language but a technique for accessing web servers from web pages. Uses a combination of:
+
+- A browser built-in XMLHttpRequest object (to request data from a web server)
+- JavaScript and HTML DOM (to display or use the data)
+
+- AJAX transports data in any form. Commonly in: XML, JSON or plain text.
+- Updates webpages asynchronously exchanging data with the webserver in the background. Then we can update websites without reloading them.
+
+### **JSON** (JavaScript Object Notation)
+A lightweight for storing and transferring data.
+
+#### **Syntax**
+
+- Data is in name/value pairs
+- Data is separated by commas
+- Curly braces hold objects
+- Square brackets hold arrays
+
+```json
+{
+"employees":[
+    {"firstName":"John", "lastName":"Doe"},
+    {"firstName":"Anna", "lastName":"Smith"},
+    {"firstName":"Peter", "lastName":"Jones"}
+]
+}
+```
+
+Its syntax is derived from JS object notation syntax, but JSON is plain text. But any language can read and generate JSON.
+
+### **`npm`** Node Package Manager
+
+The world's largest software registry (library). You have to install *Node.js* to have access to *npm*. This and the name is due to that npm was first created as a package manager for Node.
+
+All npm packages are defined in files called package.json. The content of package.json must be written in JSON. At least two fields must be present in the definition file: name and version.
+```json
+{
+"name" : "foo",
+"version" : "1.2.3",
+"description" : "A package for fooing things",
+"main" : "foo.js",
+"keywords" : ["foo", "fool", "foolish"],
+"author" : "John Doe",
+"licence" : "ISC"
+}
+```
+<br>
+
+#### **Convert JSON text to JS**
+
+A simple example is: 
+```js
+var text = '{ "employees" : [' + //JSON
+'{ "firstName":"John" , "lastName":"Doe" },' +
+'{ "firstName":"Anna" , "lastName":"Smith" },' +
+'{ "firstName":"Peter" , "lastName":"Jones" } ]}';
+
+//convert to JS object
+var obj = JSON.parse(text); 
+```
+```html
+<!-- Use in your website -->
+<p id="demo"></p>
+
+<script>
+document.getElementById("demo").innerHTML =
+obj.employees[1].firstName + " " + obj.employees[1].lastName;
+</script>
+```
+<br>
+
+### **jQuery**
+JS library.
+
+### **Angular**
+AngularJS lets you extend HTML with HTML attributes called directives. Directives offers functionality to HTML applications. AngularJS provides built-in directives and user defined directives.
+
+#### **AngularJS Directives**
+
+Directives are HTML attributes with the prefix `ng-`. The `ng-app` directive initializes an AngularJS application. The `ng-init` directive initializes application data.
+
+AngularJS uses double braces `{{ }}` as place holders for data.
+
+```html
+<div ng-app="" ng-init="message='Hello AngularJS!'">
+  <h1>{{ message }}</h1>
+</div>
+```
+<br>
+
+### **Vue.js**
+
+Allows you extend HTML with HTML attributes called directives.Directives offer functionality to HTML applications. Vue.js provides built-in directives and user defined directives
+
+#### Vue.js Directives
+Vue.js uses double braces `{{ }}` as place-holders for data.
+
+Vue.js directives are HTML attributes with the prefix `v-`
+```html
+<div id="app">
+<h1>{{ message }}</h1>
+</div>
+
+<!-- new Vue() creates a Vue Object-->
+<!-- The property el: binds the new Vue object to the HTML element with id="app". -->
+<script>
+var myObject = new Vue({
+    el: '#app',
+    data: {message: 'Hello Vue!'}
+})
+</script>
+
+```
 
 ## **Tuple**
 Las tuples son inmutables. Luego de que se dimensionan y se les asigna un valor, estos no pueden ser modificados.
@@ -24,9 +243,21 @@ There are a few important distinctions between a framework and a platform. A fra
 
 ## **DOM**
 
-O sea, el DOM exposes una interface, para que cualquier lenguaje pueda manipularlo. No solo JavaScript.
+![](.\Resources\DOMTree.png)
 
-#### What is the Difference Between the DOM and HTML Source Code?
+The DOM (Document Object Model) is created when the browser loads the page. 
+
+The DOM exposes an interface, so that any language can manipulate it, not only JavaScript.
+
+To manipulate and element we must find it. By ID is the best way.
+```js
+var myElement = document.getElementById("intro");
+/* If found the element is assign as an object to myElement.
+   If not found myElement = null.
+*/
+```
+
+#### **What is the Difference Between the DOM and HTML Source Code?**
 There are two instances the browser-generated DOM will be different than HTML source code:
 - The DOM is modified by client-side JavaScript
 - The browser automatically fixes errors in the source code.
@@ -46,33 +277,55 @@ The computation is called an evaluation.
 
 For example, `5 * 10` evaluates to `50`:
 
+## **MISC Concepts**
+
+### **UUID**
+
+Universally unique identifier is a 128-bit value to identify information. Also known as GUID (Globally Unique Identifier) mostly in microsoft.
+
+### **Cross Site Scripting (XSS)**
+
+An attacker uses a web application to send malicious code via a script. Flaws that allow these attacks to succeed are quite widespread and occur anywhere a web application uses input from a user within the output it generates without validating or encoding it.
+
+### **SQL Injection**
+
+SQL injection is the placement of malicious code in SQL statements, via web page input. SQL injection usually occurs when you ask a user for input, like their username/userid, and instead of a name/id, the user gives you an SQL statement that you will unknowingly run on your database.
+
 <br>
 
 _____
 # **OOP**
 
-### **Abstraction** 
+OO is about ***simulating the real*** world in a computer.
+
+## Use Case
+
+Describes the *objects* that will be used to create the application. It also describes what *messages* (behavior) an object understands.
+
+## **Abstraction** 
 
 Knowing what something does without knowing how it does it. Hide what you want to hide and show what you want to show. Take out the individual characteristics and leave the common ones. Separate the unique traits and use only the shared ones.
 
-### **Encapsulation** 
+## **Encapsulation** 
 
 The actual action of hiding what it does. Forming an object that is independent in its functionality and features, packing within itself what it needs to interact with others.
 
-### **Inheritance**
+## **Inheritance**
 
 Taking the characteristics and behaviors of an element and assign to another one.
 
-### **Polymorphism**. 
+## **Polymorphism**. 
 
-The ability an object has to transform in different things. Also to be able to do something in different ways. There are 2 types of polymorphism:
+The ability an object has to transform in different things. Also to be able to do something in different ways. It's the ability of different objects to get the same message and react or respond differently.
+
+There are 2 types of polymorphism:
 
 - ***Dynamic polymorphism*** (al que nos referimos por defecto como polimorfismo). Also known as runtime polymorphism. This is when a overridden method is resolved at runtime.
 - ***Static polymorphism*** (más raro y discutible si es real polimorfismo). It is also called compile time polymorphism. An example of it are methods overloading.
 
 El primero se logra con method `override` y el segundo se logra con method `overloading`
 
-### **Access Levels and Access Modifiers**
+## **Access Levels and Access Modifiers**
 
 El nivel de acceso es una característica que controla que o traves de que se puede acceder al codigo que un elemento contiene. Los modificadores de acceso es lo que utilizamos para indicar el mencionado nivel, o sea,  especifican su accesibilidad y alcance (scope) en otras palabras su visibilidad.
 
@@ -81,14 +334,14 @@ La abstracción es más general, y la encapsulación es un mecanismo también pa
 
 Por ejemplo, cuando tienes todas las propiedades privadas en la clase String, cuando uso un objeto de tipo String y no puedo ver sus detalles al usar el punto, como s.arrayOfChars, entonces en cierto sentido sus detalles están abstraídos para mí, no puedo ver cómo está construido el objeto, esos detalles me están oculto, y por eso, están abstraídos, pero en este caso el mecanismo que logró esa abstracción fue la encapsulación. Pero como la abstracción es más amplia, hay más formas de abstraer, cómo meter la lógica en un método, etc.
 
-### **composition vs inheritance**
+## **composition vs inheritance**
     ¿Qué es cada una? ¿Cuáles son sus diferencias y similitudes? ¿Cuáles son las ventajas y desventajas de cada una? ¿Cuál es más recomendada?
 
-#### Concepto
-##### Inheritance
+### Concepts
+#### Inheritance
 Es un pilar de la OOP que nos permite extender el alcance de una clase tanto funcional como semanticamente al derivar una clase de otra. Nos permite establecer una relacion `IS a` entre 2 miembros/entidades/elementos (como prefieras llamarle a una clase).
 
-##### Composition
+#### Composition
 Es una tecnica que nos permite tomar partes para armar un todo. Entendemos que una clase esta compuesta por varias otros tipos o clases. O sea, util e ideal cuando la relacion entre las clases es de `HAS a`.
  
 - **Similitudes**
@@ -103,15 +356,81 @@ Es una tecnica que nos permite tomar partes para armar un todo. Entendemos que u
 	- Composition
 		- Relacion `HAS a`
 		- Solo hay acceso a los metodos deseados
-		- :oosely coupled
+		- loosely coupled
 
 Entre otras
 
-##### Ventajas y desventajas. Recomendada
+#### Ventajas y desventajas. Recomendada
 
 Algo que he aprendido de los seniors aca es a ver las cosas mas preguntandome cuándo es mas util en vez de cuál es la mejor. Asi que, usamos Inheritance cuando entendemos que una nueva clase-hija es una version mas especifica y compleja que la clase-padre (hija `ES de` tipo padre). Y usamos composition cuando la clase guarda una relacion con otra y es parte de ella. Si bien es cierto que es posible lograr los mismos resultados con composition que podemos lograr con herencia y con el valor agregado de loose coupling,  cuando tenemos una estructura clara de nuestra solucion y entendemos que a nivel funcional y estructural una sub-clase ***es*** del tipo de una super-clase, siendo esa una relacion que nos sera de utilidad, entonces la herencia es el camino a tomar.
 
+## Tight/Loose Coupling
 
+Tight coupling is when a group of classes are highly dependent on one another.
+
+This scenario arises when a class assumes too many responsibilities, or when one concern is spread over many classes rather than having its own class.
+
+Loose coupling is achieved by means of a design that promotes single-responsibility and separation of concerns.
+
+A loosely-coupled class can be consumed and tested independently of other (concrete) classes.
+
+Interfaces are a powerful tool to use for decoupling. Classes can communicate through interfaces rather than other concrete classes, and any class can be on the other end of that communication simply by implementing the interface.
+
+Example of tight coupling:
+```java
+class CustomerRepository
+{
+    private readonly Database database;
+
+    public CustomerRepository(Database database)
+    {
+        this.database = database;
+    }
+
+    public void Add(string CustomerName)
+    {
+        database.AddRow("Customer", CustomerName);
+    }
+}
+
+class Database
+{
+    public void AddRow(string Table, string Value)
+    {
+    
+}
+```
+
+Example of loose coupling:
+```java
+class CustomerRepository
+{
+    private readonly IDatabase database;
+
+    public CustomerRepository(IDatabase database)
+    {
+        this.database = database;
+    }
+
+    public void Add(string CustomerName)
+    {
+        database.AddRow("Customer", CustomerName);
+    }
+}
+
+interface IDatabase
+{
+    void AddRow(string Table, string Value);
+}
+
+class Database implements IDatabase
+{
+    public void AddRow(string Table, string Value)
+    {
+    }
+}
+```
+<br>
 
 ___
 # **Functional Programming**
