@@ -475,6 +475,8 @@ console.log(arrMultiplied);
 ```
 <br>
 
+The function actually takes 3 arguments: item value, item index and the array itself but the example above uses only the value parameter.
+
 ##### **`map()`**
 
 Creates a new array by performing a function on each array element. It does not execute the function for array elements without values.
@@ -871,6 +873,23 @@ for (i = 0, len = cars.length, text = ""; i < len; i++) {
 }
 ```
 <br>
+
+#### The For/In Loop
+
+The JavaScript for/in statement loops through the properties of an Object:
+
+```js
+var person = {fname:"John", lname:"Doe", age:25};
+
+var text = "";
+var x;
+for (x in person) {
+  text += person[x];
+}
+```
+<br>
+
+*Do not* use `for in` over an Array if the index order is important.
 
 ### **Do...While**. Code will execute at least once.
 ```js

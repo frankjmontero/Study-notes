@@ -143,3 +143,7 @@ for (String name: names) {
 - *names* is what I am iterating through
 - *name* the variable that would hold each value.
 - *String* is the type of the iterable. Any type it may be.
+
+## **Objects**
+TODO
+6 Working with Objects/0-Working with Object References.mp4: 3:20 Stack and Heap
