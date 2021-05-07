@@ -645,6 +645,26 @@ let z = x ** 2;  // 25
 //Similar to
 let y = Math.pow(x,2);
 ```
+<br>
+
+### **Ternary Operator**
+Can be used as a one line if-else expression.
+```js
+function findGreater(a, b) {
+  return a > b ? "a is greater" : "b is greater";
+}
+```
+It can be chained:
+```js
+function checkSign(num) {
+    return (num > 0) ? 'positive' 
+        : (num == 0) ? 'zero'
+        : 'negative';
+}
+
+checkSign(10);
+```
+<br>
 
 ## **Functions**
 
@@ -679,6 +699,9 @@ function getRndInteger(min, max) {
   return Math.floor(Math.random() * (max - min) + 1 ) + min;
 }
 ```
+<br>
+
+Math.random() function generates a random decimal number between 0 (inclusive) and not quite up to 1 (exclusive). Thus Math.random() can return a 0 but never quite return a 1.
 
 ## **Objects**
 
@@ -874,7 +897,7 @@ for (i = 0, len = cars.length, text = ""; i < len; i++) {
 ```
 <br>
 
-#### The For/In Loop
+#### **The For/In Loop**
 
 The JavaScript for/in statement loops through the properties of an Object:
 
@@ -891,7 +914,23 @@ for (x in person) {
 
 *Do not* use `for in` over an Array if the index order is important.
 
-### **Do...While**. Code will execute at least once.
+#### **For/Of**
+
+Loops through the values of an iterable object: Arrays, Strings, Maps, NodeLists, etc
+
+```js
+let cars = ["BMW", "Volvo", "Mini"];
+let text = "";
+
+for (let x of cars) {
+  text += x + "<br>";
+}
+```
+
+### **Do...While**. 
+
+Code will execute at least once.
+
 ```js
 var ourArray = [];
 var i = 0;
@@ -927,35 +966,11 @@ The recursive version of multiply breaks down like this. In the base case, where
 
 *Note*: Recursive functions must have a *`base case`* when they return without calling the function again (in this example, when n <= 0), otherwise they can never finish executing.
 
-### **Random number**
-JavaScript has a Math.random() function that generates a random decimal number between 0 (inclusive) and not quite up to 1 (exclusive). Thus Math.random() can return a 0 but never quite return a 1.
-  Generate Random Whole Numbers within a Range:
-```js
-function randomRange(myMin, myMax) {
-  return Math.floor(Math.random() * (myMax -myMin + 1)) + myMin;
-}
-```
 <br>
 
-### **Ternary Operator**
-Can be used as a one line if-else expression.
-```js
-function findGreater(a, b) {
-  return a > b ? "a is greater" : "b is greater";
-}
-```
-It can be chained:
-```js
-function checkSign(num) {
-    return (num > 0) ? 'positive' 
-        : (num == 0) ? 'zero'
-        : 'negative';
-}
+### **Labels, `break`/`continue`**
 
-checkSign(10);
-```
-<br>
-
+When you label a block of code, the `break` statement can be used to jump out of it. 
 
 ## **ES6**
 

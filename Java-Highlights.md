@@ -145,5 +145,7 @@ for (String name: names) {
 - *String* is the type of the iterable. Any type it may be.
 
 ## **Objects**
-TODO
-6 Working with Objects/0-Working with Object References.mp4: 3:20 Stack and Heap
+
+### **Stack/Heap**
+
+These are two areas of memory created by the JVM upon its startup. The *stack* stores variables and the *heap* objects.
