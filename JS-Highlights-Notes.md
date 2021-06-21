@@ -543,8 +543,8 @@ var a = fruits.lastIndexOf("Apple"); /// 2
 <br>
 
 ##### **`find()`, `findIndex()`**
-`
-find()` method returns the value of the first array element that passes a test function.
+
+`find()` method returns the value of the first array element that passes a test function.
 
 `findIndex()` returns the index.
 
@@ -557,6 +557,25 @@ function myFunction(value, index, array) {
   return value > 18;
 }
 ```
+<br>
+
+#### **Adding Properties to Arrays**
+
+Since arrays are a type of object in JS, we can add any value to it including object properties. But if the key of the property being added is not indexable (not a number) then 5that element is not counted towards its length:
+
+```js
+var arr = [1,2,3];
+console.log(arr + ' ' + arr.length); //3
+
+arr['4'] = 'test1';
+console.log(arr + ' ' + arr.length); // 5
+
+arr.etc = 'test2';
+console.log(arr + ' ' + arr.length); // 5. Length doesn't increase
+```
+
+The added `etc` property is not printable by console.log 
+
 <br>
 
 ### **Global vs local variables.** 
@@ -665,6 +684,11 @@ function checkSign(num) {
 checkSign(10);
 ```
 <br>
+
+### **Bitwise Operations**
+
+Although in JS numbers are 64-bit floating points, for bitwise operations they are converted to a 32-bit before performing the operation. Then, converted back to 64-bit after the operation is done.
+
 
 ## **Functions**
 
@@ -971,6 +995,46 @@ The recursive version of multiply breaks down like this. In the base case, where
 ### **Labels, `break`/`continue`**
 
 When you label a block of code, the `break` statement can be used to jump out of it. 
+
+## **Errors**
+
+### **`try` ... `catch` ... `finally`**
+
+```js
+function func(text){
+  
+  try{
+    if (text == '') throw 'Enter something';
+    if (isNaN(text)) throw 'Enter a number';
+    console.log('You entered this number: ' + text);
+  }
+  catch (err){ 
+    console.log(err);
+  }
+  finally{
+    console.log('The end');
+  }
+}
+```
+<br>
+
+### **Error Object**
+
+JS has an error object whose properties are: 
+- name:	Sets or returns an error name
+- message:	Sets or returns an error message (a string)
+
+| Name | Description|
+|----|----|
+| RangeError |	A number "out of range" has occurred |
+| ReferenceError |	An illegal reference has occurred |
+| SyntaxError	| A syntax error has occurred |
+| TypeError	| A type error has occurred |
+| URIError	| An error in encodeURI() has occurred |
+
+
+
+<br>
 
 ## **ES6**
 
@@ -1346,6 +1410,23 @@ myPromise.catch(error => {
 ```
 `error` is the argument passed in to the `reject` method.
 
+### **Scope**
+
+Variables declared with `var`, `let` and `const` inside a function have function scope. However, `var` cannot have a block scope.
+
+#### **Global**
+
+Apart from variables declared globally, variables that were initialized without being declared become global automatically. However, that doesn't happen on *strict mode*.
+
+```js
+myFunction();
+
+// code here can use carName
+
+function myFunction() {
+  carName = "Volvo";
+}
+```
 
 
 ---
@@ -1532,6 +1613,39 @@ document.getElementById("demo").innerHTML = "Hello " +
 
 <br>
 
+## Functions and Context
+
+El contexto de una función no se le pega a otra función por el simple hecho de llamarla desde esa otra función. O sea, si tenemos esta función:
+```js
+function getName() {
+    return this.name;
+}
+
+// Y tenemos otra función dentro de un objeto que llama a esta:
+const obj = {
+   name: 'Jeremy',
+   doStuff: function() {
+       getName();
+   }
+}
+
+// Y llamamos:
+obj.doStuff();
+```
+<br>
+
+Aunque doStuff tendrá el contexto del objeto donde this.name es 'Jeremy', aunque llame a getName() dentro de esa función, getName no tendrá el mismo contexto que doStuff. Así que la función no hereda el this de otra función que la invoque. Sigue requiriendo que un objeto la llame directamente como obj2.getName() o hacerle un hard binding. De lo contrario, el contexto será el window.
+
+## **`this` rules**
+
+1. If the `new` keyword is used when calling the function, `this` inside the function is a brand new object.
+2. If `apply`, `call`, or `bind` are used to call/create a function, `this` inside the function is the object that is passed in as the argument.
+3. If a function is called as a method, such as `obj.method()`, `this` is the object that the function is a property of.
+4. If a function is invoked as a free function invocation, meaning it was invoked without any of the conditions present above, `this` is the global object. In a browser, it is the `window object`. If in strict mode ('use strict'), this will be `undefined` instead of the global object.
+5. If multiple of the above rules apply, the rule that is higher wins and will set the `this` value.
+6. If the function is an arrow function, it ignores all the rules above and receives the `this` value of its surrounding scope at the time it is created.
+
+<br>
 
 ---
 # **MISC**
