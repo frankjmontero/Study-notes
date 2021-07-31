@@ -37,9 +37,9 @@ Tester can and should be involved with:
 
 ## **QA vs Testing**
 
-QM (Quality Management): everything testers do.
-QA (Quality Assurance): Adherence to proper processes. Proactive, prevents.
-QC (Quality Control): Reactive. Includes testing and its various activities. Focuses on product.
+- QM (Quality Management): everything testers do.
+- QA (Quality Assurance): Adherence to proper processes. Proactive, prevents.
+- QC (Quality Control): Reactive. Includes testing and its various activities. Focuses on product.
 
 ![](./Resources/QAvsTesting.jpeg)
 

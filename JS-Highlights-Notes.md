@@ -195,7 +195,7 @@ var x = 0.2 + 0.1;         // x will be 0.30000000000000004
 ```
 <br>
 
-#### Methods
+#### **Methods**
 
 All number methods can be used on any type of numbers (literals, variables, or expressions):
 ```js
@@ -443,6 +443,13 @@ function myArrayMax(arr) {
 ```
 <br>
 
+## **`.reduce()`**
+Executes a provided function for each value of the array (from left-to-right).
+*Syntax:*
+`array.reduce(function(total, currentValue, currentIndex, arr), initialValue)`
+
+<br>
+
 #### **Iteration()`**
 
 The callback functions used by these methods accept other parameters apart from value, but they can be omitted if only value will be used.
@@ -576,6 +583,27 @@ console.log(arr + ' ' + arr.length); // 5. Length doesn't increase
 
 The added `etc` property is not printable by console.log 
 
+<br>
+
+### **Accessing Nested Objects**
+
+The sub-properties of objects can be accessed by chaining together the dot or bracket notation.
+```js
+var ourStorage = {
+  "desk": {
+    "drawer": "stapler"
+  },
+  "cabinet": {
+    "top drawer": { 
+      "folder1": "a file",
+      "folder2": "secrets"
+    },
+    "bottom drawer": "soda"
+  }
+};
+ourStorage.cabinet["top drawer"].folder2;  // "secrets"
+ourStorage.desk.drawer; // "stapler"
+```
 <br>
 
 ### **Global vs local variables.** 
@@ -846,25 +874,6 @@ myObj.hasOwnProperty("middle"); // false
 ```
 <br>
 
-### **Accessing Nested Objects**
-The sub-properties of objects can be accessed by chaining together the dot or bracket notation.
-```js
-var ourStorage = {
-  "desk": {
-    "drawer": "stapler"
-  },
-  "cabinet": {
-    "top drawer": { 
-      "folder1": "a file",
-      "folder2": "secrets"
-    },
-    "bottom drawer": "soda"
-  }
-};
-ourStorage.cabinet["top drawer"].folder2;  // "secrets"
-ourStorage.desk.drawer; // "stapler"
-```
-<br>
 
 ### **Accessing Nested Arrays**
 ```js
@@ -1433,8 +1442,8 @@ function myFunction() {
 # **Good To Know**
 
 
-## `localStorage`
-Si yo estoy en Facebook y abro la consola y agrego algo así: `'localStorage.myValFromFB = 'From facebook' `, y luego en otra tab entro a Youtube, abro la consola y accedo a `localStorage.myValFromFB`, por seguridad no se puede. Las webs ponen información como login tokens, información del usuario, información del app, etc., en localStorage. Así que el navegador no puede permitir que otro dominio pueda ver lo que otro dominio guardó ahí. Así que el storage es por dominio. Cada quiente tiene su propio storage.
+## **`localStorage`**
+Si yo estoy en Facebook y abro la consola y agrego algo así: `'localStorage.myValFromFB = 'From facebook' `, y luego en otra tab entro a Youtube, abro la consola y accedo a `localStorage.myValFromFB`, por seguridad no se puede. Las webs ponen información como login tokens, información del usuario, información del app, etc., en localStorage. Así que el navegador no puede permitir que otro dominio pueda ver lo que otro dominio guardó ahí. Así que el storage es por dominio. Cada quien tiene su propio storage.
 
 ## **THIS AND ARROW FUNCTIONS**
 Las arrow function no tienen un `this` propio como las demás funciones. El `this` es la de su contexto. Los arrows functions no tienen contexto. El engine tiene que salir a buscarlo más arriba.
@@ -1636,7 +1645,7 @@ obj.doStuff();
 
 Aunque doStuff tendrá el contexto del objeto donde this.name es 'Jeremy', aunque llame a getName() dentro de esa función, getName no tendrá el mismo contexto que doStuff. Así que la función no hereda el this de otra función que la invoque. Sigue requiriendo que un objeto la llame directamente como obj2.getName() o hacerle un hard binding. De lo contrario, el contexto será el window.
 
-## **`this` rules**
+## **`this` Rules**
 
 1. If the `new` keyword is used when calling the function, `this` inside the function is a brand new object.
 2. If `apply`, `call`, or `bind` are used to call/create a function, `this` inside the function is the object that is passed in as the argument.
@@ -1666,11 +1675,6 @@ var foo = "foo2"; // No problem, 'foo' is replaced.
 let bar = "bar1";
 let bar = "bar2"; // SyntaxError: Identifier 'bar' has already been declared
 ```
-
-## **`.reduce()`**
-Executes a provided function for each value of the array (from left-to-right).
-*Syntax:*
-`array.reduce(function(total, currentValue, currentIndex, arr), initialValue)`
 
 ##  **<Scripts>**
 Placing scripts at the bottom of the `<body>` element improves the display speed, because script interpretation slows down the display.
