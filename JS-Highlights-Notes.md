@@ -349,6 +349,14 @@ var citrus = fruits.slice(1, 3);
 ```
 <br>
 
+#### **`.reduce()`**
+Executes a provided function for each value of the array (from left-to-right).
+*Syntax:*
+`array.reduce(function(total, currentValue, currentIndex, arr), initialValue)`
+
+<br>
+
+
 #### **Sorting**
 
 Alphabetical sorting is accomplished by simply using `sort()`:
@@ -443,14 +451,8 @@ function myArrayMax(arr) {
 ```
 <br>
 
-## **`.reduce()`**
-Executes a provided function for each value of the array (from left-to-right).
-*Syntax:*
-`array.reduce(function(total, currentValue, currentIndex, arr), initialValue)`
 
-<br>
-
-#### **Iteration()`**
+#### **Iteration**
 
 The callback functions used by these methods accept other parameters apart from value, but they can be omitted if only value will be used.
 
@@ -584,6 +586,10 @@ console.log(arr + ' ' + arr.length); // 5. Length doesn't increase
 The added `etc` property is not printable by console.log 
 
 <br>
+
+#### **Array Methods Summary**
+
+![](./Resources/JSArrayMethods.jpeg)
 
 ### **Accessing Nested Objects**
 
