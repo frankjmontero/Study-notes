@@ -4,7 +4,28 @@ React is a User Interface (UI) library.
 
 React is a tool for building UI components.
 
-## **JSX** JavaScript XML
+# **Starting with React Apps**
+
+1- Make sure you have node installed. Run `node -v` to confirm.
+2- Run `npx create-react-app .`. `npx` is similar to `npm` but instead of downloading like `npm` it will execute de the code command that follows it. The `.` is to use the current directory.
+
+## **Considerations**
+
+In the newly created *public* folder you'll find a simple *index.html* that has just a `div` element that will hold all the html that React will automatically create for us when running the app.
+
+`src/index.js` is where our application starts. By default it renders the component `App` in the `App.js` file.
+```js
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
+
+//At means: render App in strict mode inside an html element named 'root'.
+```
+
+# **JSX** JavaScript XML
 
 It is a XML syntax extension to JavaScript (XML/HTML like). We recommend using it with React to describe what the UI should look like.
 ```jsx
@@ -17,13 +38,13 @@ You can put any valid JavaScript expression inside the curly braces in JSX. For 
 
 Since JSX is closer to JavaScript than to HTML, React DOM uses camelCase property naming convention instead of HTML attribute names.
 
-## **Babel**
+# **Babel**
 
-A JavaScript compiler that is capable of translating markup or programming languages into JS. React uses Babel to convert JSX to JavaScript.
+A JavaScript compiler that is capable of translating markup or programming languages into JS. **React uses Babel to convert JSX to JavaScript.**
 
-## **Create React Application**
+# **Create React Application**
 
-Facebook has created a Create React Application with everything you need to build a React app. It is a a development server that uses Webpack to compile React, JSX, and ES6, auto-prefix CSS files.
+Facebook has created a Create React Application with everything you need to build a React app. It is a development server that uses Webpack to compile React, JSX, and ES6, auto-prefix CSS files.
 
 The Create React App uses *ESLint* to test and warn about mistakes in the code. To create a Create React App run the following code on your terminal:
 ```
@@ -31,7 +52,7 @@ npx create-react-app react-tutorial
 ```
 <br>
 
-## **`ReactDOM.render()`**
+# **`ReactDOM.render()`**
 
 Method used to display HTML elements:
 ```html
@@ -45,7 +66,7 @@ Method used to display HTML elements:
 </script>
 ```
 
-## **Elements**
+# **Elements**
 Elements are the smallest building blocks of React apps.
 
 An element describes what you want to see on the screen:
@@ -67,39 +88,42 @@ setInterval(tick, 1000);
 ```
 <br>
 
-## **Components**
+# **Components**
 Conceptually, components are like JavaScript functions. They accept arbitrary inputs (called “props”) and return React elements describing what should appear on the screen. 
 
-- *Function components*. Literally JavaScript function that accept “props” (which stands for properties) object argument with data and returns a React element.
-```jsx
+- *Function components*. Literally JavaScript function that accept “props” (which stands for properties) object's argument with data and returns a React element.
+```js
 function Welcome(props) {
   return <h1>Hello, {props.name}</h1>;
 }
 ```
+
 - *Class components*. A component defined using ES6 classes sintaxis. 
-```jsx
+```js
 class Welcome extends React.Component {
   render() {
     return <h1>Hello, {this.props.name}</h1>;
   }
 }
 ```
+
 The above two components are equivalent from React’s point of view. Both types of components have each additional features though.
 
 When React sees an element representing a user-defined component, it passes JSX attributes and children to this component as a single object. We call this object “props”.
 
-    Note: React treats components starting with lowercase letters as DOM tags. For example, <div /> represents an HTML div tag, but <Welcome /> represents a component and requires Welcome to be in scope.
+    ***Note***: React treats components starting with lowercase letters as DOM tags. For example, <div /> represents an HTML div tag, but <Welcome /> represents a component and requires Welcome to be in scope.
 
 We recommend naming props from the component’s own point of view rather than the context in which it is being used.
 
 A component must never modify its own props.
-```jsx
+```js
 function sum(a, b) {
     return a + b;
 }
 // “pure” function because they do not attempt to change their inputs, and always return the same result for the same inputs.
 ```
-```jsx
+
+```js
 function withdraw(account, amount) {
     account.total -= amount;
 }
@@ -108,12 +132,12 @@ function withdraw(account, amount) {
 
 React is pretty flexible but it has a single strict rule: ***All React components must act like pure functions with respect to their props.***
 
-## **State and Props**
+# **State and Props**
 
 `State` are properties intrinsic to the component. It will cause the component to re-render. `Props` are properties that are passed down to the component from the parent.
 
 ___
-### **Videos**
+# **Content on Videos**
 
 - How to add components to the ProofConcept. 
     - Meet - uoe-dufj-fqm - Google Chrome 2020-10-27 21-42-50_Bootstrap-109. 1:20
@@ -122,3 +146,20 @@ ___
 # MISC
 
 - `import React from 'react';` used to be mandatory import line on React because even though you were not going to use react on that particular file, it was needed for the JSX portion of the file.
+
+- To create a React app you need to be in a folder that doesn't have capital letters or spaces in its name.
+
+# **Quick Concepts Overview**
+
+## **React**
+
+React is a declarative JS library used to build user interfaces. Through the use of composition it allows to build complex systems from small blocks of code called **components**.
+
+## **`create-react-app` - CRA**
+
+CRA is a command that downloads and readies for you a React development environment. It is the official way to access templates with the basic structure you need to start coding.
+
+## **JSX**
+
+Or Javascript XML is a syntax extension of JS created by Facebook. It specifically extends the standard ECMAScript.
+ > In React, with its tree like structure when defining elements, serves as syntactic sugar so you don't have to use things like createElement() or appendChild() to manipulate elements

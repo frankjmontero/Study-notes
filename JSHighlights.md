@@ -1,6 +1,10 @@
 # **JavaScript**
 
-Unlike most programming languages, the JavaScript language has no concept of input or output. It is designed to run as a scripting language in a host environment, and it is up to the host environment to provide mechanisms for communicating with the outside world. The most common host environment is the browser, but JavaScript interpreters can also be found in a huge list of other places,
+Unlike most programming languages, the JavaScript language has no concept of input or output. It is designed to run as a scripting language in a host environment, and it is up to the host environment to provide mechanisms for communicating with the outside world. The most common host environment is the browser, but JavaScript interpreters can also be found in a huge list of other places.
+
+## **History**
+
+Made by Brendan Eich in 1995 for Netscape 2. Became ESMA-262 standard in 1997. 
 
 
 # **Basics**
@@ -23,6 +27,10 @@ You can declare several variables on one single statement separating them with c
 ```js
 var person = "John Doe", carName = "Volvo", price = 200;
 ```
+
+### **Primitives vs Objects**
+
+All primitives in JS (`'Hola'`, `3.14`, `true`, etc) are immutable. 
 
 ### Re-Declaring JavaScript Variables
 If you re-declare a JavaScript variable, it will not lose its value.
@@ -254,6 +262,7 @@ while (myNumber != Infinity) {
 And when divided by `0`.
 
 ### **Arrays**
+
 - Nested:
 ```JS
 var myArray = [[]];
@@ -275,6 +284,31 @@ var arr = [
 arr[3]; // equals [[10,11,12], 13, 14]
 arr[3][0]; // equals [10,11,12]
 arr[3][0][1]; // equals 11
+```
+<br>
+
+#### **Accessing Nested Arrays**
+```js
+const ourPets = [
+  {
+    animalType: "cat",
+    names: [
+      "Meowzer",
+      "Fluffy",
+      "Kit-Cat"
+    ]
+  },
+  {
+    animalType: "dog",
+    names: [
+      "Spot",
+      "Bowser",
+      "Frankie"
+    ]
+  }
+];
+ourPets[0].names[1]; // "Fluffy"
+ourPets[1].names[0]; // "Spot"
 ```
 <br>
 
@@ -348,14 +382,6 @@ var citrus = fruits.slice(1, 3);
 // Returns [Orange,Lemon]
 ```
 <br>
-
-#### **`.reduce()`**
-Executes a provided function for each value of the array (from left-to-right).
-*Syntax:*
-`array.reduce(function(total, currentValue, currentIndex, arr), initialValue)`
-
-<br>
-
 
 #### **Sorting**
 
@@ -451,7 +477,6 @@ function myArrayMax(arr) {
 ```
 <br>
 
-
 #### **Iteration**
 
 The callback functions used by these methods accept other parameters apart from value, but they can be omitted if only value will be used.
@@ -503,23 +528,41 @@ console.log(numbersByTwo); // [90, 8, 18, 32, 50]
 
 ##### **`reduce()`**
 
+The parameters currentIndex, arr and initialValue are optional.
+
 Runs a function on each array element to produce (reduce it to) a single value. It runs left-to-right in the array. `reduceRight()` does it backwards.
+
+*Syntax:*
+`array.reduce(function(total, currentValue, currentIndex, arr), initialValue)`
+
+- The `total` is the initial/previously returned value
+- The `currentValue` is the item value
+- The `currentIndex` is the item index
+- `arr` is the array itself
+- The `initialValue` is the value you want the final result to start with. 
+
+The last 3 are optional.
+
 ```js
 var numbers = [45, 4, 9, 16, 25];
 var numbersSum = numbers.reduce(myFunction)
 
 function myFunction(total, value) {
-  return total + value;
+  return total * value;
 }
 
-console.log(numbersByTwo);
+console.log(numbersSum); // 648000
 ```
-It can accept 4 parameters:
 
-- The total (the initial value / previously returned value)
-- The item value
-- The item index
-- The array itself
+```js
+let arrSum = [1,2,3,4,5];
+
+let addition = arrSum.reduce((a,b) => a+b);
+console.log(addition);
+// Prints 15
+```
+
+<br>
 
 ##### **`every()` vs `some()`**
 
@@ -591,25 +634,27 @@ The added `etc` property is not printable by console.log
 
 ![](./Resources/JSArrayMethods.jpeg)
 
-### **Accessing Nested Objects**
+<br>
 
-The sub-properties of objects can be accessed by chaining together the dot or bracket notation.
+#### **Determine If An Array**
+
+Since typeOf(arr) returns object, then try:
+
 ```js
-var ourStorage = {
-  "desk": {
-    "drawer": "stapler"
-  },
-  "cabinet": {
-    "top drawer": { 
-      "folder1": "a file",
-      "folder2": "secrets"
-    },
-    "bottom drawer": "soda"
-  }
-};
-ourStorage.cabinet["top drawer"].folder2;  // "secrets"
-ourStorage.desk.drawer; // "stapler"
+const arr = [];
+// Solution 1
+console.log(Array.isArray(arr));
+
+// Solution 1 Create your own method
+const isArray = (x) => x.constructor.toString().indexOf('Array') > -1; 
+console.log(isArray(arr));
+// Returns true if the object prototype contains the word "Array".
+
+// Solution 3
+console.log(arr instanceof Array);
 ```
+
+
 <br>
 
 ### **Global vs local variables.** 
@@ -660,6 +705,15 @@ var d = new Date(100000000000);
 <br>
 
 **Days**. In JS, the first day of the week (0) means *Sunday*, even if some countries in the world consider the first day of the week to be *Monday*.
+
+#### **Adding days**
+
+The `setDate()` method can be used to add days to a date:
+
+```js
+var d = new Date();
+d.setDate(d.getDate() + 50);
+```
 
 #### **JS ISO Dates**
 
@@ -763,10 +817,10 @@ Math.random() function generates a random decimal number between 0 (inclusive) a
 
 ## **Objects**
 
-Objects are similar to `arrays`, except that instead of using indexes to access and modify their data, you access the data in objects through what are called `properties`.
+Objects are similar to `arrays`, except that instead of using indexes to access and modify their data, you access the data in objects through what are called `properties`. It's common to declare objects with `const`.
 
 ```js
-var cat = {
+const cat = {
   "name": "Whiskers",
   "legs": 4,
   "tails": 1,
@@ -775,7 +829,7 @@ var cat = {
 ```
 In this example, all the properties are stored as strings, such as - "name", "legs", and "tails". However, you can also use numbers as properties. You can even omit the quotes for single-word string properties, as follows:
 ```js
-var anotherObject = {
+const anotherObject = {
   make: "Ford",
   5: "five",
   "model": "focus"
@@ -786,7 +840,7 @@ However, if your object has any non-string properties, JavaScript will automatic
 ### **Dot notation**
 
 ```js
-var myObj = {
+const myObj = {
   prop1: "val1",
   prop2: "val2"
 };
@@ -799,7 +853,7 @@ var prop2val = myObj.prop2; // val2
 
 If the property of the object you are trying to access has a space in its name, you will need to use bracket notation.
 ```js
-var myObj = {
+const myObj = {
   "Space Name": "Kirk",
   "More Space": "Spock",
   "NoSpace": "USS Enterprise"
@@ -810,7 +864,7 @@ myObj["NoSpace"];    // USS Enterprise
 ```
 Using a variable to access a property:
 ```js
-var dogs = {
+const dogs = {
   Fido: "Mutt",  Hunter: "Doberman",  Snoopie: "Beagle"
 };
 var myDog = "Hunter";
@@ -851,7 +905,7 @@ delete ourDog.bark;
 Objects can be thought of as a key/value storage, like a dictionary. If you have tabular data, you can use an object to "lookup" values rather than a switch statement or an if/else chain. This is most useful when you know that your input data is limited to a certain range.
 
 ```js
-var alpha = {
+const alpha = {
   1:"Z",
   2:"Y",
   3:"X",
@@ -871,7 +925,7 @@ alpha[value]; // "Y"
 
 ### **`.hasOwnProperty()`** 
 ```js
-var myObj = {
+const myObj = {
   top: "hat",
   bottom: "pants"
 };
@@ -880,29 +934,24 @@ myObj.hasOwnProperty("middle"); // false
 ```
 <br>
 
+### **Accessing Nested Objects**
 
-### **Accessing Nested Arrays**
+The sub-properties of objects can be accessed by chaining together the dot or bracket notation.
 ```js
-var ourPets = [
-  {
-    animalType: "cat",
-    names: [
-      "Meowzer",
-      "Fluffy",
-      "Kit-Cat"
-    ]
+var ourStorage = {
+  "desk": {
+    "drawer": "stapler"
   },
-  {
-    animalType: "dog",
-    names: [
-      "Spot",
-      "Bowser",
-      "Frankie"
-    ]
+  "cabinet": {
+    "top drawer": { 
+      "folder1": "a file",
+      "folder2": "secrets"
+    },
+    "bottom drawer": "soda"
   }
-];
-ourPets[0].names[1]; // "Fluffy"
-ourPets[1].names[0]; // "Spot"
+};
+ourStorage.cabinet["top drawer"].folder2;  // "secrets"
+ourStorage.desk.drawer; // "stapler"
 ```
 <br>
 
@@ -1442,7 +1491,45 @@ function myFunction() {
   carName = "Volvo";
 }
 ```
+<br>
 
+
+---
+# **Conventions and Practices**
+
+## **Initialize Variables**
+
+The advantages of declaring a variable after declaring are: 
+- Give cleaner code
+- Provide a single place to initialize variables
+- Avoid undefined values
+- Initializing variables provides an idea of the intended use (and intended data type)
+
+```js
+// Declare and initiate at the beginning
+let firstName = "",
+let lastName = "",
+let price = 0,
+let discount = 0,
+let fullPrice = 0,
+const myArray = [],
+const myObject = {};
+```
+<br>
+
+## **Declare Objects With `const`**
+
+Declaring objects with const will prevent any accidental change of type:
+
+```js
+let car = {type:"Fiat", model:"500", color:"white"};
+car = "Fiat";      // Changes object to string
+
+const car = {type:"Fiat", model:"500", color:"white"};
+car = "Fiat";      // Not possible
+```
+
+<br>
 
 ---
 # **Good To Know**
@@ -1455,10 +1542,13 @@ Si yo estoy en Facebook y abro la consola y agrego algo así: `'localStorage.myV
 Las arrow function no tienen un `this` propio como las demás funciones. El `this` es la de su contexto. Los arrows functions no tienen contexto. El engine tiene que salir a buscarlo más arriba.
 
 ## **Functions**
-### **FIRST CLASS FUNCTIONS** 
-Para entender mejor las First Class Functions en JavaScript, uno puede decir que las funciones en JavaScript son objetos ejecutables/invocables.
-### **HIGH CLASS FUNCTIONS** 
-Son funciones que aceptan como parametro otra funcion y/o pueden devolver una funcion como resultado. Ex.:
+### **First Class Functions** 
+
+In JS functions are executable/invocable objects. We can say JS supports first class functions (functions can be treated as values).
+
+### **High Order Functions** 
+
+Because functions can be treated as values they can be passed down as arguments to other functions. So functions that accept other functions as parameters and/or return a function are high order functions. Ex.:
 
 ```js
 function powerOfTwo(x){
@@ -1470,7 +1560,7 @@ function double(y, func){
 const powerThenDouble = double(3, powerOfTwo);
 console.log(powerThenDouble);
 //prints 18
-//double(y, func) es nuestra high class function
+//double(y, func) is the high order fucntion
 ```
 <br>
 
@@ -1665,13 +1755,9 @@ Aunque doStuff tendrá el contexto del objeto donde this.name es 'Jeremy', aunqu
 ---
 # **MISC**
 
-
-## **Comparable** 
-Son un tipo de objetos que entre ellos pueden ser comparables. **Comparator** es un objeto que se encarga de comparar a otros objetos entre ellos.
-
 ## **Redeclaration**
 
-In strict mode, var will let you re-declare the same variable in the same scope while let raises a SyntaxError.
+In strict mode, `var` will let you re-declare the same variable in the same scope while `let` raises a SyntaxError.
 
 ```js
 'use strict';
@@ -1681,9 +1767,7 @@ var foo = "foo2"; // No problem, 'foo' is replaced.
 let bar = "bar1";
 let bar = "bar2"; // SyntaxError: Identifier 'bar' has already been declared
 ```
-
-##  **<Scripts>**
-Placing scripts at the bottom of the `<body>` element improves the display speed, because script interpretation slows down the display.
+<br>
 
 ## **Print**
 JavaScript does not have any print object or print methods. You cannot access output devices from JavaScript. The only exception is that you can call the window.print() method in the browser to print the content of the current window.
