@@ -27,6 +27,26 @@ You can declare several variables on one single statement separating them with c
 ```js
 var person = "John Doe", carName = "Volvo", price = 200;
 ```
+<br>
+
+### **Scope**
+
+Variables declared with `var`, `let` and `const` inside a function have function scope. However, `var` cannot have a block scope.
+
+#### **Global**
+
+Apart from variables declared globally, variables that were initialized without being declared become global automatically. However, that doesn't happen on *strict mode*.
+
+```js
+myFunction();
+
+// code here can use carName
+
+function myFunction() {
+  carName = "Volvo";
+}
+```
+<br>
 
 ### **Primitives vs Objects**
 
@@ -41,8 +61,20 @@ var carName;
 ```
 <br>
 
-### Const. Not Real Constants
-WHen we use to declare we are not defining a constant value but a constant reference to a value. This explains why we cannot change primitive values but we can change properties of const objects.
+### `const` Not Real Constants
+
+Objects (including arrays and functions) assigned to a variable using const are still mutable. Using the const declaration only prevents reassignment of the variable identifier.
+
+```js
+const s = [5, 6, 7];
+s = [1, 2, 3]; // throws error, trying to assign a const
+s[2] = 45; // works just as it would with an array declared with var or let
+console.log(s); // returns [5, 6, 45]
+```
+
+When we use to declare we are not defining a constant value but a constant reference to a value. This explains why we cannot change primitive values but we can change properties of const objects.
+
+<br>
 
 ### **String**
 Strings in JavaScript are sequences of Unicode characters. More accurately, they are sequences of UTF-16 code units; each code unit is represented by a 16-bit number. Each Unicode character is represented by either 1 or 2 code units.
@@ -118,7 +150,7 @@ let firstNameLength2 = "Frank".length;
 ```
 <br>
 
-#### **Bracket Notation**. 
+#### **Bracket Notation**
 Gets a character at a specific index within a string.
 ```js
 var firstName = "Charles";
@@ -131,6 +163,28 @@ var myStr = "Bob";
 myStr = "Job";
 ```
 <br>
+
+#### **`Template Literals`**
+
+Allow you to create multi-line strings and to use string interpolation features to create strings.
+```js
+const person = {
+  name: "Zodiac Hasbro",
+  age: 56
+};
+
+// Template literal with multi-line and string interpolation
+const greeting = `Hello, my name is ${person.name}!
+I am ${person.age} years old.`;
+
+console.log(greeting); // prints
+// Hello, my name is Zodiac Hasbro!
+// I am 56 years old.
+```
+Several things about the code above:
+- Back sticks (`), not quotes (' or "),
+- The string is multi-line, both in the code and the output. This saves inserting \n within strings. 
+- The ${variable} syntax is a placeholder. Basically, you won't have to use concatenation with the + operator. Similarly, you can include other expressions in your string literal, for example ${a + b}.
 
 #### **String Methods**
 All string methods return a new string and don't modify the original.
@@ -654,7 +708,49 @@ console.log(isArray(arr));
 console.log(arr instanceof Array);
 ```
 
+<br>
 
+### *Destructuring an array:*
+```js
+const [a, b] = [1, 2, 3, 4, 5, 6];
+console.log(a, b); // 1, 2
+```
+The variable a is assigned the first value of the array, and b is assigned the second value of the array. We can also access the value at any index in an array with destructuring by using commas to reach the desired index:
+```js
+const [a, b,,, c] = [1, 2, 3, 4, 5, 6];
+console.log(a, b, c); // 1, 2, 5
+```
+It differs from the the spread operator in that the spread operator unpacks all contents of an array into a comma-separated list. Consequently, you cannot pick or choose which elements you want to assign to variables.
+
+With destructuring you don't need a third variable to swab values between two:
+```js
+let a = 8, b = 6;
+[a, b] = [b, a];
+// Now a = 6 and b = 8
+```
+
+Destructuring Assignment can be used *with the Rest Parameter to Reassign Array Elements*. In some situations involving array destructuring, we might want to collect the rest of the elements into a separate array.
+
+The result is similar to `Array.prototype.slice()`, as shown below:
+```js
+const [a, b, ...arr] = [1, 2, 3, 4, 5, 7];
+console.log(a, b); // 1, 2
+console.log(arr); // [3, 4, 5, 7]
+```
+Variables `a` and `b` take the first and second values from the array. After that, because of the rest parameter's presence, `arr` gets the rest of the values in the form of an array. The rest element only works correctly as the last variable in the list. As in, you cannot use the rest parameter to catch a subarray that leaves out the last element of the original array.
+
+Destructure the object in a function argument:
+```js
+const profileUpdate = ({ name, age, nationality, location }) => {
+  /* do something with these fields */
+}
+
+//Similar to the following if you were to pass profileData as argument to the function above
+const profileUpdate = (profileData) => {
+  const { name, age, nationality, location } = profileData;
+  // do something with these variables
+}
+```
 <br>
 
 ### **Global vs local variables.** 
@@ -793,12 +889,167 @@ document.getElementById("demo").innerHTML = toCelsius(77);
 // This returns the function object 
 document.getElementById("demo").innerHTML = toCelsius;
 ```
+<br>
 
+### **`Arrow Functions`**
+```js
+const myFunc = function() {
+  const myVar = "value";
+  return myVar;
+}
+```
+It's equal to:
+```js
+const myFunc = () => {
+  const myVar = "value";
+  return myVar;
+}
+```
+When there is no function body, and only a return value:
+```js
+const myFunc = () => "value";
+```
+if an arrow function has a single parameter, the parentheses enclosing the parameter may be omitted.
+```js
+const doubler = item => item * 2;
+```
+<br>
+
+### **`Concise Declarative Functions`**
+
+You can remove the function keyword and colon altogether when defining functions in objects. Here's an example of this syntax:
+```js
+const person = {
+  name: "Taylor",
+  sayHello() {
+    return `Hello! My name is ${this.name}.`;
+  }
+};
+
+///instead of:
+const person = {
+  name: "Taylor",
+  sayHello: function() {
+    return `Hello! My name is ${this.name}.`;
+  }
+};
+```
+<br>
+
+### **`Default Parameters`**
+```js
+const greeting = (name = "Anonymous") => "Hello " + name;
+
+console.log(greeting("John")); // Hello John
+console.log(greeting()); // Hello Anonymous
+```
+The default parameter kicks in when the argument is not specified (it is undefined)
+<br>
+
+### **`Rest Parameter`**
+
+You can create functions that take a variable number of arguments. These arguments are stored in an array that can be accessed later from inside the function.
+```js
+const sum = (...args) => {
+  return args.reduce((a, b) => a + b, 0);
+}
+
+console.log(sum(1,2,3,4));
+```
+<br>
+
+### **`Spread Operator`**
+
+Allows us to expand arrays and other expressions in places where multiple parameters or elements are expected.
+```js
+const arr = [6, 89, 3, 45];
+const maximus = Math.max(...arr); /*instead of
+var maximus = Math.max.apply(null, arr);*/
+// returns 89
+```
+
+`...arr` returns an unpacked array. In other words, it spreads the array. However, the spread operator only works in-place, like in an argument to a function or in an array literal. In other words, allows an iterable such as an array expression or string to be expanded in places where zero or more arguments (for function calls) or elements (for array literals) are expected, or an object expression to be expanded in places where zero or more key-value pairs (for object literals) are expected.
+
+<br>
+
+### **`Export to Share a Code Block`**
+If you want to use this a function or variable in several different JavaScript files you first need to export it.
+```js
+export const add = (x, y) => {
+  return x + y;
+}
+// or
+const add = (x, y) => {
+  return x + y;
+}
+
+export { add };
+```
+<br> 
+
+#### *`export default`*. 
+Usually you will use this syntax if only one value is being exported from a file. It is also used to create a fallback value for a file or module.
+```js
+// named function
+export default function add(x, y) {
+  return x + y;
+}
+
+// anonymous function
+export default function(x, y) {
+  return x + y;
+}
+```
+Since `export default` is used to declare a fallback value for a module or file, you can only have one value be a default export in each module or file. Additionally, you cannot use `export default` with `var, let, or const`.
+
+#### **`Using import`**
+`import` allows you to choose which parts of a file or module to load. 
+```js
+import { add } from './math_functions.js';
+//Here, import will find add in math_functions.js, import just that function for you to use, and ignore the rest.
+```
+ The ./ tells the import to look for the math_functions.js file in the same folder as the current file. The relative file path (./) and file extension (.js) are required when using import in this way.
+
+You can import more than one item from the file by adding them in the import statement like this:
+```js
+import { add, subtract } from './math_functions.js';
+```
+
+IF you wish to import all of its contents into the current file. This can be done with the `import * as` syntax.
+```js
+import * as myMathModule from "./math_functions.js";
+
+myMathModule.add(2,3);
+myMathModule.subtract(5,3);
+```
+The above import statement will create an object called myMathModule. This is just a variable name, you can name it anything. The object will contain all of the exports from math_functions.js in it, so you can access the functions like you would any other object property.
+
+#### *`Import a Default Export`*
+```js
+import add from "./math_functions.js";
+```
+The syntax differs in one key place. The imported value, `add`, is not surrounded by curly braces `({})`. `add` here is simply a variable name for whatever the default export of the `math_functions.js` file is. You can use any name here when importing a default.
+
+### **`Callback Functions`**
+
+Callbacks make sure that a function is not going to run before a task is completed but will run right after the task has completed. It helps us develop asynchronous JavaScript code and keeps us safe from problems and errors. A callback function is to pass it as a parameter to another function, and then to call it back right after something has happened or some task is completed.
+```js
+function myDisplayer(some) {
+  document.getElementById("demo").innerHTML = some;
+}
+
+function myCalculator(num1, num2, myCallback) {
+  let sum = num1 + num2;
+  myCallback(sum);
+}
+
+myCalculator(5, 5, myDisplayer);
+```
 <br>
 
 ### Math Class
 
-### Function for Random Integer Numbers
+#### Function for Random Integer Numbers
 
 To generate a random integer:
 ```js
@@ -872,6 +1123,18 @@ var myBreed = dogs[myDog];
 console.log(myBreed); // "Doberman"
 ```
 <br>
+
+## **`Concise Object Literal Declarations Using Object Property Shorthand`**. 
+```js
+const getMousePosition = (x, y) => ({
+  x: x,
+  y: y
+});
+
+//equals
+const getMousePosition = (x, y) => ({ x, y });
+```
+Syntactic sugar to eliminate the redundancy of having to write `x: x`. You can simply write x once, and it will be converted tox: x (or something equivalent) under the hood. 
 
 ### **Update**
 You can update its properties at any time just like you would update any other variable. You can use either dot or bracket notation to update.
@@ -954,6 +1217,47 @@ ourStorage.cabinet["top drawer"].folder2;  // "secrets"
 ourStorage.desk.drawer; // "stapler"
 ```
 <br>
+
+### **Object.freeze()**
+Prevents object mutations. You can no longer add, update, or delete properties from it. Any attempt at changing the object will be rejected without an error.
+```js
+let obj = {
+  name:"FreeCodeCamp",
+  review:"Awesome"
+};
+Object.freeze(obj);
+obj.review = "bad"; // will be ignored. Mutation not allowed
+obj.newProp = "Test"; // will be ignored. Mutation not allowed
+console.log(obj); 
+// { name: "FreeCodeCamp", review:"Awesome"}
+```
+<br>
+
+### **`Destructuring assignment`**
+
+Assigns values taken directly from an object. 
+```js
+onst user = { name: 'John Doe', age: 34 };
+
+const { name, age } = user;
+// name = 'John Doe', age = 34
+```
+Here, the `name` and `age` variables will be created and assigned the values of their respective values from the `user` object.
+
+You can give it a new name when assigning by placing the new name after colon:
+```js
+const { name: userName, age: userAge } = user;
+// userName = 'John Doe', userAge = 34
+```
+
+#### *Destructuring nested objects:*
+```js
+const { johnDoe: { age, email }} = user;
+//variables with different names:
+const { johnDoe: { age: userAge, email: userEmail }} = user;
+```
+<br>
+
 
 ## **Loops**
 
@@ -1096,335 +1400,11 @@ JS has an error object whose properties are:
 | TypeError	| A type error has occurred |
 | URIError	| An error in encodeURI() has occurred |
 
-
-
 <br>
 
-## **ES6**
+# **Asynchronous Developing**
 
-### **`Const`**
-
-Objects (including arrays and functions) assigned to a variable using const are still mutable. Using the const declaration only prevents reassignment of the variable identifier.
-
-```js
-const s = [5, 6, 7];
-s = [1, 2, 3]; // throws error, trying to assign a const
-s[2] = 45; // works just as it would with an array declared with var or let
-console.log(s); // returns [5, 6, 45]
-```
-<br>
-
-### **Object.freeze()**
-Prevents object mutations. You can no longer add, update, or delete properties from it. Any attempt at changing the object will be rejected without an error.
-```js
-let obj = {
-  name:"FreeCodeCamp",
-  review:"Awesome"
-};
-Object.freeze(obj);
-obj.review = "bad"; // will be ignored. Mutation not allowed
-obj.newProp = "Test"; // will be ignored. Mutation not allowed
-console.log(obj); 
-// { name: "FreeCodeCamp", review:"Awesome"}
-```
-<br>
-
-### **`Arrow Functions`**
-```js
-const myFunc = function() {
-  const myVar = "value";
-  return myVar;
-}
-```
-It's equal to:
-```js
-const myFunc = () => {
-  const myVar = "value";
-  return myVar;
-}
-```
-When there is no function body, and only a return value:
-```js
-const myFunc = () => "value";
-```
-if an arrow function has a single parameter, the parentheses enclosing the parameter may be omitted.
-```js
-const doubler = item => item * 2;
-```
-<br>
-
-### **`Default Parameters`**
-```js
-const greeting = (name = "Anonymous") => "Hello " + name;
-
-console.log(greeting("John")); // Hello John
-console.log(greeting()); // Hello Anonymous
-```
-The default parameter kicks in when the argument is not specified (it is undefined)
-<br>
-
-### **`Rest Parameter`**
-
-You can create functions that take a variable number of arguments. These arguments are stored in an array that can be accessed later from inside the function.
-```js
-const sum = (...args) => {
-  return args.reduce((a, b) => a + b, 0);
-}
-
-console.log(sum(1,2,3,4));
-```
-<br>
-
-### **`Spread Operator`**
-
-Allows us to expand arrays and other expressions in places where multiple parameters or elements are expected.
-```js
-const arr = [6, 89, 3, 45];
-const maximus = Math.max(...arr); /*instead of
-var maximus = Math.max.apply(null, arr);*/
-// returns 89
-```
-
-`...arr` returns an unpacked array. In other words, it spreads the array. However, the spread operator only works in-place, like in an argument to a function or in an array literal. In other words, allows an iterable such as an array expression or string to be expanded in places where zero or more arguments (for function calls) or elements (for array literals) are expected, or an object expression to be expanded in places where zero or more key-value pairs (for object literals) are expected.
-
-
-### **`Destructuring assignment`**
-
-Assigns values taken directly from an object. 
-```js
-onst user = { name: 'John Doe', age: 34 };
-
-const { name, age } = user;
-// name = 'John Doe', age = 34
-```
-Here, the `name` and `age` variables will be created and assigned the values of their respective values from the `user` object.
-
-You can give it a new name when assigning by placing the new name after colon:
-```js
-const { name: userName, age: userAge } = user;
-// userName = 'John Doe', userAge = 34
-```
-
-#### *Destructuring nested objects:*
-```js
-const { johnDoe: { age, email }} = user;
-//variables with different names:
-const { johnDoe: { age: userAge, email: userEmail }} = user;
-```
-<br>
-
-#### *Destructuring an array:*
-```js
-const [a, b] = [1, 2, 3, 4, 5, 6];
-console.log(a, b); // 1, 2
-```
-The variable a is assigned the first value of the array, and b is assigned the second value of the array. We can also access the value at any index in an array with destructuring by using commas to reach the desired index:
-```js
-const [a, b,,, c] = [1, 2, 3, 4, 5, 6];
-console.log(a, b, c); // 1, 2, 5
-```
-It differs from the the spread operator in that the spread operator unpacks all contents of an array into a comma-separated list. Consequently, you cannot pick or choose which elements you want to assign to variables.
-
-With destructuring you don't need a third variable to swab values between two:
-```js
-let a = 8, b = 6;
-[a, b] = [b, a];
-// Now a = 6 and b = 8
-```
-
-Destructuring Assignment can be used *with the Rest Parameter to Reassign Array Elements*. In some situations involving array destructuring, we might want to collect the rest of the elements into a separate array.
-
-The result is similar to `Array.prototype.slice()`, as shown below:
-```js
-const [a, b, ...arr] = [1, 2, 3, 4, 5, 7];
-console.log(a, b); // 1, 2
-console.log(arr); // [3, 4, 5, 7]
-```
-Variables `a` and `b` take the first and second values from the array. After that, because of the rest parameter's presence, `arr` gets the rest of the values in the form of an array. The rest element only works correctly as the last variable in the list. As in, you cannot use the rest parameter to catch a subarray that leaves out the last element of the original array.
-
-Destructure the object in a function argument:
-```js
-const profileUpdate = ({ name, age, nationality, location }) => {
-  /* do something with these fields */
-}
-
-//Similar to the following if you were to pass profileData as argument to the function above
-const profileUpdate = (profileData) => {
-  const { name, age, nationality, location } = profileData;
-  // do something with these variables
-}
-```
-<br>
-
-### **`Template Literals`**
-Allow you to create multi-line strings and to use string interpolation features to create strings.
-```js
-const person = {
-  name: "Zodiac Hasbro",
-  age: 56
-};
-
-// Template literal with multi-line and string interpolation
-const greeting = `Hello, my name is ${person.name}!
-I am ${person.age} years old.`;
-
-console.log(greeting); // prints
-// Hello, my name is Zodiac Hasbro!
-// I am 56 years old.
-```
-Several things about the code above:
-- Backticks (`), not quotes (' or "),
-- The string is multi-line, both in the code and the output. This saves inserting \n within strings. 
-- The ${variable} syntax is a placeholder. Basically, you won't have to use concatenation with the + operator. Similarly, you can include other expressions in your string literal, for example ${a + b}.
-
-### **`Concise Object Literal Declarations Using Object Property Shorthand`**. 
-```js
-const getMousePosition = (x, y) => ({
-  x: x,
-  y: y
-});
-
-//equals
-const getMousePosition = (x, y) => ({ x, y });
-```
-Syntactic sugar to eliminate the redundancy of having to write `x: x`. You can simply write x once, and it will be converted tox: x (or something equivalent) under the hood. 
-
-#### **`Concise Declarative Functions`**
-
-You can remove the function keyword and colon altogether when defining functions in objects. Here's an example of this syntax:
-```js
-const person = {
-  name: "Taylor",
-  sayHello() {
-    return `Hello! My name is ${this.name}.`;
-  }
-};
-
-///instead of:
-const person = {
-  name: "Taylor",
-  sayHello: function() {
-    return `Hello! My name is ${this.name}.`;
-  }
-};
-```
-<br>
-
-### **`Syntax to Define a Constructor Function`**
-The class syntax:
-```js
-class SpaceShuttle {
-  constructor(targetPlanet) {
-    this.targetPlanet = targetPlanet;
-  }
-}
-const zeus = new SpaceShuttle('Jupiter');
-```
-It should be noted that the class keyword declares a new function, to which a constructor is added. This constructor is invoked when new is called to create a new object.
-- UpperCamelCase should be used by convention for ES6 class names, as in `SpaceShuttle` used above.
-- The constructor method is a special method for creating and initializing an object created with a class.
-
-### **`Getters and Setters`**
-
-Getter functions are meant to simply return (get) the value of an object's private variable. Setter functions are meant to modify (set) the value of an object's private variable based on the value passed into the setter function. 
-```js
-class Book {
-  constructor(author) {
-    this._author = author;
-    //It is convention to precede the name of a private variable with an underscore (_). However, the practice itself does not make a variable private.
-  }
-  // getter
-  get writer() {
-    return this._author;
-  }
-  // setter
-  set writer(updatedAuthor) {
-    this._author = updatedAuthor;
-  }
-}
-const novel = new Book('anonymous');
-console.log(novel.writer);  // anonymous
-novel.writer = 'newAuthor';
-console.log(novel.writer);  // newAuthor
-```
-<br>
-
-### **`Export to Share a Code Block`**
-If you want to use this a function or variable in several different JavaScript files you first need to export it.
-```js
-export const add = (x, y) => {
-  return x + y;
-}
-// or
-const add = (x, y) => {
-  return x + y;
-}
-
-export { add };
-```
-<br> 
-
-#### *`export default`*. 
-Usually you will use this syntax if only one value is being exported from a file. It is also used to create a fallback value for a file or module.
-```js
-// named function
-export default function add(x, y) {
-  return x + y;
-}
-
-// anonymous function
-export default function(x, y) {
-  return x + y;
-}
-```
-Since `export default` is used to declare a fallback value for a module or file, you can only have one value be a default export in each module or file. Additionally, you cannot use `export default` with `var, let, or const`.
-
-#### **`Using import`**
-`import` allows you to choose which parts of a file or module to load. 
-```js
-import { add } from './math_functions.js';
-//Here, import will find add in math_functions.js, import just that function for you to use, and ignore the rest.
-```
- The ./ tells the import to look for the math_functions.js file in the same folder as the current file. The relative file path (./) and file extension (.js) are required when using import in this way.
-
-You can import more than one item from the file by adding them in the import statement like this:
-```js
-import { add, subtract } from './math_functions.js';
-```
-
-IF you wish to import all of its contents into the current file. This can be done with the `import * as` syntax.
-```js
-import * as myMathModule from "./math_functions.js";
-
-myMathModule.add(2,3);
-myMathModule.subtract(5,3);
-```
-The above import statement will create an object called myMathModule. This is just a variable name, you can name it anything. The object will contain all of the exports from math_functions.js in it, so you can access the functions like you would any other object property.
-
-#### *`Import a Default Export`*
-```js
-import add from "./math_functions.js";
-```
-The syntax differs in one key place. The imported value, `add`, is not surrounded by curly braces `({})`. `add` here is simply a variable name for whatever the default export of the `math_functions.js` file is. You can use any name here when importing a default.
-
-### **`Callback Functions`**
-
-Callbacks make sure that a function is not going to run before a task is completed but will run right after the task has completed. It helps us develop asynchronous JavaScript code and keeps us safe from problems and errors. A callback function is to pass it as a parameter to another function, and then to call it back right after something has happened or some task is completed.
-```js
-function myDisplayer(some) {
-  document.getElementById("demo").innerHTML = some;
-}
-
-function myCalculator(num1, num2, myCallback) {
-  let sum = num1 + num2;
-  myCallback(sum);
-}
-
-myCalculator(5, 5, myDisplayer);
-```
-<br>
-
-### **`Promises`**
+## **`Promises`**
 
 A promise in JavaScript is exactly what it sounds like - you use it to make a promise to do something, usually asynchronously. When the task completes, you either fulfill your promise or fail to do so. Promise is a constructor function, so you need to use the new keyword to create one. It takes a function, as its argument, with two parameters - resolve and reject. These are methods used to determine the outcome of the promise.
 ```js
@@ -1465,7 +1445,7 @@ myPromise.then(
 > *SEE JS_Practice, Line 46*
 <br>
 
-#### **`Rejected Promise with catch`**
+### **`Rejected Promise with catch`**
 `catch` is the method used when your promise has been rejected. It is executed immediately after a promise's reject method is called. It is an alternative to the second parameter of `then`.
 ```js
 myPromise.catch(error => {
@@ -1474,25 +1454,46 @@ myPromise.catch(error => {
 ```
 `error` is the argument passed in to the `reject` method.
 
-### **Scope**
-
-Variables declared with `var`, `let` and `const` inside a function have function scope. However, `var` cannot have a block scope.
-
-#### **Global**
-
-Apart from variables declared globally, variables that were initialized without being declared become global automatically. However, that doesn't happen on *strict mode*.
-
+---
+# **OOP**
+## **`Syntax to Define a Constructor Function`**
+The class syntax:
 ```js
-myFunction();
-
-// code here can use carName
-
-function myFunction() {
-  carName = "Volvo";
+class SpaceShuttle {
+  constructor(targetPlanet) {
+    this.targetPlanet = targetPlanet;
+  }
 }
+const zeus = new SpaceShuttle('Jupiter');
+```
+It should be noted that the class keyword declares a new function, to which a constructor is added. This constructor is invoked when new is called to create a new object.
+- UpperCamelCase should be used by convention for ES6 class names, as in `SpaceShuttle` used above.
+- The constructor method is a special method for creating and initializing an object created with a class.
+
+## **`Getters and Setters`**
+
+Getter functions are meant to simply return (get) the value of an object's private variable. Setter functions are meant to modify (set) the value of an object's private variable based on the value passed into the setter function. 
+```js
+class Book {
+  constructor(author) {
+    this._author = author;
+    //It is convention to precede the name of a private variable with an underscore (_). However, the practice itself does not make a variable private.
+  }
+  // getter
+  get writer() {
+    return this._author;
+  }
+  // setter
+  set writer(updatedAuthor) {
+    this._author = updatedAuthor;
+  }
+}
+const novel = new Book('anonymous');
+console.log(novel.writer);  // anonymous
+novel.writer = 'newAuthor';
+console.log(novel.writer);  // newAuthor
 ```
 <br>
-
 
 ---
 # **Conventions and Practices**
@@ -1587,8 +1588,6 @@ switch (new Date().getDay()) {
 }
 ```
 <br>
-
-
 
 ## **Key = Value**
 Si la llave y el valor de una objeto en javascript es una misma variable, para usarlo puedes:
