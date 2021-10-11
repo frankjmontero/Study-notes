@@ -301,3 +301,11 @@ Only *MP4*, *WebM*, and *Ogg* video are supported by the HTML standard.
 
 ##  **<Scripts>**
 Placing scripts at the bottom of the `<body>` element improves the display speed, because script interpretation slows down the display.
+
+## **Editing Website Live on Browser**
+
+```js
+document.designMode = 'on'
+//edit page then
+document.designMode = 'off'
+```

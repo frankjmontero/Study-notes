@@ -7,7 +7,7 @@ React is a tool for building UI components.
 # **Starting with React Apps**
 
 1- Make sure you have node installed. Run `node -v` to confirm.
-2- Run `npx create-react-app .`. `npx` is similar to `npm` but instead of downloading like `npm` it will execute de the code command that follows it. The `.` is to use the current directory.
+2- Run `npx create-react-app .`. `npx` is similar to `npm` but instead of downloading like `npm` it will execute the code command that follows it. The `.` is to use the current directory.
 
 ## **Considerations**
 
@@ -132,9 +132,46 @@ function withdraw(account, amount) {
 
 React is pretty flexible but it has a single strict rule: ***All React components must act like pure functions with respect to their props.***
 
+## **Functional Components**
+
+## **Class Components**
+
+We mainly use class components when we need to access the specialized methods
+
 # **State and Props**
 
 `State` are properties intrinsic to the component. It will cause the component to re-render. `Props` are properties that are passed down to the component from the parent.
+
+The states are considered private to each component.
+
+If we want to obtain data from multiple children components or we want them to communicate then declare the shared state in the parent component and pass that state as a prop to the children.
+
+## **Typechecking `PropTypes`**
+
+You can set the types of your props and enforced them to be passed down when calling a component.
+
+```js
+import PropTypes from 'prop-types';
+
+const Foo = ({name}) => {
+  return (
+    <h1>This is your {name}</h1>
+  )
+}
+
+Foo.propTypes = {
+  name: PropTypes.string.isRequired
+}
+```
+Using `isRequired` we make providing a prop *name* to be mandatory. It's optional. 
+
+# **Hooks**
+
+Hooks are the way function components are able to access state and side-effects in react like we do with class components.
+
+## **`setState`**
+
+If setState if called several times
 
 ___
 # **Content on Videos**

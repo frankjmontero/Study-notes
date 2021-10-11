@@ -50,7 +50,13 @@ function myFunction() {
 
 ### **Primitives vs Objects**
 
-All primitives in JS (`'Hola'`, `3.14`, `true`, etc) are immutable. 
+Primitives values are values with no properties or methods. Primitives data types hold primitive values. All primitives values in JS (`'Hola'`, `3.14`, `true`, etc) are hardcoded therefore immutable. 
+
+#### Primitives data types
+string, number, boolean, null, undefined
+
+#### Object types
+Dates are always objects, Maths, Regular expressions, Arrays, Functions and Objects. Booleans, Numbers and String can be objects (if defined with the new keyword). All *values* that are not primitives.
 
 ### Re-Declaring JavaScript Variables
 If you re-declare a JavaScript variable, it will not lose its value.
@@ -778,7 +784,7 @@ A variable without a value is undefined. The type is also undefined. `null` is "
 
 #### Considerations
 - Emptying. `undefined` can be used to empty variables and objects in both cases value and type will be undefined. `null` can empty objects and the types continues to be object.
-- Difference. `undefined` and `null` are similar in value but different in type:
+- Difference. `undefined` and `null` **are similar in value but different in type**:
 ```js
 typeof undefined           // undefined
 typeof null                // object
@@ -1088,6 +1094,12 @@ const anotherObject = {
 ```
 However, if your object has any non-string properties, JavaScript will automatically typecast them as strings.
 
+- **Object method**: is an object element that has an function definition.
+
+### **Initializer Notation**
+
+Objects can be initialized using `new Object` or `Object.create()`. Using brackets as we did before is called **literal notation**(*initializer notation*).
+
 ### **Dot notation**
 
 ```js
@@ -1124,17 +1136,65 @@ console.log(myBreed); // "Doberman"
 ```
 <br>
 
-## **`Concise Object Literal Declarations Using Object Property Shorthand`**. 
+Objects can be thought of as a key/value storage, like a dictionary. If you have tabular data, you can use an object to "lookup" values rather than a switch statement or an if/else chain. This is most useful when you know that your input data is limited to a certain range.
+
 ```js
+const alpha = {
+  1:"Z",
+  2:"Y",
+  3:"X",
+  4:"W",
+  ...
+  24:"C",
+  25:"B",
+  26:"A"
+};
+alpha[2]; // "Y"
+alpha[24]; // "C"
+
+var value = 2;
+alpha[value]; // "Y"
+```
+<br>
+
+### **`Concise Object Literal Declarations Using Object Property Shorthand`**. 
+```js
+const coordinates = {
+  x: x,
+  y: y
+}
+
+//equals
+const coordinates = {x, y}
+```
+Syntactic sugar to eliminate the redundancy of having to write `x: x`. You can simply write x once, and it will be converted to x: x (or something equivalent) under the hood. 
+
+Other examples:
+
+```js
+//Method names
+const tv = {
+  turnOn() {return 'Turned On'}
+}
+//Syntax: property(parameters) {}
+
+// Functions expressions
 const getMousePosition = (x, y) => ({
   x: x,
   y: y
 });
-
 //equals
 const getMousePosition = (x, y) => ({ x, y });
+
+//Computed property name
+const prop = 'name';
+
+const customer = {
+  [prop] = 'Luis',
+  ['Maiden ' + prop] = 'Santana
+}
 ```
-Syntactic sugar to eliminate the redundancy of having to write `x: x`. You can simply write x once, and it will be converted tox: x (or something equivalent) under the hood. 
+<br>
 
 ### **Update**
 You can update its properties at any time just like you would update any other variable. You can use either dot or bracket notation to update.
@@ -1165,26 +1225,7 @@ delete ourDog.bark;
 ```
 <br>
 
-Objects can be thought of as a key/value storage, like a dictionary. If you have tabular data, you can use an object to "lookup" values rather than a switch statement or an if/else chain. This is most useful when you know that your input data is limited to a certain range.
-
-```js
-const alpha = {
-  1:"Z",
-  2:"Y",
-  3:"X",
-  4:"W",
-  ...
-  24:"C",
-  25:"B",
-  26:"A"
-};
-alpha[2]; // "Y"
-alpha[24]; // "C"
-
-var value = 2;
-alpha[value]; // "Y"
-```
-<br>
+When using delete on inherit properties of an object you won't affect its prototype but if you delete on a prototype the change will reflect on all objects that inherited from it. 
 
 ### **`.hasOwnProperty()`** 
 ```js
@@ -1218,7 +1259,15 @@ ourStorage.desk.drawer; // "stapler"
 ```
 <br>
 
-### **Object.freeze()**
+### **Properties attributes**
+
+Objects properties have name, values and attributes. The attributes define things like the access levels of the properties. Some of them are:
+
+- Enumerable
+- Configurable
+- Writable
+
+#### **Object.freeze()**
 Prevents object mutations. You can no longer add, update, or delete properties from it. Any attempt at changing the object will be rejected without an error.
 ```js
 let obj = {
@@ -1237,7 +1286,7 @@ console.log(obj);
 
 Assigns values taken directly from an object. 
 ```js
-onst user = { name: 'John Doe', age: 34 };
+const user = { name: 'John Doe', age: 34 };
 
 const { name, age } = user;
 // name = 'John Doe', age = 34
@@ -1454,6 +1503,11 @@ myPromise.catch(error => {
 ```
 `error` is the argument passed in to the `reject` method.
 
+##  **Await**
+
+await no causa ningún error nunca. Solo que si no es válido su uso, no compila. Pero una vez corriendo, solo es ignorado, etc.
+`await` never causes an error. If it's use is not valid it doesn't compile and at runtime is ignored.
+
 ---
 # **OOP**
 ## **`Syntax to Define a Constructor Function`**
@@ -1469,6 +1523,7 @@ const zeus = new SpaceShuttle('Jupiter');
 It should be noted that the class keyword declares a new function, to which a constructor is added. This constructor is invoked when new is called to create a new object.
 - UpperCamelCase should be used by convention for ES6 class names, as in `SpaceShuttle` used above.
 - The constructor method is a special method for creating and initializing an object created with a class.
+- To add a property to a constructor you must add it to the constructor function, you cannot do this: `SpaceShuttle.departure = 'Earth';`
 
 ## **`Getters and Setters`**
 
@@ -1494,6 +1549,60 @@ novel.writer = 'newAuthor';
 console.log(novel.writer);  // newAuthor
 ```
 <br>
+
+Notice that you don't access the getter as a called function but rather as a property with the return value.
+
+### **`Object.defineProperty()`**
+
+Can also define properties:
+
+```js
+const obj = {counter : 0};
+
+Object.defineProperty(obj, "reset", {
+  get : function () {this.counter = 0;}
+});
+Object.defineProperty(obj, "increment", {
+  get : function () {this.counter++;}
+});
+Object.defineProperty(obj, "add", {
+  set : function (value) {this.counter += value;}
+});
+```
+<br>
+
+### **`prototype` Property**
+
+Another way to for adding properties to an object's constructor is using its prototype property:
+
+```js
+fooObj.prototype.anotherProp = 'Property Value';
+```
+<br>
+
+### **Iterators and Iterables**
+
+**Iterators** are objects that follow the *iterator protocol*. Iterators implement the **next()** method that return an object with two properties: `value` and `done`.
+
+```js
+function countToTen() {
+  let count = 0;
+  return {
+    next: function() {
+      count++;
+      return {value:count, done:false}
+    }
+  }
+}
+
+const counter = countToTen();
+counter.next();
+counter.next();
+
+// Each time next() is called `count` is incremented by one
+```
+
+**Iterables** object that has the Symbol.iterator property which is a function definition that sets the way we'll be iterating. When a personal function is not supplied the default behavior of Symbol.iterator is to iterate one by one.
 
 ---
 # **Conventions and Practices**
@@ -1535,12 +1644,19 @@ car = "Fiat";      // Not possible
 ---
 # **Good To Know**
 
+## **`JSON.stringify(0)`**
+
+When stringifying a function cover the function to string first since *stringify()* does not convert functions to string. 
+
+```js
+const animal = {
+  type: 'mammal';
+
+};
+```
 
 ## **`localStorage`**
 Si yo estoy en Facebook y abro la consola y agrego algo así: `'localStorage.myValFromFB = 'From facebook' `, y luego en otra tab entro a Youtube, abro la consola y accedo a `localStorage.myValFromFB`, por seguridad no se puede. Las webs ponen información como login tokens, información del usuario, información del app, etc., en localStorage. Así que el navegador no puede permitir que otro dominio pueda ver lo que otro dominio guardó ahí. Así que el storage es por dominio. Cada quien tiene su propio storage.
-
-## **THIS AND ARROW FUNCTIONS**
-Las arrow function no tienen un `this` propio como las demás funciones. El `this` es la de su contexto. Los arrows functions no tienen contexto. El engine tiene que salir a buscarlo más arriba.
 
 ## **Functions**
 ### **First Class Functions** 
@@ -1743,11 +1859,81 @@ Aunque doStuff tendrá el contexto del objeto donde this.name es 'Jeremy', aunqu
 ## **`this` Rules**
 
 1. If the `new` keyword is used when calling the function, `this` inside the function is a brand new object.
+```js
+const testThis = {
+  name: 'me',
+  whoAmI: function () {console.log(this.name)},
+}
+new testThis.whoAmI(); // 'undefined'
+```
 2. If `apply`, `call`, or `bind` are used to call/create a function, `this` inside the function is the object that is passed in as the argument.
+```js
+function testThis() {
+  const carlosObj = {
+    greet: function () {return this.greeting},
+  };
+  const joseObj = {
+    greeting: 'Hola I am Jose',
+  }
+  console.log(carlosObj.greet.call(joseObj)); // 'Hola I am Jose'
+}
+testThis();
+```
 3. If a function is called as a method, such as `obj.method()`, `this` is the object that the function is a property of.
+```js
+const testThis = {
+  name: 'me',
+  whoAmI: function () {console.log(this.name)},
+}
+testThis.whoAmI(); // 'me'
+```
 4. If a function is invoked as a free function invocation, meaning it was invoked without any of the conditions present above, `this` is the global object. In a browser, it is the `window object`. If in strict mode ('use strict'), this will be `undefined` instead of the global object.
+```js
+console.log(this); // depending on the console that executes it it displays: '{}' , Window{} , {object Window}
+```
 5. If multiple of the above rules apply, the rule that is higher wins and will set the `this` value.
-6. If the function is an arrow function, it ignores all the rules above and receives the `this` value of its surrounding scope at the time it is created.
+6. If the function is an arrow function, it ignores all the rules above and receives the `this` value of its surrounding scope at the time it is created. Las arrow function no tienen un `this` propio como las demás funciones. El `this` es la de su contexto. Los arrows functions no tienen contexto. El engine tiene que salir a buscarlo más arriba
+
+An extra special case:
+```js
+function testThis() {
+  let num = 1;
+  const innerFunc = () => {
+    const num = 2;
+    this.num = 4;
+    console.log(num); // 2
+    console.log(this.num); // 4
+    // this.num is not the constant in innerFunc nor the variable num in his father is a separate object.
+  }
+  innerFunc();
+  console.log(num); // 1
+}
+testThis();
+```
+
+<br>
+
+## **Performance Tips**
+
+- **For Loop**. To speed it up assign the length of the iterable to a variable and loop until that variable. Otherwise `for` will access the length property on each iteration.
+  ```js
+  let l = arr.length;
+  for (let i = 0; i < l; i++) {}
+  ```
+- **DOM**. Access to DOM elements is slow. Assign the element to a variable for several uses.
+  ```js
+  const objElement = document.getElementbyId('sample');
+  objElement.innerHTML = 'test';
+  ```
+- Reduce DOM size. 
+- Save on variables if possible.
+- Avoid loading the JS code prior to the page.
+
+<br>
+
+## **Caching**
+
+In JS Maps are optimized for caching. Maps are 30% more efficient than `{}`.
 
 <br>
 
