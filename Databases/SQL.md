@@ -1,6 +1,5 @@
 _______________________________
-## CODECACADEMY SQL
-___
+# CODECACADEMY SQL
 
 ### **Clauses = commands**. 
 By convention they are written in capital letters.
@@ -162,3 +161,7 @@ LEFT JOIN table2
 ### **Candidate Key**
 
 A column that can uniquely identify a record of data is known as a `Candidate Key`. Tables can have multiple `Candidate Key`'s, each of which could potentially be the `Primary Key`, but there must only be one `Primary Key` per table.
+
+# **SQL vs NoSQL**
+
+![](../Resources/SQLvsNoSQL.png)

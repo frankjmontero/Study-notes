@@ -277,20 +277,6 @@ The computation is called an evaluation.
 
 For example, `5 * 10` evaluates to `50`:
 
-## **MISC Concepts**
-
-### **UUID**
-
-Universally unique identifier is a 128-bit value to identify information. Also known as GUID (Globally Unique Identifier) mostly in microsoft.
-
-### **Cross Site Scripting (XSS)**
-
-An attacker uses a web application to send malicious code via a script. Flaws that allow these attacks to succeed are quite widespread and occur anywhere a web application uses input from a user within the output it generates without validating or encoding it.
-
-### **SQL Injection**
-
-SQL injection is the placement of malicious code in SQL statements, via web page input. SQL injection usually occurs when you ask a user for input, like their username/userid, and instead of a name/id, the user gives you an SQL statement that you will unknowingly run on your database.
-
 <br>
 
 _____
@@ -445,14 +431,14 @@ Interface y API no es lo mismo. Pero sí, el DOM tiene cara de API y expone esa 
 
 ____
 # **Database**
-- **Partionning**:
+- **Partitioning**:
     - *Horizontal*. Has separado en una base de datos una tabla con 100 columnas en varias de menos columnas para normalizar?
     - *Vertical*. Has separado en una base de datos una tabla con millones de records, en varias tablas con menos records, conde puedes elegir separarlas por categoría o lo que quieras. Si quieres separarlas por categoría, de una tabla products puedes hacer 10 tablas electronic_products, etc., y listo. Para que pesen menos.
 
 
 ____
 # **Web Assembly (WASM)**
-High-level single-threaded garbage-collected interpreted or just-in-time compiled prototype-based multi pradigm dinamic langugae with a non blocking event loop concurrency model
+High-level single-threaded garbage-collected interpreted or just-in-time compiled prototype-based multi paradigm dynamic language with a non blocking event loop concurrency model
 
 
 _____
@@ -756,3 +742,35 @@ ____
 
 ## **Chrome tabs resource usage.** 
 Cada tab en Chrome tiene su proprio mundo. Event loop, stack, etc. Hence the amount of resourced it uses.
+
+<br>
+
+_____
+# **MISC Concepts**
+
+## **UUID**
+
+Universally unique identifier is a 128-bit value to identify information. Also known as GUID (Globally Unique Identifier) mostly in microsoft.
+
+## **Cross Site Scripting (XSS)**
+
+An attacker uses a web application to send malicious code via a script. Flaws that allow these attacks to succeed are quite widespread and occur anywhere a web application uses input from a user within the output it generates without validating or encoding it.
+
+## **SQL Injection**
+
+SQL injection is the placement of malicious code in SQL statements, via web page input. SQL injection usually occurs when you ask a user for input, like their username/userId, and instead of a name/id, the user gives you an SQL statement that you will unknowingly run on your database.
+
+## **Depth-First vs Breadth-First Search**
+
+![](./Resources/DFS-VS-BFS.png)
+
+## **Debounce vs Throttle**
+
+![](./Resources/DebounceThrottle.png)
+
+## **Synch vs Async**
+
+![](./Resources/SynchAsynch.png)
+
+## **Comparable** 
+Son un tipo de objetos que entre ellos pueden ser comparables. **Comparator** es un objeto que se encarga de comparar a otros objetos entre ellos.

@@ -3,7 +3,7 @@
 
 1. **Physical Layer.** The devices that interconnect. Including cables and their specifications and the specifications to communicate.
 
-2. **Data Link.** (Network Interface, Network Access Layer). Protocols or common ways to define the signals transmitted by the physiscal layer. Ex.: Ethernet, this standard also covers the protocols to get data to nodes on the same network.
+2. **Data Link.** (Network Interface, Network Access Layer). Protocols or common ways to define the signals transmitted by the physical layer. Ex.: Ethernet, this standard also covers the protocols to get data to nodes on the same network.
 
 3. **Network. (Internet Layer).** Allows communications between networks through routers. Ex. Internet. Its most famous protocol is IP.
 

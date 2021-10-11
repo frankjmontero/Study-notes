@@ -1,6 +1,6 @@
 # Overview
 
-Every 6 month a new version of Java is released but not necessarily considered for long-term support. As of march 2021, Java 11 is the latest oficial lon-term version of Java. 
+Every 6 months a new version of Java is released but not necessarily considered for long-term support. As of march 2021, Java 11 is the latest oficial lon-term version of Java. 
 
 ## **Java Ecosystem**
 
@@ -22,12 +22,11 @@ It has a number of different Java additions.
 
 The code that we write after compiled turns into *bytecode* (Java Class) and read by the JVM (Java Virtual Machine, that emulates the actual CPU and the computer that the software is running on) translates the code into executable code the computer can run.
 
-
 ## **Design**
 
 ### **Class**
 
-A class represents a type of thing or concept that has attributes and behavior. A blueprint or template of an object.
+A class represents a type of thing or concept that has attributes and behaviors. A blueprint or template of an object.
 
 A way to determine the classes we'll use is to describe the interaction between the end user and the system (use cases) and look for nouns. The nouns are typically our classes that have behaviors and data for the application to work correctly.
 
@@ -125,7 +124,17 @@ Web services allow us to expose code to the enterprise for reuse in a controlled
 
 <br>
 
-# **Basics**
+# **Concepts and Syntaxes**
+
+In Java you cannot execute methods on a primitive only its Objects.
+
+## **Constants**
+
+It is customary to make constants public because they cannot be changed and we can access them directly.
+
+```java
+public final double MIN_PRICE = 10;
+```
 
 ## Loops
 
@@ -144,8 +153,142 @@ for (String name: names) {
 - *name* the variable that would hold each value.
 - *String* is the type of the iterable. Any type it may be.
 
+### **`while`**
+
+`while` is *good to use* when:
+- You don't know the amount of times you are going to be looping, 
+- when the conditions can change inside its body 
+- or there are several conditions to evaluate.
+
 ## **Objects**
 
 ### **Stack/Heap**
 
 These are two areas of memory created by the JVM upon its startup. The *stack* stores variables and the *heap* objects.
+
+### **Methods**
+
+The signature of a method is the name of the method and its parameters. Therefore, there can't be two methods with the same signature even if they return a different type.
+
+## **Access Modifiers**
+
+### **Static**
+
+The static modifier implies that the method or variable belong to the class and it's shared by all objects. It is not specific to an object instance. It is a method or variable that does not logically belong to an object but to the class.
+
+## **Error Handling**
+
+## **Exceptions**
+
+An exception is something unexpected that Java doesn't know what to do with it.
+
+You can handle them with `try...catch`.
+
+```java
+int a, b, c;
+
+try{
+  c = a / b;  
+} catch (Exception e) {
+  System.out.println(e.getMessage());
+}
+```
+
+## OOP in Java
+
+Java is what is called a **single class inheritance hierarchy**  because all classes family tree start on the class Object.
+
+The father classes, in Java known as super classes, are more general and hold the common aspects of the child classes. Child classes are more specific and may have different behaviors and properties.
+
+### **Abstract Classes**
+
+If there are members that we want to be always present in child classes but we don't have an actual general implementation that makes sense and we can pass to the children then we can create an `abstract` signature of the member and let each children to handle their particular implementation.
+
+```java
+public abstract class Clothing {
+  public abstract double reimbursement();
+}
+```
+
+A class that implements a abstract method must be abstract as well.
+
+### **Interfaces**
+
+Uses:
+
+- When we have features that are shared between multiple classes for which we cannot use inheritance because they are not related with each other.
+- When we need to use composition. Meaning, add behaviors from multiple classes. Sometimes our classes are more than one thing, therefore we use interfaces because we can implement more than one but we cannot inherit from more than one parent.
+
+They can contain concrete methods only if they are default, private or static. They can contain constants but not variables because they cannot instantiated.
+### **Abstract Classes vs Interfaces**
+
+Although both are similar: they cannot be instantiated and can have methods with or without and implementation. 
+
+They differ in:
+- abstract classes can declare fields that are not static and final, and define public, protected, and private concrete methods. With interfaces, all fields are automatically public, static, and final, and all methods that you declare or define (as default methods) are public.
+- You can extend only one class, whether or not it is abstract, whereas you can implement any number of interfaces. 
+
+# **Good To Know**
+
+## Classes and instances access
+
+Classes are not able to access an instantiated object. The object does have a reference to its class so that JVM can find the code that defines the object and executed. This means that a static member (method or property) cannot access a instance member
+
+```java
+private static int  nextHat;
+private int hatID;
+
+public static void toHat() {
+  hatID = nextHat;
+}
+
+//This will not compile
+```
+
+## **String Pool**
+
+It is a special region in memory that JVM has where String objects created with String literals (*String str = "test"*) are stored. Every time we create a String object JVM looks for it in the pool, returns a reference to that memory address or creates a new spot in the pool if not found. String objects created with *new()* (*String str = new String("test")*) are still stored in the heap. Because of that:
+
+```java
+String one = "test";
+String two = "test";
+String three = new String("test");
+
+System.out.println(one == two); // True
+System.out.println(one == three); // False
+```
+
+## **`.equals()` vs `==`**
+
+- On objects the operator `==` compares references and the method equals() values.
+
+```java
+String one = "test";
+String two = new String("test");
+
+System.out.println(one == three); // False
+System.out.println(one.equals(three); // True
+```
+
+- With `==` the compared aliases should be compatible
+
+```java
+Thread t = new Thread();
+Object o = new Object();
+String s = new String("test");
+
+// Good
+System.out.println(t == o);
+System.out.println(o == s);
+// Again equals compares de values not their references, therefore their types
+System.out.println(t.equals(s));
+
+// Incompatible types error
+System.out.println(t==s);
+```
+
+<br>
+
+## **Builder**
+
+Builder like when you do `Routing route = Routing.builder()` is a special pattern for creating objects similar to but more robust than a constructor.
