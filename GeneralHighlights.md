@@ -544,7 +544,74 @@ HashMap, HashSet, Balanced Tress, Grafos, al bruja, la recursión. Con un par de
 <br>
 
 ______
-# **Browser Console**
+# **Web Debugging**
+
+## Chrome's Dev Tools
+
+- `settings > Workspace`. You can a directory you are working on to edit it directly on dev tools.
+- `settings > Ignore List`. Add scripts whose exceptions you want to be ignored when debugging.
+- `settings > Devices`. The different emulated devices you can test your website on.
+- `settings > Throttling`. You setup latency, upload and download speeds to test your application's behavior.
+
+### **Elements tab**
+
+When you click an element's tag you can see the style applied to it and where did that style came from.
+
+![](./Resources/devTools1.png)
+
+The `computed` tab shows the styles that have been applied.
+
+#### **Styles tab**
+
+- To the right of the filter text box you have different menus one of which is tagged `:hov` that allows to trigger elements states to test what happens. In the sample below applying :hov will turn the unordered list element red:
+
+![](./Resources/devTools2.png)
+
+### **Sources tab**
+
+- Coverage. Click CTRL+Shift+P and type coverage. Reload the page and you will be able to see what code has been used by the webpage as we interact with it.
+
+![](./Resources/devTools3.png)
+
+Here we have no hovered over any of the list elements therefore the color of the bar at that particular CSS code shows it unused.
+
+#### **Breakpoints and code execution**
+
+When a file is opened is opened we can debug it line by line by adding breakpoints.
+
+After the execution is paused you can manually  continue the execution of the file until a particular line:
+
+- Right click on the line you want code to execute to.
+- Click `Continue to here`.
+
+When you have more than one breakpoint the execution stops on each one even after you've clicked the `Resume script execution`. If some reason you don't want to stop again:
+
+- Click and hold the `Resume script execution` button and select the second play icon.
+
+![](./Resources/devTools4.png)
+
+**Restart function execution**
+
+In the Call Stack section go the function you would like to restart, right click it and choose `Restart Frame`
+
+![](./Resources/devTools5.png)
+
+
+#### **Editing and Copying**
+
+- You can double click specific parts of the html code to modify it for right click an element and select `Edit as HTML` to edit a whole html element.
+- When right clicking an element there is an `Copy` sub-menu with different copy options. A couple of useful ones are:
+    - Copy JS Path. This will clipboard the code needed to access that particular element from JS.
+    - Copy styles. Gives you the css code of the html element selected.
+
+## React Dev Tools
+
+### **Tabs**
+
+- **Network**. Loaded Files, sources, ajax code, etc, can be found here.
+
+
+## **Browser Console**
 
 Open: `Ctrl` + `Shift` + `I` || F12 || Right-click > Inspect Element.
 
