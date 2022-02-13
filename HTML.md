@@ -118,10 +118,16 @@ Creates a input box. The placeholder attribute displays text in the input elemen
 <input type="text" placeholder="cat photo URL"> <br>
 
 ## **`form`**
-Allows to build web forms that can submit date to a server. Ex.:
+
+Allows to build web forms that can submit data to a server. Ex.:
 ```html
 <form action="/url-where-you-want-to-submit-form-data"></form>
 ```
+The *input* tag is one of the most common children of *form* elements. The children elements in a *form* tag that hold data **must** have a `name` attribute. Otherwise when submitting the form the data held by the elements missing the name attribute may not be submitted or accepted by a server.
+
+### **`id` vs `name` Attribute**
+
+Both can uniquely identify an element. However the role of the `name` attribute goes beyond that in `form` elements. We can say *id's* are convenient and reliable to use for frontend (JS, CSS) and *name's* by the backend, since this is what the backend receives and processes.
 
 ## **`button`**
 Creates a button that by clicking it will send the data from your form to the URL you specified with your form's action attribute. Ex.:

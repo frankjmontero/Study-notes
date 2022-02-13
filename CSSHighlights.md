@@ -901,9 +901,10 @@ Here's an example of the CSS rules that accomplish this:
 /* Then apply this sr-only class to the table */
 ```
 
-**Note:** The following CSS approaches will NOT do the same thing:
-display: none; or visibility: hidden; hides content for everyone, including screen reader users
-Zero values for pixel sizes, such as width: 0px; height: 0px; removes that element from the flow of your document, meaning screen readers will ignore it.
+> **Note:** The following CSS approaches will NOT do the same thing:
+> - `display: none`, hides the entire element; 
+> - `visibility: hidden`, <u> hides content</u> for everyone, including screen reader users;
+> - Zero values for pixel sizes, such as: `width: 0px` and `height: 0px`, removes that element from the flow of your document, meaning screen readers will ignore it.
 
 Tables in HTML. 
 ```html

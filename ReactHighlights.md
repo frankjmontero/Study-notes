@@ -111,7 +111,7 @@ The above two components are equivalent from React’s point of view. Both types
 
 When React sees an element representing a user-defined component, it passes JSX attributes and children to this component as a single object. We call this object “props”.
 
-    ***Note***: React treats components starting with lowercase letters as DOM tags. For example, <div /> represents an HTML div tag, but <Welcome /> represents a component and requires Welcome to be in scope.
+>***Note***: React treats components starting with lowercase letters as DOM tags. For example, <div /> represents an HTML div tag, but <Welcome /> represents a component and requires Welcome to be in scope.
 
 We recommend naming props from the component’s own point of view rather than the context in which it is being used.
 

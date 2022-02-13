@@ -315,10 +315,10 @@ Some of the useful methods for numbers are:
 
 - **`.toString()`**.
 - **`.toExponential()`**. Work with exponential notation.
-- **`.toFixed(n)`**, n = number of decimals. 
-- **`.toString(n)`**, n = length of a number. 
+- **`.toFixed(n)`**, n = number of decimals.
+- **`.toString(n)`**, n = length of a number.
 - **`.valueOf()`**, returns a number as number. In JS primitives can be numbers or objects.
-- **`.parseFloat()`**. Allows spaces. 
+- **`.parseFloat()`**. Allows spaces.
 
 All number methods can be used on any type of numbers (literals, variables, or expressions):
 
@@ -878,6 +878,8 @@ const profileUpdate = (profileData) => {
 
 ### **Global vs local variables.**
 
+**Global**. In a web page, global variables belong to the window object. Global variables can be used (and changed) by all scripts in the page (and in the window).
+
 It is possible to have both local and global variables with the same name. When you do this, the local variable takes precedence over the global variable.
 
 ```js
@@ -1100,6 +1102,8 @@ The default parameter kicks in when the argument is not specified (it is undefin
 
 ### **`Rest Parameter`**
 
+**The Arguments Object**. JavaScript functions have a built-in object called the arguments object. The argument object contains an array of the arguments used when the function was called (invoked).
+
 You can create functions that take a variable number of arguments. These arguments are stored in an array that can be accessed later from inside the function.
 
 ```js
@@ -1214,6 +1218,48 @@ function myCalculator(num1, num2, myCallback) {
 }
 
 myCalculator(5, 5, myDisplayer);
+```
+
+<br>
+
+### **`call()`**
+
+It allows an object to use a method that belongs to another object passing the object the method will be applied on as argument.
+
+```js
+const person = {
+  fullName: function (city, country) {
+    return this.firstName + ' ' + this.lastName + ',' + city + ',' + country;
+  },
+};
+const person1 = {
+  firstName: 'John',
+  lastName: 'Doe',
+};
+person.fullName.call(person1, 'Oslo', 'Norway');
+// fullName() will execute in person1
+// Any other argument after person1 will be passed to the fullName() method
+```
+
+<br>
+
+### **`apply()`**
+
+The apply() method takes arguments as an array.
+
+The apply() method is very handy if you want to use an array instead of an argument list.
+
+```js
+const person = {
+  fullName: function (city, country) {
+    return this.firstName + ' ' + this.lastName + ',' + city + ',' + country;
+  },
+};
+const person1 = {
+  firstName: 'John',
+  lastName: 'Doe',
+};
+person.fullName.apply(person1, ['Oslo', 'Norway']);
 ```
 
 <br>
@@ -1505,41 +1551,43 @@ const {
   johnDoe: { age: userAge, email: userEmail },
 } = user;
 ```
+
 <br>
 
 ## **Data Structures**
 
 ### **Sets**
 
-A JS set is a collection of unique values. Each value can only occur once in a Set. A Set can hold any value of any data type.  
+A JS set is a collection of unique values. Each value can only occur once in a Set. A Set can hold any value of any data type.
 
 Sets don't have keys. Therefor keys() return the same as values() and entries return [values, values]
 
 ```js
-const letters = new Set(["a","b","c"]);
+const letters = new Set(['a', 'b', 'c']);
 
 // List all entries
 const iterator = letters.entries();
-let text = "";
+let text = '';
 for (const entry of iterator) {
   text += entry;
 }
 
 // Returns a,a b,b c,c
 ```
+
 <br>
 
 ### **Maps**
 
 JS objects vs maps:
 
-| **Object** | **Map** |
-| ----------- | ----------- |
-**Iterable** | Not directly iterable | Directly iterable
-**Size** | Do not have a size property | Have a size property
-**Key Types** | Keys must be Strings (or Symbols) | Keys can be any datatype
-**Key Order** | Keys are not well ordered | Keys are ordered by insertion
-**Defaults** | Have default keys | Do not have default keys
+| **Object**    | **Map**                           |
+| ------------- | --------------------------------- | ----------------------------- |
+| **Iterable**  | Not directly iterable             | Directly iterable             |
+| **Size**      | Do not have a size property       | Have a size property          |
+| **Key Types** | Keys must be Strings (or Symbols) | Keys can be any datatype      |
+| **Key Order** | Keys are not well ordered         | Keys are ordered by insertion |
+| **Defaults**  | Have default keys                 | Do not have default keys      |
 
 <br>
 
@@ -1701,7 +1749,9 @@ JS has an error object whose properties are:
 
 ## **`Promises`**
 
-A promise in JavaScript is exactly what it sounds like - you use it to make a promise to do something, usually asynchronously. When the task completes, you either fulfill your promise or fail to do so. Promise is a constructor function, so you need to use the new keyword to create one. It takes a function, as its argument, with two parameters - resolve and reject. These are methods used to determine the outcome of the promise.
+A promise in JavaScript is exactly what it sounds like - you use it to make a promise to do something, usually asynchronously. A promise is a JavaScript object that links producing code and consuming code (the producing code may take some time and the consuming code must wait for the result).
+
+When the task completes, you either fulfill your promise or fail to do so. Promise is a constructor function, so you need to use the new keyword to create one. It takes a function, as its argument, with two parameters - resolve and reject. These are methods used to determine the outcome of the promise.
 
 ```js
 const myPromise = new Promise((resolve, reject) => {
@@ -1747,8 +1797,7 @@ myPromise.then(
 );
 ```
 
-> _SEE JS_Practice, Line 46_
-> <br>
+> _SEE JS_Practice, Line 46_ > <br>
 
 ### **`Rejected Promise with catch`**
 
@@ -1767,6 +1816,25 @@ myPromise.catch((error) => {
 await no causa ningún error nunca. Solo que si no es válido su uso, no compila. Pero una vez corriendo, solo es ignorado, etc.
 `await` never causes an error. If it's use is not valid it doesn't compile and at runtime is ignored.
 
+## **`setInterval()` and `setTimeout()`**
+
+Both are methods of the DOM Window object
+
+With *setInterval* you can specify a callback function to be executed for each interval:
+
+```js
+setInterval(myFunction, 1000);
+
+function myFunction() {
+  let d = new Date();
+  document.getElementById('demo').innerHTML =
+    d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+}
+```
+
+The *setTimeout* functions works in a similar way just that the function is only executed once.
+
+
 ---
 
 # **OOP**
@@ -1784,11 +1852,16 @@ class SpaceShuttle {
 const zeus = new SpaceShuttle('Jupiter');
 ```
 
+The syntax in classes must be written in "strict mode", you'll get an error if you don't.
+
+Class declarations are not hoisted. A class must be declared before being used.
+
 It should be noted that the class keyword declares a new function, to which a constructor is added. This constructor is invoked when new is called to create a new object.
 
 - UpperCamelCase should be used by convention for ES6 class names, as in `SpaceShuttle` used above.
 - The constructor method is a special method for creating and initializing an object created with a class.
 - To add a property to a constructor you must add it to the constructor function, you cannot do this: `SpaceShuttle.departure = 'Earth';`
+  -The this keyword in the constructor does not have a value. The value of this will be the new object created when the function is invoked
 
 ## **`Getters and Setters`**
 
@@ -1817,9 +1890,32 @@ console.log(novel.writer); // newAuthor
 
 <br>
 
-Notice that you don't access the getter as a called function but rather as a property with the return value.
+> **Note**: even if the getter is a method, you do not use parentheses when you want to get the property value. You don't access the getter as a called function but rather as a property with the return value. The same with the _setter_.
 
-### **`Object.defineProperty()`**
+The name of the getter/setter method cannot be the same as the name of the property.
+
+```js
+// Changes the car name to "Volvo"
+class Car {
+  constructor(brand) {
+    // Programmers like to use underscore
+    this._carname = brand;
+  }
+  get carname() {
+    return this._carname;
+  }
+  set carname(x) {
+    this._carname = x;
+  }
+}
+let myCar = new Car('Ford');
+myCar.carname = 'Volvo';
+document.getElementById('demo').innerHTML = myCar.carname;
+```
+
+<br>
+
+## **`Object.defineProperty()`**
 
 Can also define properties:
 
@@ -1845,7 +1941,7 @@ Object.defineProperty(obj, 'add', {
 
 <br>
 
-### **`prototype` Property**
+## **`prototype` Property**
 
 Another way to for adding properties to an object's constructor is using its prototype property:
 
@@ -1855,7 +1951,7 @@ fooObj.prototype.anotherProp = 'Property Value';
 
 <br>
 
-### **Iterators and Iterables**
+## **Iterators and Iterables**
 
 **Iterators** are objects that follow the _iterator protocol_. Iterators implement the **next()** method that return an object with two properties: `value` and `done`.
 
@@ -1900,6 +1996,327 @@ for (const num of myNumbers) {
   // Any Code Here
 }
 ```
+
+<br>
+
+# **DOM**
+
+## **`document.write()`**
+
+In JS, you can use _document.write()_ to write to the HTML output stream
+
+```html
+<!DOCTYPE html>
+<html>
+  <body>
+    <p>Bla bla bla</p>
+
+    <script>
+      document.write(Date());
+    </script>
+
+    <p>Bla bla bla</p>
+  </body>
+</html>
+
+<!-- OUTPUT:
+  Bla, bla, bla
+
+  Wed Nov 17 2021 09:49:16 GMT-0400 (Bolivia Time)
+  
+  Bla, bla, bla
+-->
+```
+
+> Never use `document.write()` after the document is loaded. It will overwrite the document.
+
+<br>
+
+## **Forms**
+
+### **Form Validation**
+
+HTML form validation can be done by JavaScript. Let's say we have a form field _fname_ that is empty, this function alerts a message, and returns false, to prevent the form from being submitted:
+
+```js
+function validateForm() {
+  let x = document.forms['myForm']['fname'].value;
+  if (x == '') {
+    alert('Name must be filled out');
+    return false;
+  }
+}
+```
+
+The function can be called when the form is submitted:
+
+```html
+<form
+  name="myForm"
+  action="/action_page.php"
+  onsubmit="return validateForm()"
+  method="post"
+>
+  Name: <input type="text" name="fname" />
+  <input type="submit" value="Submit" />
+</form>
+<!--return validateForm() is used because without the return the result of the execution of the method is not assign to the onsubmit event. It will simply execute the function and the form will be submitted regardless-->
+```
+
+## **HTML Events**
+
+You can equalize any event attribute of HTML elements to any executable code of JavaScript. Such a code is executed whenever the event happens.
+
+- A. When assigning a function to an event attribute of an element the function is past with ().
+- B. When passed down using the d o m the function is passed without () and it will be executed when the event happens.
+- C. If an event listener is being assigned indicate the event without the on at the beginning of the event and the function without ().
+
+```js
+<!--A-->
+<button onclick="displayDate()">Try it</button>
+
+<!--B-->
+document.getElementById("myBtn").onclick = displayDate;
+
+<!--C-->
+document.getElementById("myBtn").addEventListener("click", displayDate);
+```
+
+<br>
+
+### **Bubbling vs Capturing**
+
+When defining the order in which events of nested elements should be executed we can: execute the inner most elements first (_bubbling_, the default behavior) or the outer most elements first (_capturing_). To capture we set the useCapture parameter to true:
+
+```js
+document.getElementById('myP').addEventListener('click', myFunction, true);
+```
+
+### **Event Handler**
+
+You can add multiple events of the same type without overwriting each other--6
+
+```js
+element.addEventListener('click', myFunction);
+element.addEventListener('click', mySecondFunction);
+//  Both functions will execute when the element is clicked.
+```
+
+If the function has parameters we need to wrap it in a anonymous function. The wrapper delectation is passed to the event listener and when the wrapper is executed by the event it will call the function with its parameters.
+
+```js
+const a = 2, b = 3;
+
+element.addEventListener('click', () => (multiply(a, b));
+```
+
+<br>
+
+## **DOM Navigation (Nodes)**
+
+The DOM is conceptualized as a tree of nodes. The whole document, elements, their text, attributes and comments are all individual nodes. A node can only have one parent but can have many children.
+
+Since text is a node elements do not contain text they have a text node. It can be accessed by _innerHTML_ and _nodeValue_.
+
+```js
+myElement = document.getElementById('sample').innerHTML;
+// The same as
+myElement = document.getElementById('sample').firstChild.nodeValue;
+// Or
+myElement = document.getElementById('sample').childNodes[0].nodeValue;
+```
+
+### **`nodeName` Property**
+
+`
+It specifies the name of a node.
+
+- nodeName of an element node = tag name
+- nodeName of an attribute node = attribute name
+- nodeName of a text node = "#text"
+- nodeName of the document node = "#document"
+
+### **`nodeValue` Property**
+
+Indicates the value of a node. For instance, in text nodes is the text itself.
+
+### **`nodeType` Property**
+
+Returns the type of node.
+
+### **Create New HTML Elements**
+
+Adding an element to the DOM we first create the element and then append to a already existing element.
+
+```html
+<div id="div1">
+  <p id="p1">This is a paragraph.</p>
+  <p id="p2">This is another paragraph.</p>
+</div>
+<script>
+  const para = document.createElement('p');
+  const node = document.createTextNode('This is new.');
+  para.appendChild(node);
+
+  const element = document.getElementById('div1');
+  element.appendChild(para);
+</script>
+```
+
+To insert an element in a specific position use insertBefore() method:
+
+```js
+const para = document.createElement("p");
+const node = document.createTextNode("This is new.");
+para.appendChild(node);
+
+const element = document.getElementById("div1");
+const child = document.getElementById("p1");
+element.insertBefore(para, child);
+```
+
+### **Remove an element**
+
+Find the element and remove it
+
+```js
+const elmnt = document.getElementById("p1"); elmnt.remove();
+```
+
+#### **Removing a Child Node**
+
+For browsers that does not support the `remove()` method, you have to find the parent node to remove an element:
+
+```html
+<div id="div1">
+  <p id="p1">This is a paragraph.</p>
+  <p id="p2">This is another paragraph.</p>
+</div>
+<script>
+const parent = document.getElementById("div1");
+const child = document.getElementById("p1");
+parent.removeChild(child);
+</script>
+```
+
+> **Common workaround**: Find the child you want to remove, and use its parentNode property to find the parent:
+
+```js
+const child = document.getElementById("p1");
+child.parentNode.removeChild(child);
+```
+
+### **NodeList Object**
+
+It's a list (collection) of nodes extracted from a document. All browsers return a NodeList object for the property childNodes. Most browsers return a NodeList object for the method `querySelectorAll()`.
+
+```js
+// Selects all <p> nodes in a document
+const myNodeList = document.querySelectorAll("p");
+```
+
+**Important**: A node list is **NOT** and array. You cannot access array methods with it.
+
+### **The HTMLCollection Object**
+
+An *HTMLCollection* object is an array-like list (collection) of HTML elements.
+
+The `getElementsByTagName()` method returns an HTMLCollection object. The elements in the collection can be accessed by an index number.
+
+```js
+// Selects all `<p>` elements in a document
+const myCollection = document.getElementsByTagName("p");
+
+// To access the second <p> element you can write:
+myCollection[1]
+```
+
+> **Important**: An HTMLCollection is **NOT** and array. You cannot access array methods with it.
+
+<br>
+
+### **HTMLCollection vs NodeList**
+
+|                       | NodeList                 | HTMLCollection         |
+| --------------------- | ------------------------ | ---------------------- |
+| **Collection of**     | document nodes           | HTML elements          |
+| **Accessed by**       | index number             | name, id, index number |
+| **Exclusive content** | attribute and text nodes | -                      |
+
+
+# **BOM (Browser Object Model)**
+
+This is not a standard, it is the term often used to refer to the similar methods and properties browsers have implemented to interact with JS.
+
+Some examples are:
+
+- `window.innerHeight` and `window.innerWidth`. The browser window (the browser viewport) NOT including toolbars and scrollbars.
+- `window.open()`
+- `window.close()`
+- `window.moveTo()`
+- `window.resizeTo()`
+## **`window.location`**
+
+It can be used to obtain details of the URI of the current page and load new pages.
+
+```js
+// Displaying https://www.mypage.com/1/index.html
+console.log(window.location.href); // https://www.mypage.com/1/index.html
+console.log(window.location.hostname); //  www.mypage.com
+console.log(window.location.pathname); // /1/index.html
+console.log(window.location.protocol); // https:
+console.log(window.location.port); // Most browser won't display he default ports: 80 for http, 443 for https
+window.location.assign('https://www.myotherwebsite.com'); // displays the passed page
+```
+
+## **`window.history`**
+
+Gives limited access to the browsers history.
+
+```js
+window.history.back(); // Equal to clicking back on browser
+window.history.forward(); // Equal to clicking forward on browser
+```
+
+## **`window.navigator`**
+
+Provides information about the browser
+
+```js
+console.log(navigator.cookieEnabled()); // returns boolean
+console.log(navigator.appName()); // Netscape for most popular browsers
+console.log(navigator.appCodeName()); // Mozilla for most popular browsers
+console.log(navigator.language()); // Browsers language
+console.log(navigator.onLine()); // Mozilla for most popular browsers
+console.log(navigator.javaEnabled()); // Mozilla for most popular browsers
+```
+
+## **Popup Boxes**
+
+### **Alert box**
+
+This is for information you want to make sure the user sees since the user needs to press "OK".
+
+```js
+window.alert('Say something here');
+```
+
+### **Confirm box**
+
+Presents de user with the options _OK_ or _Cancel_
+
+```js
+window.confirm('Say something here');
+```
+
+### **Prompt box**
+
+The user is prompted for an input.
+
+```js
+window.prompt('Say something here', 'defaultText');
+```
+
 <br>
 
 ---
@@ -1994,7 +2411,7 @@ function double(y, func) {
 const powerThenDouble = double(3, powerOfTwo);
 console.log(powerThenDouble);
 //prints 18
-//double(y, func) is the high order fucntion
+//double(y, func) is the high order function
 ```
 
 <br>
@@ -2100,7 +2517,7 @@ console.log(camper);
 
 ### **Hoisting**
 
-Hoisting is the process of setting up of memory space for our variables and functions. Before the code starts to execute, the JS engine goes thru the code and sets up blocks of memory for functions and variables. The values of variables are not stored but functions are stored entirely along with their definitions. However, for variables declared with `var` the engine assigns `undefined` as the default value; they are hoisted. Which means they are accessible in their enclosing scope even before they are declared:
+Hoisting is the process of setting up of memory space for our variables and functions. Before the code starts to execute, the JS engine goes thru the code and sets up blocks of memory for functions and variables (functions defined using an expression are not hoisted.). The values of variables are not stored but functions are stored entirely along with their definitions. However, for variables declared with `var` the engine assigns `undefined` as the default value; they are hoisted. Which means they are accessible in their enclosing scope even before they are declared:
 
 ```js
 function run() {
