@@ -76,7 +76,11 @@ var carName;
 
 <br>
 
-### `const` Not Real Constants
+### **`const`**
+
+Variables declared with `const` must be initialized, otherwise will give a syntax error.
+
+#### **`const` Not Real Constants**
 
 Objects (including arrays and functions) assigned to a variable using const are still mutable. Using the const declaration only prevents reassignment of the variable identifier.
 
@@ -906,6 +910,12 @@ function isEqual(a, b) {
 
 A variable without a value is undefined. The type is also undefined. `null` is "nothing". But, due to what can be considered a bug, in JS null is an object.
 
+```js
+null === undefined         // false
+null == undefined          // true
+//equal un value but different in type
+```
+
 #### Considerations
 
 - Emptying. `undefined` can be used to empty variables and objects in both cases value and type will be undefined. `null` can empty objects and the types continues to be object.
@@ -1146,6 +1156,8 @@ const add = (x, y) => {
 
 export { add };
 ```
+
+> **Note**: Modules only work with HTTP(s) protocol.
 
 <br>
 
@@ -2316,6 +2328,46 @@ The user is prompted for an input.
 ```js
 window.prompt('Say something here', 'defaultText');
 ```
+
+<br>
+
+## **Cookies**
+
+Cookies are stored in name-value pairs. Requests sent by browsers do include the cookies associated to the requested page, this is how the server obtains information it needs about specific users.
+
+```js
+document.cookie = "username=John Doe; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/";
+```
+
+- First we have the cookie itself (name-value), 
+- then optionally an expiration date in UTC time (By default the cookie are deleted when the browser closes ) 
+- and a path (by default the cookie belongs to the current page).
+
+- **Update**. Cookies are updated the same way they are created.
+- **Delete**. You delete them yb setting the expiration date to a past date. Path must be supplied.
+
+<br>
+
+# **Web APIs**
+
+## **Web Worker API**
+
+A web worker is a javascript code running in the background that does not affect the performance of the website.
+
+### **How to use**
+
+1. Make sure is supported by the browser. The expression `typeof(Worker) !== 'undefined'` should satisfy any conditional used.
+2. Create a separate JS file with the workers code. Here `postMessage()` is used send data to the code that will consume the worker.
+3. Create a web worker object in the script that will use the worker code and add a onmessage event listener:
+```js
+w = new Worker("demo_workers.js");
+w.onmessage = function(event){
+  document.getElementById("result").innerHTML = event.data;
+};
+```
+4. Stop the web worker `w.terminate()`. **Bonus**: If you set the object to `undefined` after terminating it, you can re use hte worker.
+
+Because workers are on external files the cannot access: the window, document and parent objects.
 
 <br>
 

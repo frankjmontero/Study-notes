@@ -32,15 +32,19 @@
 
 # Learn to Learn Coding
 
-1. Hard work over talent.
-2. Learn patterns. Don't memorize syntax. Get tools in your brain that allows you to create solutions on any language
-3. Stop watching and ***DO***. Code at least a couple os hours a day.
-4. Stay Healthy.
-5. Feynman Technique. 
-	- Choose a topic.	Choose topic to learn: build a website with JS.
-	- Explain it to a 12 year old.	Explain the tech
-	- Reflect, refine, simplify. Build something. Anything that functions as quickly as possible.
-	- Organize and review.	Go back refactor and simplify. Share it if possible to get feedback.
-6. Dopamine hits. Because learning to code is painful a reward is needed. Helps get addicted to coding.
-7. Don't work to hard. Pace yourself and take regular breaks.
-8. Think like an engineer. Google what you want to learn and go from there; that is essentially what you will be doing all the time.
+1. **Hard work over talent**.
+2. **Learn patterns**. Don't memorize syntax. Get tools in your brain that allows you to create solutions on any language
+3. **Stop watching and *DO***. Code at least a couple os hours a day.
+4. **Stay Healthy.**
+5. **Feynman Technique**. 
+
+| Technique | Coding Example |
+| ----------- | ----------- |
+| Choose a topic | Choose topic to learn: build a website with JS |
+| Explain it to a 12 year old	| Explain the tech |
+| Reflect, refine, simplify | Build something. Anything that functions as quickly as possible |
+| Organize and review | Go back refactor and simplify. Share it if possible to get feedback |
+
+6. **Dopamine hits**. Because learning to code is painful a reward is needed. Helps get addicted to coding.
+7. **Don't work to hard**. Pace yourself and take regular breaks.
+8. **Think like an engineer**. Google what you want to learn and go from there; that is essentially what you will be doing all the time.

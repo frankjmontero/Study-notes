@@ -290,7 +290,7 @@ Describes the *objects* that will be used to create the application. It also des
 
 ## **Abstraction** 
 
-Knowing what something does without knowing how it does it. Hide what you want to hide and show what you want to show. Take out the individual characteristics and leave the common ones. Separate the unique traits and use only the shared ones.
+Knowing what something does without knowing how it does it (for instance, abstract classes and interfaces define the signature of methods, classes and fields, but the only ones that know how they will be used and implemented are the classes that will make use of those abstract classes and interfaces). Hide what you want to hide and show what you want to show. Take out the individual characteristics and leave the common ones. Separate the unique traits and use only the shared ones.
 
 ## **Encapsulation** 
 
@@ -313,7 +313,7 @@ El primero se logra con method `override` y el segundo se logra con method `over
 
 ## **Access Levels and Access Modifiers**
 
-El nivel de acceso es una característica que controla que o traves de que se puede acceder al codigo que un elemento contiene. Los modificadores de acceso es lo que utilizamos para indicar el mencionado nivel, o sea,  especifican su accesibilidad y alcance (scope) en otras palabras su visibilidad.
+El nivel de acceso es una característica que controla que o traves de que se puede acceder al código que un elemento contiene. Los modificadores de acceso es lo que utilizamos para indicar el mencionado nivel, o sea, especifican su accesibilidad y alcance (scope) en otras palabras su visibilidad.
 
 La razón por la que a veces mencionan a la abstracción y encapsulación, es porque una envuelve a la otra.
 La abstracción es más general, y la encapsulación es un mecanismo también para lograr un poco de abstracción, pero a diferente nivel.
