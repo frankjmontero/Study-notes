@@ -282,15 +282,20 @@ For example, `5 * 10` evaluates to `50`:
 _____
 # **OOP**
 
-OO is about ***simulating the real*** world in a computer.
+**Technical**: OOP is about ***simulating the real*** world in a computer. OOP is a programming model that focuses on data fields that can have particular behaviors and attributes known as objects. Each object represent a portion of our system.
+
+**Simple**: It's a programming approach where we see the system as one or more elements with individual properties and behaviors.
 
 ## Use Case
 
-Describes the *objects* that will be used to create the application. It also describes what *messages* (behavior) an object understands.
+Use case is step by step description of a particular interactions an user will have with the system. It includes who the user is, how will they interact with the system and how will the system respond.
 
 ## **Abstraction** 
 
-Knowing what something does without knowing how it does it (for instance, abstract classes and interfaces define the signature of methods, classes and fields, but the only ones that know how they will be used and implemented are the classes that will make use of those abstract classes and interfaces). Hide what you want to hide and show what you want to show. Take out the individual characteristics and leave the common ones. Separate the unique traits and use only the shared ones.
+Knowing what something does without knowing how it does it (for instance, abstract classes and interfaces define the signature of methods, classes and fields, but the only ones that know how they will work and be implemented are the classes that will make use of those abstract classes and interfaces). 
+
+- Hide what you want to hide and show what you want to show. Take out the individual characteristics and leave the common ones. 
+- Separate the unique traits and use only the shared ones.
 
 ## **Encapsulation** 
 
@@ -348,7 +353,7 @@ Entre otras
 
 #### Ventajas y desventajas. Recomendada
 
-Algo que he aprendido de los seniors aca es a ver las cosas mas preguntandome cuándo es mas util en vez de cuál es la mejor. Asi que, usamos Inheritance cuando entendemos que una nueva clase-hija es una version mas especifica y compleja que la clase-padre (hija `ES de` tipo padre). Y usamos composition cuando la clase guarda una relacion con otra y es parte de ella. Si bien es cierto que es posible lograr los mismos resultados con composition que podemos lograr con herencia y con el valor agregado de loose coupling,  cuando tenemos una estructura clara de nuestra solucion y entendemos que a nivel funcional y estructural una sub-clase ***es*** del tipo de una super-clase, siendo esa una relacion que nos sera de utilidad, entonces la herencia es el camino a tomar.
+Algo que he aprendido de los seniors aca es a ver las cosas mas preguntandome cuándo es mas util en vez de cuál es la mejor. Asi que, usamos Inheritance cuando entendemos que una nueva clase-hija es una version mas especifica y compleja que la clase-padre (hija `ES de` tipo padre). Y usamos composition cuando la clase guarda una relacion con otra y es parte de ella. Si bien es cierto que es posible lograr los mismos resultados con composition que podemos lograr con herencia y con el valor agregado de loose coupling, cuando tenemos una estructura clara de nuestra solucion y entendemos que a nivel funcional y estructural una sub-clase ***es*** del tipo de una super-clase, siendo esa una relacion que nos sera de utilidad, entonces la herencia es el camino a tomar.
 
 ## Tight/Loose Coupling
 

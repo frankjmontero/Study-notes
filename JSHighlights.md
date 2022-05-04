@@ -1297,7 +1297,8 @@ function getRndInteger(min, max) {
 
 Math.random() function generates a random decimal number between 0 (inclusive) and not quite up to 1 (exclusive). Thus Math.random() can return a 0 but never quite return a 1.
 
-## **Objects**
+
+  },## **Objects**
 
 Objects are similar to `arrays`, except that instead of using indexes to access and modify their data, you access the data in objects through what are called `properties`. It's common to declare objects with `const`.
 
@@ -1491,7 +1492,6 @@ The sub-properties of objects can be accessed by chaining together the dot or br
 var ourStorage = {
   desk: {
     drawer: 'stapler',
-  },
   cabinet: {
     'top drawer': {
       folder1: 'a file',
@@ -1590,6 +1590,11 @@ for (const entry of iterator) {
 <br>
 
 ### **Maps**
+
+In JS Maps can be created in two ways:
+
+- Passing an Array to `new Map()`.
+- Create a Map and use `Map.set()`.
 
 JS objects vs maps:
 
@@ -2011,6 +2016,113 @@ for (const num of myNumbers) {
 
 <br>
 
+## **_Binding_**
+
+With the `bind()` method, an object can borrow a method from another object.
+
+- **HARD BINDING**. It's done with `bind()`. We say it is hard binding because it doesn't matter how many further bindings you do to the function that bind returns, it is not going to reference any other object that the one passed to it first.
+- **SOFT BINDING**. Soft binding it's done with `call`, `apply` or calling the function from another object as well.
+
+<br>
+
+
+## **`this` Rules**
+
+1. If the `new` keyword is used when calling the function, `this` inside the function is a brand new object.
+
+```js
+const testThis = {
+  name: 'me',
+  whoAmI: function () {
+    console.log(this.name);
+  },
+};
+new testThis.whoAmI(); // 'undefined'
+```
+
+2. If `apply`, `call`, or `bind` are used to call/create a function, `this` inside the function is the object that is passed in as the argument.
+
+```js
+function testThis() {
+  const carlosObj = {
+    greet: function () {
+      return this.greeting;
+    },
+  };
+  const joseObj = {
+    greeting: 'Hola I am Jose',
+  };
+  console.log(carlosObj.greet.call(joseObj)); // 'Hola I am Jose'
+}
+testThis();
+```
+
+3. If a function is called as a method, such as `obj.method()`, `this` is the object that the function is a property of.
+
+```js
+const testThis = {
+  name: 'me',
+  whoAmI: function () {
+    console.log(this.name);
+  },
+};
+testThis.whoAmI(); // 'me'
+```
+
+4. If a function is invoked as a free function invocation, meaning it was invoked without any of the conditions present above, `this` is the global object. In a browser, it is the `window object`. If in strict mode ('use strict'), this will be `undefined` instead of the global object.
+
+```js
+console.log(this); // depending on the console that executes it it displays: '{}' , Window{} , {object Window}
+```
+
+5. If multiple of the above rules apply, the rule that is higher wins and will set the `this` value.
+6. If the function is an arrow function, it ignores all the rules above and receives the `this` value of its surrounding scope at the time it is created (whoever declared it). The arrow functions don't have an actual this binding because such binding is dependant on a execution context which arrow functions don't have. Therefor the engine has to look for that context on higher levels of the hierarchy.
+
+An extra special case:
+
+```js
+function testThis() {
+  let num = 1;
+  const innerFunc = () => {
+    const num = 2;
+    this.num = 4;
+    console.log(num); // 2
+    console.log(this.num); // 4
+    // this.num is not the constant in innerFunc nor the variable num in his father is a separate object.
+  };
+  innerFunc();
+  console.log(num); // 1
+}
+testThis();
+```
+
+<br>
+
+### **Preserving `this`**
+
+When a function is used as a callback, `this` is lost.
+
+```js
+const person = {
+  firstName:"John",
+  lastName: "Doe",
+  display: function () {
+    let x = document.getElementById("demo");
+    x.innerHTML = this.firstName + " " + this.lastName;
+  }
+}
+
+setTimeout(person.display, 3000);
+//Displays undefined
+
+let display = person.display.bind(person);
+// It binds the person binds person.display to person
+setTimeout(display, 5000);
+// Now it will display the name
+```
+
+<br>
+
 # **DOM**
 
 ## **`document.write()`**
@@ -2426,16 +2538,6 @@ You can give block scope if declared inside a block or declared at the beginning
 x = 3.14; // This will cause an error because x is not declared
 ```
 
-## **`JSON.stringify()`**
-
-When stringifying a function cover the function to string first since _stringify()_ does not convert functions to string.
-
-```js
-const animal = {
-  type: 'mammal';
-
-};
-```
 
 <br>
 
@@ -2467,11 +2569,6 @@ console.log(powerThenDouble);
 ```
 
 <br>
-
-## **_Binding_**
-
-- **HARD BINDING**. Se hace con `bind()`. Se dice que es hard con el bind, porque la wrapped function que te devuelve bind, por más bind que le vuelvas a hacer y más jodiendas, ya no se volverá a referir a nadie más que el objeto original que le pasaste.
-- **SOFT BINDING**. Soft binding lo hace `call` y `apply` y llamando a la función desde el objeto también.
 
 ## **_Switch Case_**
 
@@ -2663,78 +2760,6 @@ obj.doStuff();
 
 Aunque doStuff tendrá el contexto del objeto donde this.name es 'Jeremy', aunque llame a getName() dentro de esa función, getName no tendrá el mismo contexto que doStuff. Así que la función no hereda el this de otra función que la invoque. Sigue requiriendo que un objeto la llame directamente como obj2.getName() o hacerle un hard binding. De lo contrario, el contexto será el window.
 
-## **`this` Rules**
-
-1. If the `new` keyword is used when calling the function, `this` inside the function is a brand new object.
-
-```js
-const testThis = {
-  name: 'me',
-  whoAmI: function () {
-    console.log(this.name);
-  },
-};
-new testThis.whoAmI(); // 'undefined'
-```
-
-2. If `apply`, `call`, or `bind` are used to call/create a function, `this` inside the function is the object that is passed in as the argument.
-
-```js
-function testThis() {
-  const carlosObj = {
-    greet: function () {
-      return this.greeting;
-    },
-  };
-  const joseObj = {
-    greeting: 'Hola I am Jose',
-  };
-  console.log(carlosObj.greet.call(joseObj)); // 'Hola I am Jose'
-}
-testThis();
-```
-
-3. If a function is called as a method, such as `obj.method()`, `this` is the object that the function is a property of.
-
-```js
-const testThis = {
-  name: 'me',
-  whoAmI: function () {
-    console.log(this.name);
-  },
-};
-testThis.whoAmI(); // 'me'
-```
-
-4. If a function is invoked as a free function invocation, meaning it was invoked without any of the conditions present above, `this` is the global object. In a browser, it is the `window object`. If in strict mode ('use strict'), this will be `undefined` instead of the global object.
-
-```js
-console.log(this); // depending on the console that executes it it displays: '{}' , Window{} , {object Window}
-```
-
-5. If multiple of the above rules apply, the rule that is higher wins and will set the `this` value.
-6. If the function is an arrow function, it ignores all the rules above and receives the `this` value of its surrounding scope at the time it is created (whoever declared it). The arrow functions don't have an actual this binding because such binding is dependant on a execution context which arrow functions don't have. Therefor the engine has to look for that context on higher levels of the hierarchy.
-
-An extra special case:
-
-```js
-function testThis() {
-  let num = 1;
-  const innerFunc = () => {
-    const num = 2;
-    this.num = 4;
-    console.log(num); // 2
-    console.log(this.num); // 4
-    // this.num is not the constant in innerFunc nor the variable num in his father is a separate object.
-  };
-  innerFunc();
-  console.log(num); // 1
-}
-testThis();
-```
-
-<br>
-
 ## **Performance Tips**
 
 - **For Loop**. To speed it up assign the length of the iterable to a variable and loop until that variable. Otherwise `for` will access the length property on each iteration.
@@ -2785,3 +2810,11 @@ JavaScript does not have any print object or print methods. You cannot access ou
 ```js
 <button onclick="window.print()">Print this page</button>
 ```
+
+<br>
+
+# Concepts
+
+## **String interpolation**
+
+The use of `..${...}...` in string literals.
