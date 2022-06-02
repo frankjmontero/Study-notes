@@ -846,3 +846,6 @@ SQL injection is the placement of malicious code in SQL statements, via web page
 
 ## **Comparable** 
 Son un tipo de objetos que entre ellos pueden ser comparables. **Comparator** es un objeto que se encarga de comparar a otros objetos entre ellos.
+
+## What is CLS?
+CLS is a measure of the largest burst of layout shift scores for every unexpected layout shift that occurs during the entire lifespan of a page.

@@ -1475,3 +1475,16 @@ The preceding code uses Media Queries to model the grid container template depen
 -	If 400 or more
 ![](./Resources/Gird&MediaQuery-VP400+.png)
 
+# Unsorted
+
+```css
+body {
+  width: 100%;
+  height: 100vh;
+  margin: 0; /*Gets rid of margin automatically added by some browsers*/
+}
+```
+
+The first input element with a type of submit is automatically set to submit its nearest parent form element.
+
+Select only the .inline elements, and give them width of unset. This will remove the earlier rule which set all the input elements to width: 100%.

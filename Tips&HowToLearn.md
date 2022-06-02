@@ -48,3 +48,9 @@
 6. **Dopamine hits**. Because learning to code is painful a reward is needed. Helps get addicted to coding.
 7. **Don't work to hard**. Pace yourself and take regular breaks.
 8. **Think like an engineer**. Google what you want to learn and go from there; that is essentially what you will be doing all the time.
+
+# MISC
+
+## Focus on systems not goals
+
+The goal is you destination but rather than motivating yourself looking at that far goal and see yourself failing to get there promptly every day, create a system. Through a system you have mini-objectives you complete everyday. For instance, you can create a system for learning where you have to sit in front of hte computer to code for 1 hr at least everyday. This "goal" is more manageable and still moves you towards you end goal one step at a time.

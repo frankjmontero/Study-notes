@@ -201,6 +201,24 @@ Its general purpose is a container of other elements. It can be styled with CSS 
 
 <br>
 
+## **Tables**
+
+We use the `<table></table>` tag.
+
+- `<td></td>`. Table data, these are the cells of the table. They can hold: text, images, lists, other tables, etc. All sorts of HTML elements.
+- `<tr></tr>`. Table row.
+- `<th></th>`. Cells that are table headers.
+
+### **Size**
+
+We can define the height and width of the table, row or column with css.
+
+- `<table style="width:90%">` for the table.
+- `<th style="width:90%">` or `<td style="width:90%">` for the column.
+- `<tr style="width:90%">` for the row.
+
+<br>
+
 ## **Default structure**
 At the top of your document, you need to tell the browser which version of HTML your page is using. You tell the browser this information by adding the `<!DOCTYPE ...>` tag on the first line, where the ... part is the version of HTML. For HTML5, you use `<!DOCTYPE html>`. The `!` and uppercase DOCTYPE is important, especially for older browsers. The declaration is not an HTML tag. It is an "information" to the browser about what document type to expect.
 
@@ -396,3 +414,23 @@ document.designMode = 'on'
 //edit page then
 document.designMode = 'off'
 ```
+
+# Content to sort
+
+In order for a form's data to be accessed by the location specified in the action attribute, you must give the text field a name attribute and assign it a value to represent the data being submitted. For example, you could use the following syntax for an email address text field: `<input type="text" name="email">`.
+
+The default behavior of clicking a form button without any attributes submits the form to the location specified in the form's action attribute.
+
+When elements have multiple attributes, the order of the attributes doesn't matter.
+
+the form data for the button is based on its name and value attributes
+
+Add the name attribute with the value personality to the checkbox input element.
+
+block-level elements, so they take up the entire width of their parent element.
+
+This is because inline-block elements only take up the width of their content. 
+
+Styling the p elements as inline-block and placing them on separate lines in the code creates an extra space to the right of the first p element, causing the second one to shift to the next line.
+
+With form submissions, it is useful, and good practice, to provide each submittable element with a name attribute. This attribute is used to identify the element in the form submission.
