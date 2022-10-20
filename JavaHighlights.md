@@ -126,7 +126,9 @@ Web services allow us to expose code to the enterprise for reuse in a controlled
 
 # **Concepts and Syntaxes**
 
-In Java you cannot execute methods on a primitive only its Objects.
+## **Primitives and Methods**
+
+In Java you cannot execute methods on a primitive only on objects derived from its equivalent class.
 
 ## **Constants**
 
@@ -178,7 +180,7 @@ The static modifier implies that the method or variable belong to the class and 
 
 ## **Error Handling**
 
-## **Exceptions**
+### **Exceptions**
 
 An exception is something unexpected that Java doesn't know what to do with it.
 

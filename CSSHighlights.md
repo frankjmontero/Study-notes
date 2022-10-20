@@ -1043,7 +1043,7 @@ img {
 
 ## <u>**CSS Flexbox**</u>
 
-Placing the CSS property `display: flex;` on an element allows you to use other flex properties to build a responsive page.
+Flexbox is a one-dimensional CSS layout approach that focuses on the flow of content. It offers the ability to control the way items are spaced and aligned within a container. Placing the CSS property `display: flex;` on an element allows you to use other flex properties to build a responsive page.
 ```css
 div{
     height: 500px;
@@ -1488,3 +1488,32 @@ body {
 The first input element with a type of submit is automatically set to submit its nearest parent form element.
 
 Select only the .inline elements, and give them width of unset. This will remove the earlier rule which set all the input elements to width: 100%.
+
+## CSS Box Sizing
+The CSS box-sizing property allows us to include the padding and border in an element's total width and height. you set box-sizing: border-box;
+
+## float
+
+The float property is used to place an element on the left or right of its container, allowing other content (such as text) to wrap around it.
+
+## Screen readers-only visible text
+
+If we don't want to visually clutter an element but want text that is descriptive enough to be available for screen readers we can use the following common pattern:
+
+```html
+<label for="birth-date">D.O.B.<span class="sr-only">(Date of Birth)</span></label>
+<input type="date" name="birth-date" id="birth-date" />
+```
+```css
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0,0,0,0);
+	white-space: nowrap;
+	border: 0;
+}
+```
