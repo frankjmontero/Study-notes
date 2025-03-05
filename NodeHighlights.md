@@ -10,7 +10,7 @@
 
 ### **Events**
 
-Objects in Node.js can fire events,
+Objects in Node.js can fire events.
 
 ## **Backend**
 

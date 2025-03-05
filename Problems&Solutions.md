@@ -1,4 +1,4 @@
-# Css
+# CSS
 
 ## Query
 
@@ -46,3 +46,62 @@ git rm --cached [dir]
 > Replace `dir` with the directory of the submodule.
 
 3. Now you can run `git add` to add the directory back.
+
+# Nodejs
+
+## Unable connect and/or run new server
+
+### Problem
+
+You get the `Error: listen EADDRINUSE: address already in use 127.0.0.1:3000` or whichever IP and port you are trying to listen to, or node runs but you get a `No response error` in browser.
+
+### Solution
+
+In my case the I had ran the server previously from the terminal and used `CTRL+Z` to terminated. This does leave the port open and doesn't stop the server correctly. You must use `CTRL+C`.
+
+To fix the problem run `lsof -i :{port}` where port is the port you are trying to use:
+
+```cmd
+lsof -i :3000
+```
+
+This will list all processes using the port. Then proceed to kill the ones you desire using their PIDs `kill -9 {PID}`:
+
+```cmd
+kill -9 2067
+```
+
+## Unusable `query` property on object returned by `url.parse()`
+
+### Problem
+
+When using url.parse() to obtain an object where you can extract the query parameters of an URL you get the following:
+
+```js
+// For the url: http://test.com/path?id=1234
+const url = require('url');
+const http= require('http');
+
+const httpServer = http.createServer((req, res) =>{
+  const parsedUrl = url.parse(req.url, true);
+  console.log(parsedUrl.query);
+  // [Object: null prototype] { id: '1234' }
+  const id = parsedUrl.id;
+  // id = undefined;
+});
+```
+
+Such query result is unusable because if you try to access `parsedUrl.query.id` you will get `undefined`
+
+### Solution
+
+This happens because indeed in the `parsedUrl` object the property `query` is in fact an object that doesn't inherit any properties (it doesn't have a prototype). You can make the elements of `query` accesible by stringifying it and then parsing it with JSON:
+
+```js
+const id = JSON.parse(JSON.stringify(parsedUrl.query)).id;
+```
+
+
+### Digging deeper
+
+You obtained the `query` object by setting the second parameter of `url.parse()` to `true`. Then url.parse() calls `querystring.parse()` which returns the a query object that doesn't inherit from js Object. 

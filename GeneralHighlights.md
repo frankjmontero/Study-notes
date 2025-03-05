@@ -292,10 +292,12 @@ Use case is step by step description of a particular interactions an user will h
 
 ## **Abstraction** 
 
-Knowing what something does without knowing how it does it (for instance, abstract classes and interfaces define the signature of methods, classes and fields, but the only ones that know how they will work and be implemented are the classes that will make use of those abstract classes and interfaces). 
+Knowing what something does without knowing how it does it (for instance, abstract classes and interfaces define the signature of methods, classes and fields, but the only ones that know how they will work and be implemented are the classes that will make use of those abstract classes and interfaces). In other words, the simplification of something, so that you don't focus on the lower
+level implementation details; you really just focus on the high level goals or the process itself.
 
 - Hide what you want to hide and show what you want to show. Take out the individual characteristics and leave the common ones. 
 - Separate the unique traits and use only the shared ones.
+
 
 ## **Encapsulation** 
 

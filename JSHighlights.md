@@ -274,6 +274,25 @@ let arr = txt.split(',');
 -If the separator is omitted the whole string in stored in index 0.
 -If separator is `""` then each character is stored in a separate index.
 
+##### **`replace()`**
+
+You can provide a pattern (string or regex) as first argument for replace to search. If we provide a regex with the global modifier, all matching words will be replaced on the target string.
+
+```js
+const p = 'The quick brown fox jumps over the lazy dog. If the dog reacted, was it really lazy?';
+
+console.log(p.replace('dog', 'monkey'));
+// Output: "The quick brown fox jumps over the lazy monkey. If the dog reacted, was it really lazy?"
+
+const regex = /Dog/i;
+console.log(p.replace(regex, 'ferret'));
+// Output: "The quick brown fox jumps over the lazy ferret. If the dog reacted, was it really lazy?"
+
+const regex = /Dog/ig;
+console.log(p.replace(regex, 'ferret'));
+// Output: "The quick brown fox jumps over the lazy ferret. If the ferret reacted, was it really lazy?"
+```
+
 <br>
 
 ### **Numbers**
@@ -976,13 +995,21 @@ var rDT = new Date('2015-03-25T12:00:00-06:30');
 
 ### **Booleans**
 
-Everything with a "value" is true. Without a "value" is false. Examples:
+#### Truthy and Falsy
 
-- 0, -0
-- ""
-- undefined
-- null
-- NaN
+In JS a truthy value is one that can be coerced to true in a boolean context. Any value that is not falsy is truthy. The following all the values considered falsy in JS:
+
+| Value | Description |
+| ----- | ----------- |
+| false | The keyword false.|
+|0 | The Number zero (so, also `0.0`, etc., and `0x0`). |
+| -0 | The Number negative zero (so, also `-0.0`, etc., and `-0x0`). |
+| 0n | The BigInt zero (so, also `0x0n`). Note that there is no BigInt negative zero — the negation of 0n is 0n. |
+| "", '', `` | Empty string value. |
+| null | null — the absence of any value. |
+| undefined | undefined — the primitive value. |
+| NaN | NaN — not a number. |
+|document.all | Objects are falsy if and only if they have the `[[IsHTMLDDA]]` internal slot. That slot only exists in document.all and cannot be set using JavaScript. |`
 
 ## **Operations**
 
@@ -1598,7 +1625,7 @@ In JS Maps can be created in two ways:
 
 JS objects vs maps:
 
-| **Object**    | **Map**                           |
+|               | **Object**                        | **Map**                       |
 | ------------- | --------------------------------- | ----------------------------- |
 | **Iterable**  | Not directly iterable             | Directly iterable             |
 | **Size**      | Do not have a size property       | Have a size property          |
@@ -1608,7 +1635,7 @@ JS objects vs maps:
 
 <br>
 
-## **Loops**
+## **Loops**}
 
 ### **While**
 
